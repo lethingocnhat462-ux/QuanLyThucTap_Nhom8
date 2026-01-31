@@ -1,0 +1,39 @@
+version: '3.8'
+
+services:
+  # 1. Dịch vụ Database
+  db:
+    image: mysql:8.0
+    container_name: quanlythuctap_db
+    restart: always
+    environment:
+      MYSQL_DATABASE: db_thuctap
+      MYSQL_ROOT_PASSWORD: password123
+    ports:
+      - "3306:3306"
+
+  # 2. Dịch vụ phpMyAdmin
+  phpmyadmin:
+    image: phpmyadmin:latest
+    container_name: quanlythuctap_pma
+    restart: always
+    ports:
+      - "8080:80"
+    environment:
+      PMA_HOST: db
+      PMA_USER: root
+      PMA_PASSWORD: password123
+    depends_on:
+      - db
+
+  # 3. Dịch vụ Web PHP
+  web:
+    build: .
+    container_name: quanlythuctap_web
+    restart: always
+    ports:
+      - "80:80"
+    volumes:
+      - .:/var/www/html
+    depends_on:
+      - db
