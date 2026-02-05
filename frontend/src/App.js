@@ -1,17 +1,28 @@
 import React from 'react';
+import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
+import HomePage from './pages/HomePage';
+import LoginPage from './pages/LoginPage';
+import ProfilePage from './pages/ProfilePage'; // QUAN TRỌNG: Phải import dòng này
 
 function App() {
   return (
-    <div className="container mt-5 text-center">
-      <div className="card shadow">
-        <div className="card-body">
-          <h1 className="text-primary">QUẢN LÝ THỰC TẬP - NHÓM 8</h1>
-          <p className="lead">Frontend đã sẵn sàng với Bootstrap và Axios!</p>
-          <button className="btn btn-success m-2">Nút Đăng Ký</button>
-          <button className="btn btn-outline-danger m-2">Nút Hủy Bỏ</button>
-        </div>
-      </div>
-    </div>
+    <Router>
+      <Routes>
+        {/* Trang chủ và Đăng nhập */}
+        <Route path="/" element={<HomePage />} />
+        <Route path="/login" element={<LoginPage />} />
+        <Route path="/home" element={<HomePage />} />
+
+        {/* Các tuyến đường hồ sơ cá nhân (Dùng chung ProfilePage) */}
+        <Route path="/student/profile" element={<ProfilePage />} />
+        <Route path="/admin/profile" element={<ProfilePage />} />
+        <Route path="/teacher/profile" element={<ProfilePage />} />
+        <Route path="/mentor/profile" element={<ProfilePage />} />
+        
+        {/* Route mặc định nếu không khớp cái nào ở trên */}
+        <Route path="/profile" element={<ProfilePage />} />
+      </Routes>
+    </Router>
   );
 }
 

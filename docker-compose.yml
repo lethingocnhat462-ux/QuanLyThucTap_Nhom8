@@ -26,14 +26,14 @@ services:
     depends_on:
       - db
 
-  # 3. Dịch vụ Web PHP
-  web:
+  # 3. Dịch vụ Web PHPweb:
+web:
     build: .
     container_name: quanlythuctap_web
     restart: always
     ports:
       - "80:80"
     volumes:
-      - .:/var/www/html
+      - ./backend:/var/www/html  # Ánh xạ thư mục backend vào Apache
     depends_on:
       - db
