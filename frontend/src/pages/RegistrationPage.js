@@ -8,7 +8,6 @@ const RegistrationPage = () => {
     const [danhSachTruong, setDanhSachTruong] = useState([]);
     const [loading, setLoading] = useState(true);
 
-    // 1. Lấy danh sách trường từ database
     useEffect(() => {
         const fetchTruongs = async () => {
             try {
@@ -26,7 +25,6 @@ const RegistrationPage = () => {
         fetchTruongs();
     }, []);
 
-    // 2. Hàm xử lý gửi đăng ký
     const handleRegister = async () => {
         if (!nv1) { alert("⚠️ Vui lòng chọn Nguyện vọng 1!"); return; }
         const data = { maSV: "4551150001", nv1, nv2, nv3, ghiChu };
@@ -41,23 +39,31 @@ const RegistrationPage = () => {
         } catch (error) { alert("❌ Lỗi kết nối Server!"); }
     };
 
-    // 3. Hàm tạo danh sách <option> cho Select
-    const renderOptions = () => {
+    // Hàm render các Option có kiểm tra trùng lặp
+    const renderOptions = (currentValue, otherValues) => {
         if (loading) return <option value="">Đang tải dữ liệu...</option>;
         if (danhSachTruong.length === 0) return <option value="">(Bảng DonViThucTap đang trống)</option>;
+        
         return (
             <>
                 <option value="">-- Chọn trường thực tập --</option>
-                {danhSachTruong.map((truong) => (
-                    <option key={truong.MaDV} value={truong.TenDonVi}>
-                        {truong.TenDonVi}
-                    </option>
-                ))}
+                {danhSachTruong.map((truong) => {
+                    // Nếu trường này đã được chọn ở các NV khác, thì disable nó
+                    const isSelectedElsewhere = otherValues.includes(truong.TenDonVi);
+                    return (
+                        <option 
+                            key={truong.MaDV} 
+                            value={truong.TenDonVi} 
+                            disabled={isSelectedElsewhere}
+                        >
+                            {truong.TenDonVi} {isSelectedElsewhere ? "(Đã chọn)" : ""}
+                        </option>
+                    );
+                })}
             </>
         );
     };
 
-    // TẤT CẢ PHẦN RETURN PHẢI NẰM TRONG HÀM NÀY
     return (
         <div className="max-w-4xl mx-auto">
             <div className="bg-white p-8 rounded-2xl shadow-lg border border-gray-100">
@@ -69,27 +75,37 @@ const RegistrationPage = () => {
                 </div>
                 
                 <div className="space-y-6">
+                    {/* Nguyện vọng 1 - Kiểm tra trùng với NV2 và NV3 */}
                     <div>
-                        <label className="block text-sm font-bold text-gray-700 mb-2">Nguyện vọng 1 (Bắt buộc) *</label>
+                        <label className="block text-sm font-bold text-gray-700 mb-2">Nguyện vọng 1 *</label>
                         <select 
-                            className="w-full border-2 p-3 rounded-lg focus:border-blue-500 outline-none transition-all" 
+                            className="w-full border-2 p-3 rounded-lg outline-none transition-all focus:border-blue-500" 
                             onChange={(e) => setNv1(e.target.value)} value={nv1}
                         >
-                            {renderOptions()}
+                            {renderOptions(nv1, [nv2, nv3])}
                         </select>
                     </div>
 
                     <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+                        {/* Nguyện vọng 2 - Kiểm tra trùng với NV1 và NV3 */}
                         <div>
                             <label className="block text-sm font-bold text-gray-700 mb-2">Nguyện vọng 2</label>
-                            <select className="w-full border-2 p-3 rounded-lg" onChange={(e) => setNv2(e.target.value)} value={nv2}>
-                                {renderOptions()}
+                            <select 
+                                className="w-full border-2 p-3 rounded-lg outline-none transition-all focus:border-blue-500" 
+                                onChange={(e) => setNv2(e.target.value)} value={nv2}
+                            >
+                                {renderOptions(nv2, [nv1, nv3])}
                             </select>
                         </div>
+
+                        {/* Nguyện vọng 3 - Kiểm tra trùng với NV1 và NV2 */}
                         <div>
                             <label className="block text-sm font-bold text-gray-700 mb-2">Nguyện vọng 3</label>
-                            <select className="w-full border-2 p-3 rounded-lg" onChange={(e) => setNv3(e.target.value)} value={nv3}>
-                                {renderOptions()}
+                            <select 
+                                className="w-full border-2 p-3 rounded-lg outline-none transition-all focus:border-blue-500" 
+                                onChange={(e) => setNv3(e.target.value)} value={nv3}
+                            >
+                                {renderOptions(nv3, [nv1, nv2])}
                             </select>
                         </div>
                     </div>
