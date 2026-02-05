@@ -1,18 +1,18 @@
 version: '3.8'
 
 services:
-  # 1. Dịch vụ Database
   db:
     image: mysql:8.0
     container_name: quanlythuctap_db
     restart: always
     environment:
-      MYSQL_DATABASE: db_thuctap
+      # CHỈNH TẠI ĐÂY: Khớp với ảnh phpMyAdmin của bạn
+      MYSQL_DATABASE: quan_ly_thuc_tap 
       MYSQL_ROOT_PASSWORD: password123
+      TZ: Asia/Ho_Chi_Minh
     ports:
       - "3306:3306"
 
-  # 2. Dịch vụ phpMyAdmin
   phpmyadmin:
     image: phpmyadmin:latest
     container_name: quanlythuctap_pma
@@ -23,17 +23,19 @@ services:
       PMA_HOST: db
       PMA_USER: root
       PMA_PASSWORD: password123
+      TZ: Asia/Ho_Chi_Minh
     depends_on:
       - db
 
-  # 3. Dịch vụ Web PHPweb:
-web:
+  web:
     build: .
     container_name: quanlythuctap_web
     restart: always
     ports:
       - "80:80"
     volumes:
-      - ./backend:/var/www/html  # Ánh xạ thư mục backend vào Apache
+      - ./backend:/var/www/html
+    environment:
+      TZ: Asia/Ho_Chi_Minh
     depends_on:
       - db
