@@ -1,56 +1,63 @@
 import React from 'react';
 import { BrowserRouter as Router, Routes, Route, Link } from 'react-router-dom';
 import RegistrationPage from './pages/RegistrationPage';
+import HomePage from './pages/HomePage';
+import LoginPage from './pages/LoginPage';
+import ProfilePage from './pages/ProfilePage';
 
 const App = () => {
   return (
     <Router>
-      <div className="flex flex-col h-screen">
-        {/* 1. THANH NGANG TRÊN CÙNG */}
-        <nav className="h-16 bg-white shadow-sm border-b flex items-center justify-between px-6 z-50">
-          <div className="flex items-center gap-4">
-            <div className="bg-blue-700 text-white p-1.5 rounded font-bold text-xl">KSP</div>
-            <h1 className="font-bold text-blue-900 text-lg">KHOA SƯ PHẠM - ĐHQN</h1>
-          </div>
-          <div className="flex items-center gap-4 text-sm font-medium">
-            <span className="hidden md:block">ĐANG ĐĂNG NHẬP: <b className="text-blue-700">Thành viên</b></span>
-            <button className="bg-red-500 text-white px-4 py-1.5 rounded-md font-bold hover:bg-red-600 transition-all">
-              ĐĂNG XUẤT
-            </button>
-          </div>
-        </nav>
+      <Routes>
+        {/* Trang chủ và Đăng nhập không có Sidebar */}
+        <Route path="/" element={<HomePage />} />
+        <Route path="/login" element={<LoginPage />} />
 
-        <div className="flex flex-1 overflow-hidden">
-          {/* 2. THANH DỌC BÊN TRÁI - Sát mép trên cùng */}
-          <aside className="w-72 bg-[#1e3a8a] text-white flex flex-col shadow-inner">
-            <div className="flex flex-col p-3 gap-2 mt-4">
-              <Link to="/" className="flex items-center gap-3 p-4 hover:bg-blue-800 rounded-lg transition-colors">
-                🏠 TRANG CHỦ HỆ THỐNG
-              </Link>
-              <Link to="/ho-so" className="flex items-center gap-3 p-4 hover:bg-blue-800 rounded-lg transition-colors">
-                👤 HỒ SƠ CÁ NHÂN
-              </Link>
-              <Link to="/dang-ky" className="flex items-center gap-3 p-4 bg-yellow-500 text-blue-900 font-bold rounded-lg shadow-md">
-                📄 ĐĂNG KÝ NGUYỆN VỌNG
-              </Link>
-              <Link to="/nop-bao-cao" className="flex items-center gap-3 p-4 hover:bg-blue-800 rounded-lg transition-colors">
-                📤 NỘP BÁO CÁO
-              </Link>
+        {/* Các trang chức năng của Sinh viên */}
+        <Route
+          path="/*"
+          element={
+            <div className="flex h-screen overflow-hidden">
+              {/* THANH DỌC BÊN TRÁI (SIDEBAR) */}
+              <aside className="w-72 bg-[#1e3a8a] text-white flex flex-col shadow-inner">
+                {/* Logo KSP nhỏ ở đầu Sidebar cho chuyên nghiệp */}
+                <div className="p-6 flex items-center gap-3 border-b border-blue-800">
+                  <div className="bg-white text-blue-800 px-2 py-1 rounded font-bold">KSP</div>
+                  <span className="font-bold text-sm">QUẢN LÝ THỰC TẬP</span>
+                </div>
+
+                <div className="flex flex-col p-3 gap-2 mt-4">
+                  <Link to="/" className="flex items-center gap-3 p-4 hover:bg-blue-800 rounded-lg transition-colors">
+                    🏠 TRANG CHỦ HỆ THỐNG
+                  </Link>
+                  <Link to="/ho-so" className="flex items-center gap-3 p-4 hover:bg-blue-800 rounded-lg transition-colors">
+                    👤 HỒ SƠ CÁ NHÂN
+                  </Link>
+                  <Link to="/dang-ky" className="flex items-center gap-3 p-4 hover:bg-blue-800 rounded-lg transition-colors">
+                    📄 ĐĂNG KÝ NGUYỆN VỌNG
+                  </Link>
+                  {/* LẤY LẠI NÚT NỘP BÁO CÁO Ở ĐÂY */}
+                  <Link to="/nop-bao-cao" className="flex items-center gap-3 p-4 hover:bg-blue-800 rounded-lg transition-colors">
+                    📤 NỘP BÁO CÁO
+                  </Link>
+                </div>
+              </aside>
+
+              {/* NỘI DUNG CHÍNH (Header con đã nằm sẵn trong ProfilePage của bạn) */}
+              <main className="flex-1 bg-gray-100 overflow-y-auto">
+                <Routes>
+                  <Route path="/ho-so" element={<ProfilePage />} />
+                  <Route path="/dang-ky" element={<RegistrationPage />} />
+                  {/* Nhớ tạo file ReportPage.js nếu cần */}
+                  <Route path="/nop-bao-cao" element={<div>Trang nộp báo cáo</div>} />
+                </Routes>
+              </main>
             </div>
-          </aside>
-
-          {/* 3. NỘI DUNG CHÍNH - Đã xóa Banner trùng lặp */}
-          <main className="flex-1 bg-gray-100 overflow-y-auto p-8">
-            <Routes>
-              <Route path="/dang-ky" element={<RegistrationPage />} />
-              {/* Thêm các Route khác ở đây */}
-            </Routes>
-          </main>
-        </div>
-      </div>
+          }
+        />
+      </Routes>
     </Router>
   );
 };
 
-// DÒNG NÀY LÀ QUAN TRỌNG NHẤT ĐỂ SỬA LỖI CỦA BẠN
 export default App;
