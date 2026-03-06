@@ -4,7 +4,7 @@ import RegistrationPage from './pages/RegistrationPage';
 import HomePage from './pages/HomePage';
 import LoginPage from './pages/LoginPage';
 import ProfilePage from './pages/ProfilePage';
-import SubmissionPage from './pages/SubmissionPage';
+
 
 const App = () => {
   return (
@@ -49,8 +49,7 @@ const App = () => {
                 <Routes>
                   <Route path="/ho-so" element={<ProfilePage />} />
                   <Route path="/dang-ky" element={<RegistrationPage />} />
-                  {/* Nhớ tạo file ReportPage.js nếu cần */}
-                  <Route path="/nop-bao-cao" element={<SubmissionPage />} />
+                  
                 </Routes>
               </main>
             </div>
