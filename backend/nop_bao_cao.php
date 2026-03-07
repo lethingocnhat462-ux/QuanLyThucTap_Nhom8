@@ -2,37 +2,96 @@
 <html lang="vi">
 <head>
     <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Nộp Báo Cáo - KSP</title>
     <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700;900&display=swap" rel="stylesheet">
+    <style>
+        body { font-family: 'Inter', sans-serif; }
+        .glass-effect { background: rgba(255, 255, 255, 0.95); backdrop-filter: blur(10px); }
+    </style>
 </head>
-<body class="bg-gray-100 p-6"> <div class="max-w-2xl mx-auto bg-white p-8 rounded-xl shadow-md border border-gray-200">
-        <h2 class="text-2xl font-bold text-blue-900 mb-6 flex items-center gap-2">
-            <span>📤</span> Tải lên báo cáo thực tập
-        </h2>
-        
-        <form action="xuly_nop.php" method="POST" enctype="multipart/form-data" class="space-y-5">
-            <div>
-                <label class="block text-sm font-semibold text-gray-700 mb-1">Mã số sinh viên</label>
-                <input type="text" name="ma_sv" required class="w-full p-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 outline-none">
+<body class="bg-[#f0f4f8] min-h-screen p-4 md:p-12 relative overflow-x-hidden">
+    
+    <div class="absolute top-0 right-0 w-1/4 h-1/4 bg-blue-400/10 rounded-full blur-[100px] pointer-events-none"></div>
+    <div class="absolute bottom-0 left-0 w-1/4 h-1/4 bg-indigo-400/10 rounded-full blur-[100px] pointer-events-none"></div>
+
+    <div class="max-w-2xl mx-auto relative z-10">
+        <div class="glass-effect rounded-[2.5rem] shadow-[0_20px_50px_rgba(0,0,0,0.04)] border border-blue-100 overflow-hidden transition-all duration-500 hover:shadow-[0_30px_60px_rgba(37,99,235,0.08)]">
+            
+            <div class="bg-gradient-to-r from-[#1e3a8a] via-[#2563eb] to-[#3b82f6] p-8 md:p-10 text-white relative">
+                <div class="flex items-center gap-4">
+                    <div class="w-12 h-12 bg-white/20 backdrop-blur-md rounded-xl flex items-center justify-center border border-white/30 shadow-lg">
+                        <span class="text-2xl">📤</span>
+                    </div>
+                    <div>
+                        <h2 class="text-xl md:text-2xl font-black uppercase tracking-tight">
+                            Hệ thống <span class="text-blue-200">Nộp báo cáo</span>
+                        </h2>
+                        <p class="text-blue-100/70 text-[10px] font-mono tracking-[0.2em] mt-1 uppercase">Portal Upload v2.0 • KSP Secure</p>
+                    </div>
+                </div>
             </div>
 
-            <div>
-                <label class="block text-sm font-semibold text-gray-700 mb-1">Loại tài liệu</label>
-                <select name="loai" class="w-full p-3 border border-gray-300 rounded-lg outline-none">
-                    <option value="Báo cáo">Báo cáo thực tập</option>
-                    <option value="Giáo án">Giáo án giảng dạy</option>
-                </select>
-            </div>
+            <form action="xuly_nop.php" method="POST" enctype="multipart/form-data" class="p-8 md:p-10 space-y-7">
+                
+                <div class="space-y-2">
+                    <div class="flex items-center gap-2 mb-1">
+                        <div class="w-1.5 h-1.5 bg-blue-600 rounded-full"></div>
+                        <label class="text-[12px] font-bold text-slate-600 uppercase tracking-widest">Mã số sinh viên</label>
+                    </div>
+                    <input type="text" name="ma_sv" required 
+                        placeholder="Nhập MSSV của bạn..."
+                        class="w-full bg-slate-50 border-2 border-slate-100 p-4 rounded-2xl outline-none transition-all focus:border-blue-500 focus:bg-white focus:ring-4 focus:ring-blue-500/5 font-semibold text-slate-800 shadow-sm">
+                </div>
 
-            <div>
-                <label class="block text-sm font-semibold text-gray-700 mb-1">Chọn tệp tin (PDF/Word)</label>
-                <input type="file" name="file_tai_lieu" accept=".pdf,.doc,.docx" required class="w-full text-sm text-gray-500 file:mr-4 file:py-2 file:px-4 file:rounded-full file:border-0 file:text-sm file:font-semibold file:bg-blue-50 file:text-blue-700 hover:file:bg-blue-100">
-            </div>
+                <div class="space-y-2">
+                    <div class="flex items-center gap-2 mb-1">
+<div class="w-1.5 h-1.5 bg-blue-400 rounded-full"></div>
+                        <label class="text-[12px] font-bold text-slate-600 uppercase tracking-widest">Phân loại báo cáo</label>
+                    </div>
+                    <div class="relative">
+                        <select name="loai" 
+                            class="w-full bg-slate-50 border-2 border-slate-100 p-4 rounded-2xl outline-none appearance-none transition-all focus:border-blue-400 focus:bg-white font-medium text-slate-800 cursor-pointer">
+                            <option value="Báo cáo">Báo cáo thực tập cuối kỳ</option>
+                            <option value="Giáo án">Hồ sơ giáo án giảng dạy</option>
+                            <option value="Khác">Tài liệu bổ sung khác</option>
+                        </select>
+                        <div class="absolute inset-y-0 right-4 flex items-center pointer-events-none text-blue-500">
+                            <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" viewBox="0 0 20 20" fill="currentColor">
+                                <path fill-rule="evenodd" d="M5.293 7.293a1 1 0 011.414 0L10 10.586l3.293-3.293a1 1 0 111.414 1.414l-4 4a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414z" clip-rule="evenodd" />
+                            </svg>
+                        </div>
+                    </div>
+                </div>
 
-            <button type="submit" name="btnNop" class="w-full bg-[#1e3a8a] text-white py-3 rounded-lg font-bold hover:bg-blue-700 transition-all shadow-lg mt-4">
-                XÁC NHẬN GỬI BÁO CÁO
-            </button>
-        </form>
+                <div class="space-y-2">
+                    <div class="flex items-center gap-2 mb-1">
+                        <div class="w-1.5 h-1.5 bg-indigo-500 rounded-full"></div>
+                        <label class="text-[12px] font-bold text-slate-600 uppercase tracking-widest">Tệp đính kèm (PDF/Word)</label>
+                    </div>
+                    <div class="group relative">
+                        <input type="file" name="file_tai_lieu" accept=".pdf,.doc,.docx" required 
+                            class="w-full text-sm text-slate-500 file:mr-4 file:py-3 file:px-6 file:rounded-xl file:border-0 file:text-xs file:font-black file:uppercase file:bg-blue-600 file:text-white hover:file:bg-blue-700 file:transition-all file:cursor-pointer p-2 bg-slate-50 border-2 border-dashed border-slate-200 rounded-2xl group-hover:border-blue-300 transition-colors">
+                    </div>
+                    <p class="text-[10px] text-slate-400 italic mt-1 font-medium">* Dung lượng tối đa: 20MB. Định dạng hỗ trợ: .pdf, .docx</p>
+                </div>
+
+                <div class="flex justify-center pt-4">
+                    <button type="submit" name="btnNop" 
+                        class="group relative overflow-hidden bg-[#1e3a8a] text-white font-black py-4 px-12 rounded-2xl shadow-[0_15px_30px_rgba(30,58,138,0.2)] transition-all hover:scale-105 active:scale-95 tracking-[0.1em] text-sm w-full md:w-auto">
+                        <span class="relative z-10 uppercase">Xác nhận gửi báo cáo</span>
+<div class="absolute inset-0 bg-gradient-to-r from-transparent via-white/10 to-transparent -translate-x-full group-hover:translate-x-full transition-transform duration-1000"></div>
+                    </button>
+                </div>
+            </form>
+
+            <div class="bg-slate-50/50 border-t border-slate-100 p-6 text-center">
+                <p class="text-[9px] text-slate-400 font-mono uppercase tracking-[0.4em]">
+                    Đảm bảo an toàn dữ liệu bởi KSP Cloud Security
+                </p>
+            </div>
+        </div>
     </div>
 
 </body>

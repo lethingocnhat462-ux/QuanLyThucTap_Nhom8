@@ -1,58 +1,90 @@
-// Navbar.js
-import React from 'react';
-import { Link, useNavigate } from 'react-router-dom';
+import React, { useState, useEffect } from 'react';
+import { Link, useNavigate, useLocation } from 'react-router-dom';
 
 const Navbar = ({ userProfile }) => {
   const navigate = useNavigate();
+  const location = useLocation();
+  const [isScrolled, setIsScrolled] = useState(false);
+
+  useEffect(() => {
+    const handleScroll = () => {
+      setIsScrolled(window.scrollY > 20);
+    };
+    window.addEventListener('scroll', handleScroll);
+    return () => window.removeEventListener('scroll', handleScroll);
+  }, []);
+
+  const menuItems = [
+    { name: 'Trang chủ', path: '/' },
+    { name: 'Đơn vị thực tập', path: '/don-vi' },
+    { name: 'Quy trình', path: '/quy-trinh' },
+    { name: 'Giới thiệu', path: '/gioi-thieu' },
+  ];
 
   return (
-    <nav className="bg-white shadow-md py-5 px-10 flex justify-between items-center sticky top-0 z-50">
-      {/* Logo: Nhấn vào luôn về trang chủ */}
-      <div className="flex items-center gap-4 cursor-pointer" onClick={() => navigate('/')}>
-        <div className="bg-blue-800 text-white p-3 rounded-2xl font-black text-base shadow-lg">KSP</div>
+    <nav className={`fixed top-0 left-0 w-full z-50 transition-all duration-300 px-6 md:px-12 flex justify-between items-center ${
+      isScrolled 
+        ? 'bg-white/80 backdrop-blur-lg py-3 shadow-lg' 
+        : 'bg-white py-5 shadow-sm border-b border-gray-100'
+    }`}>
+      
+      {/* Logo & Brand */}
+      <div className="flex items-center gap-4 cursor-pointer group" onClick={() => navigate('/')}>
+        <div className="bg-[#1e3a8a] text-white w-12 h-12 rounded-xl flex items-center justify-center font-black text-lg shadow-blue-200 shadow-xl group-hover:scale-105 transition-transform">
+          KSP
+        </div>
         <div className="flex flex-col">
-          <span className="font-black text-blue-900 uppercase text-xl tracking-tighter leading-none">Khoa Sư Phạm</span>
-          <span className="font-bold text-blue-700 text-xs tracking-widest">ĐH QUY NHƠN</span>
+          <span className="font-extrabold text-[#1e3a8a] uppercase text-xl tracking-tighter leading-none">
+            Khoa Sư Phạm
+          </span>
+          <span className="font-bold text-blue-500 text-[10px] tracking-[0.2em] mt-1">
+            ĐH QUY NHƠN
+          </span>
         </div>
       </div>
       
-      {/* Menu: Các Link này phải nằm NGOÀI mọi điều kiện check login */}
-      <div className="hidden md:flex gap-12">
-        <Link to="/" className="text-lg font-bold text-gray-500 hover:text-blue-800 uppercase transition-all">
-          Trang chủ
-        </Link>
-        
-        {/* Đảm bảo Link này không bị bọc bởi {userProfile && ...} */}
-        <Link to="/don-vi" className="text-lg font-bold text-gray-500 hover:text-blue-800 uppercase transition-all">
-          Đơn vị thực tập
-        </Link>
-        
-        <Link to="/quy-trinh" className="text-lg font-bold text-gray-500 hover:text-blue-800 uppercase transition-all">
-          Quy trình
-        </Link>
+      {/* Menu trung tâm */}
+      <div className="hidden md:flex items-center gap-2">
+        {menuItems.map((item) => (
+          <Link 
+            key={item.path}
+            to={item.path} 
+            className={`px-5 py-2 rounded-full text-sm font-bold uppercase transition-all no-underline ${
+              location.pathname === item.path 
+                ? 'bg-blue-50 text-[#1e3a8a]' 
+                : 'text-gray-500 hover:text-[#1e3a8a] hover:bg-gray-50'
+            }`}
+          >
+            {item.name}
+          </Link>
+        ))}
       </div>
 
-      {/* Phần bên phải: Hiển thị tùy theo trạng thái đăng nhập */}
-      <div className="flex items-center gap-8">
+      {/* Phần bên phải: Auth Status */}
+      <div className="flex items-center gap-6">
         {userProfile ? (
-          // Nếu ĐÃ đăng nhập
-          <>
-            <div className="text-right border-r-2 pr-8 border-gray-100">
-              <p className="text-[10px] font-black text-gray-400 uppercase">Đang đăng nhập</p>
-              <p className="text-lg font-black text-blue-900 italic leading-none">{userProfile.HoTen}</p>
+          <div className="flex items-center gap-4 bg-gray-50 p-1.5 pr-4 rounded-full border border-gray-100">
+            <div className="w-8 h-8 bg-blue-100 text-blue-800 rounded-full flex items-center justify-center font-bold text-xs uppercase">
+              {userProfile.HoTen?.charAt(0) || 'U'}
+            </div>
+            <div className="text-left hidden sm:block">
+              <p className="text-[9px] font-bold text-gray-400 uppercase leading-none mb-1">Thành viên</p>
+              <p className="text-sm font-black text-blue-900 leading-none">{userProfile.HoTen}</p>
             </div>
             <button 
-              onClick={() => { localStorage.removeItem('user'); window.location.href='/login'; }}
-              className="bg-red-600 text-white px-6 py-2.5 rounded-xl font-bold text-sm hover:bg-red-700 transition-all"
+              onClick={() => { localStorage.clear(); window.location.href='/login'; }}
+              className="ml-2 p-2 text-gray-400 hover:text-red-500 transition-colors"
+              title="Đăng xuất"
             >
-              ĐĂNG XUẤT
+              <svg xmlns="http://www.w3.org/2000/svg" className="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M17 16l4-4m0 0l-4-4m4 4H7m6 4v1a3 3 0 01-3 3H6a3 3 0 01-3-3V7a3 3 0 013-3h4a3 3 0 013 3v1" />
+              </svg>
             </button>
-          </>
+          </div>
         ) : (
-          // Nếu CHƯA đăng nhập
           <button 
             onClick={() => navigate('/login')}
-            className="bg-blue-600 text-white px-8 py-2.5 rounded-xl font-black text-sm hover:bg-blue-700 transition-all shadow-md"
+            className="bg-[#2563eb] text-white px-8 py-2.5 rounded-full font-bold text-sm hover:bg-[#1e3a8a] transition-all shadow-lg shadow-blue-100 hover:shadow-blue-200 active:scale-95"
           >
             ĐĂNG NHẬP
           </button>
