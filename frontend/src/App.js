@@ -5,6 +5,7 @@ import HomePage from './pages/HomePage';
 import LoginPage from './pages/LoginPage';
 import ProfilePage from './pages/ProfilePage';
 import InternshipUnitsPage from './pages/InternshipUnitsPage';
+import AboutPage from './pages/AboutPage';
 
 const App = () => {
   return (
@@ -17,6 +18,7 @@ const App = () => {
         <Route path="/don-vi" element={<InternshipUnitsPage />} />
         <Route path="/quy-trinh" element={<div>Trang Quy trình đang xây dựng</div>} />
         <Route path="/login" element={<LoginPage />} />
+        <Route path="/gioi-thieu" element={<AboutPage />} />
 
         {/* NHÓM 2: CÁC TRANG SAU KHI ĐĂNG NHẬP - Có Sidebar */}
         <Route
