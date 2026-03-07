@@ -47,7 +47,13 @@ const ProfilePage = () => {
             </h1>
             <div className="flex gap-3 mt-5 justify-center md:justify-start">
               <span className="bg-blue-100 text-blue-700 text-sm px-6 py-2 rounded-full font-bold uppercase tracking-wide">
-                {Number(profile.Quyen) === 3 ? 'Giảng Viên ĐH' : 'Sinh Viên'}
+                {/* Thay đoạn {Number(profile.Quyen) === 3 ? ...} cũ bằng đoạn này */}
+<span className="bg-blue-100 text-blue-700 text-sm px-6 py-2 rounded-full font-bold uppercase tracking-wide">
+  {Number(profile.Quyen) === 1 && 'Quản trị viên'}
+  {Number(profile.Quyen) === 2 && 'Sinh Viên'}
+  {Number(profile.Quyen) === 3 && 'Giảng Viên ĐH'}
+  {Number(profile.Quyen) === 4 && 'Giáo Viên Phổ Thông'}
+</span>
               </span>
               <span className="bg-green-100 text-green-700 text-sm px-6 py-2 rounded-full font-bold uppercase tracking-wide">Chính thức</span>
             </div>

@@ -23,18 +23,34 @@ const LoginPage = () => {
 
       const result = await response.json();
 
-      if (result.status === "success") { 
+if (result.status === "success") { 
+        // 1. Lưu thông tin user và quan trọng nhất là userRole
         localStorage.setItem('user', JSON.stringify(result.user));
+        
+        // Chuyển quyền từ API (thường là số hoặc chữ) sang số 1,2,3,4 để App.js nhận diện
+        // Giả sử API trả về result.user.Quyen là các số 1, 2, 3, 4
+        localStorage.setItem('userRole', result.user.Quyen); 
+        
         alert("✅ Đăng nhập thành công!");
 
-        const role = result.user.Quyen; 
-        if (role === 'sinhvien') {
-          navigate('/ho-so'); 
-        } else if (role === 'admin') {
-          navigate('/admin/profile');
+        const role = parseInt(result.user.Quyen); 
+
+        // 2. Điều hướng dựa trên quyền số (1, 2, 3, 4)
+        if (role === 1) {
+          navigate('/admin-tai-khoan'); // Admin
+        } else if (role === 2) {
+          navigate('/ho-so'); // Sinh viên
+        } else if (role === 3) {
+          navigate('/doan-thuc-tap'); // Giảng viên ĐH
+        } else if (role === 4) {
+          navigate('/xem-dssv'); // Giáo viên phổ thông
         } else {
-          navigate('/ho-so'); 
+          navigate('/ho-so'); // Mặc định
         }
+
+        // Buộc trình duyệt tải lại nhẹ để App.js cập nhật userRole mới từ localStorage
+        window.location.reload();
+
       } else {
         alert("❌ " + result.message);
       }

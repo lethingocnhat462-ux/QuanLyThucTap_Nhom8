@@ -26,18 +26,18 @@ if (!empty($user_input) && !empty($pass_input)) {
         $stmt = $conn->prepare($sql);
         $stmt->execute(['user' => $user_input]);
         $row = $stmt->fetch(PDO::FETCH_ASSOC);
-
-        if ($row && $pass_input == $row['MatKhau']) {
-            echo json_encode([
-                "status" => "success", // React sẽ kiểm tra result.status === "success"
-                "message" => "Đăng nhập thành công",
-                "user" => [
-                    "MaTK" => $row['MaTK'],
-                    "Quyen" => $row['Quyen'],
-                    "Email" => $row['Email']
-                ]
-            ]);
-        } else {
+if ($row && $pass_input == $row['MatKhau']) {
+    echo json_encode([
+        "status" => "success",
+        "message" => "Đăng nhập thành công",
+        "user" => [
+            "MaTK" => $row['MaTK'],
+            "Ten" => $row['TenDangNhap'], // Thêm cái này để hiện tên trên Sidebar/Header
+            "Quyen" => $row['Quyen'],      // Trả về số 1, 2, 3, hoặc 4
+            "Email" => $row['Email']
+        ]
+    ]);
+} else {
             http_response_code(401);
             echo json_encode(["status" => "error", "message" => "Tài khoản hoặc mật khẩu không chính xác"]);
         }
