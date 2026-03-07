@@ -1,5 +1,6 @@
 import React from 'react';
-import { useNavigate } from 'react-router-dom';
+import { useNavigate, Link } from 'react-router-dom'; 
+
 
 function HomePage() {
   const navigate = useNavigate(); // Dùng để điều hướng giống như lệnh Redirect
@@ -12,11 +13,12 @@ function HomePage() {
           <h1 className="text-xl font-bold text-blue-900 leading-tight">KHOA SƯ PHẠM<br/><span className="text-sm">ĐH QUY NHƠN</span></h1>
         </div>
         <div className="hidden md:flex gap-6 font-medium text-gray-700">
-          <a href="#" className="hover:text-blue-600">Trang chủ</a>
-          <a href="#" className="hover:text-blue-600">Giới thiệu</a>
-          <a href="#" className="hover:text-blue-600">Đơn vị thực tập</a>
-          <a href="#" className="hover:text-blue-600">Quy trình</a>
-        </div>
+  <Link to="/" className="hover:text-blue-600">Trang chủ</Link>
+  <Link to="/gioi-thieu" className="hover:text-blue-600">Giới thiệu</Link>
+  {/* ĐỔI href="#" THÀNH to="/don-vi" */}
+  <Link to="/don-vi" className="hover:text-blue-600 font-bold text-blue-900">Đơn vị thực tập</Link>
+  <Link to="/quy-trinh" className="hover:text-blue-600">Quy trình</Link>
+</div>
         {/* SỬA TẠI ĐÂY */}
         <button 
           onClick={() => navigate('/login')} 

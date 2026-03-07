@@ -4,56 +4,56 @@ import RegistrationPage from './pages/RegistrationPage';
 import HomePage from './pages/HomePage';
 import LoginPage from './pages/LoginPage';
 import ProfilePage from './pages/ProfilePage';
+import InternshipUnitsPage from './pages/InternshipUnitsPage';
 
 const App = () => {
   return (
     <Router>
       <Routes>
-        {/* Trang chủ và Đăng nhập không có Sidebar */}
+        {/* NHÓM 1: CÁC TRANG CÔNG KHAI - Không có Sidebar */}
+        {/* Để điều hướng được từ HomePage, Navbar trong HomePage phải dùng Link của react-router-dom */}
         <Route path="/" element={<HomePage />} />
+        <Route path="/home" element={<HomePage />} />
+        <Route path="/don-vi" element={<InternshipUnitsPage />} />
+        <Route path="/quy-trinh" element={<div>Trang Quy trình đang xây dựng</div>} />
         <Route path="/login" element={<LoginPage />} />
 
-        {/* Các trang chức năng của Sinh viên */}
+        {/* NHÓM 2: CÁC TRANG SAU KHI ĐĂNG NHẬP - Có Sidebar */}
         <Route
           path="/*"
           element={
             <div className="flex h-screen overflow-hidden">
-              {/* THANH DỌC BÊN TRÁI (SIDEBAR) */}
               <aside className="w-72 bg-[#1e3a8a] text-white flex flex-col shadow-inner">
                 <div className="p-6 flex items-center gap-3 border-b border-blue-800">
                   <div className="bg-white text-blue-800 px-2 py-1 rounded font-bold">KSP</div>
-                  <span className="font-bold text-sm">QUẢN LÝ THỰC TẬP</span>
+                  <span className="font-bold text-sm uppercase">Quản lý thực tập</span>
                 </div>
 
                 <div className="flex flex-col p-3 gap-2 mt-4">
-                  <Link to="/" className="flex items-center gap-3 p-4 hover:bg-blue-800 rounded-lg transition-colors no-underline text-white">
+                  {/* Sử dụng Link để quay lại trang chủ công khai */}
+                  <Link to="/" className="flex items-center gap-3 p-4 hover:bg-blue-800 rounded-lg no-underline text-white">
                     🏠 TRANG CHỦ HỆ THỐNG
                   </Link>
-                  <Link to="/ho-so" className="flex items-center gap-3 p-4 hover:bg-blue-800 rounded-lg transition-colors no-underline text-white">
+                  <Link to="/ho-so" className="flex items-center gap-3 p-4 hover:bg-blue-800 rounded-lg no-underline text-white">
                     👤 HỒ SƠ CÁ NHÂN
                   </Link>
-                  <Link to="/dang-ky" className="flex items-center gap-3 p-4 hover:bg-blue-800 rounded-lg transition-colors no-underline text-white">
+                  <Link to="/dang-ky" className="flex items-center gap-3 p-4 hover:bg-blue-800 rounded-lg no-underline text-white">
                     📄 ĐĂNG KÝ NGUYỆN VỌNG
                   </Link>
-                  
-                  {/* Sử dụng Link để React nhận diện Route bên dưới */}
-                  <Link to="/nop-bao-cao" className="flex items-center gap-3 p-4 hover:bg-blue-800 rounded-lg transition-colors no-underline text-white">
+                  <Link to="/nop-bao-cao" className="flex items-center gap-3 p-4 hover:bg-blue-800 rounded-lg no-underline text-white">
                     📤 NỘP BÁO CÁO
                   </Link>
                 </div>
               </aside>
 
-              {/* NỘI DUNG CHÍNH */}
               <main className="flex-1 bg-gray-100 overflow-y-auto">
                 <Routes>
                   <Route path="/ho-so" element={<ProfilePage />} />
                   <Route path="/dang-ky" element={<RegistrationPage />} />
-                  
-                  {/* HIỂN THỊ GIAO DIỆN NỘP BÁO CÁO TẠI ĐÂY */}
                   <Route path="/nop-bao-cao" element={
                     <div className="w-full h-full flex flex-col">
-                      <div className="bg-white p-4 shadow-sm font-bold text-blue-900 border-b">
-                         HỆ THỐNG NỘP BÁO CÁO & GIÁO ÁN
+                      <div className="bg-white p-4 shadow-sm font-bold text-blue-900 border-b uppercase">
+                         Hệ thống nộp báo cáo & giáo án
                       </div>
                       <iframe 
                         src="http://localhost/nop_bao_cao.php" 
