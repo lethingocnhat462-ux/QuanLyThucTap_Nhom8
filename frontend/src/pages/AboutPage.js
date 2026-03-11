@@ -53,8 +53,20 @@ const AboutPage = () => {
       {/* Danh sách thành viên - Glassmorphism */}
       <div className="relative z-10 flex-1 max-w-6xl mx-auto py-16 px-4">
         <div className="text-center mb-16">
-          <h2 className="text-3xl font-light text-white tracking-[0.2em] uppercase mb-2">Đội ngũ phát triển</h2>
-          <div className="h-1 w-20 bg-blue-500 mx-auto rounded-full"></div>
+          <div className="text-center mb-16">
+  <div className="inline-block relative">
+    <h2 className="text-3xl font-light text-white tracking-[0.2em] uppercase mb-4">
+      Đội ngũ phát triển
+    </h2>
+
+    {/* Line chạy */}
+    <div className="h-[3px] w-full bg-white/10 rounded-full overflow-hidden">
+      <div className="h-full w-full animate-line bg-gradient-to-r from-transparent via-blue-500 to-transparent"></div>
+    </div>
+
+  </div>
+</div>
+
         </div>
 
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-10">
@@ -94,6 +106,20 @@ const AboutPage = () => {
       </div>
 
       <style>{`
+
+@keyframes lineMove {
+  0% {
+    background-position: -200px 0;
+  }
+  100% {
+    background-position: 200px 0;
+  }
+}
+
+.animate-line {
+  background-size: 200px 100%;
+  animation: lineMove 2.5s linear infinite;
+}
         @keyframes float {
           0% { transform: translateY(0) rotate(0deg); opacity: 0; }
           20% { opacity: 0.6; }

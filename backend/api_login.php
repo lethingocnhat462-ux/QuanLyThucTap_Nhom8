@@ -1,11 +1,9 @@
 <?php
-// Chỉ cần một bộ header chuẩn là đủ
 header("Access-Control-Allow-Origin: *");
 header("Access-Control-Allow-Methods: POST, GET, OPTIONS");
 header("Access-Control-Allow-Headers: Content-Type, Authorization, X-Requested-With");
 header("Content-Type: application/json; charset=UTF-8");
 
-// Xử lý yêu cầu OPTIONS từ trình duyệt (CORS Preflight)
 if ($_SERVER['REQUEST_METHOD'] == 'OPTIONS') {
     http_response_code(200);
     exit();
@@ -13,31 +11,43 @@ if ($_SERVER['REQUEST_METHOD'] == 'OPTIONS') {
 
 require_once 'config/db_config.php';
 
-// Nhận dữ liệu từ Frontend (JSON)
 $data = json_decode(file_get_contents("php://input"), true);
 
-// SỬA TẠI ĐÂY: Dùng 'mssv' thay vì 'username' để khớp với React của bạn
-$user_input = $data['mssv'] ?? ''; 
+// CẬP NHẬT: Nhận 'identity' từ React (bao gồm cả Mã số hoặc Email)
+$user_input = $data['identity'] ?? ''; 
 $pass_input = $data['password'] ?? '';
 
 if (!empty($user_input) && !empty($pass_input)) {
     try {
-        $sql = "SELECT MaTK, TenDangNhap, MatKhau, Quyen, Email FROM NguoiDung WHERE TenDangNhap = :user";
-        $stmt = $conn->prepare($sql);
-        $stmt->execute(['user' => $user_input]);
+        // CẬP NHẬT SQL: Tìm kiếm ở cả cột TenDangNhap HOẶC cột Email
+// SQL có 2 vị trí cần điền dữ liệu là :user1 và :user2
+$sql = "SELECT MaTK, TenDangNhap, MatKhau, Quyen, Email 
+        FROM NguoiDung 
+        WHERE TenDangNhap = :user1 OR Email = :user2 
+        LIMIT 1";
+
+$stmt = $conn->prepare($sql);
+
+// Truyền cùng một giá trị $user_input vào cả 2 tham số
+$stmt->execute([
+    'user1' => $user_input,
+    'user2' => $user_input
+]);
         $row = $stmt->fetch(PDO::FETCH_ASSOC);
-if ($row && $pass_input == $row['MatKhau']) {
-    echo json_encode([
-        "status" => "success",
-        "message" => "Đăng nhập thành công",
-        "user" => [
-            "MaTK" => $row['MaTK'],
-            "Ten" => $row['TenDangNhap'], // Thêm cái này để hiện tên trên Sidebar/Header
-            "Quyen" => $row['Quyen'],      // Trả về số 1, 2, 3, hoặc 4
-            "Email" => $row['Email']
-        ]
-    ]);
-} else {
+
+        // Kiểm tra mật khẩu (Hiện tại em đang so sánh thô)
+        if ($row && $pass_input == $row['MatKhau']) {
+            echo json_encode([
+                "status" => "success",
+                "message" => "Đăng nhập thành công",
+                "user" => [
+                    "MaTK" => $row['MaTK'],
+                    "Ten" => $row['TenDangNhap'],
+                    "Quyen" => $row['Quyen'],
+                    "Email" => $row['Email']
+                ]
+            ]);
+        } else {
             http_response_code(401);
             echo json_encode(["status" => "error", "message" => "Tài khoản hoặc mật khẩu không chính xác"]);
         }
