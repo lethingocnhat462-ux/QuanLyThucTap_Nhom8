@@ -9,6 +9,7 @@ import AboutPage from './pages/AboutPage';
 import ProcessPage from './pages/ProcessPage';
 import Navbar from './components/Navbar';
 import ChangePasswordModal from './components/ChangePasswordModal/ChangePasswordModal'; 
+import XemDSSVPage from './pages/XemDSSVPage';
 
 // --- 1. IMPORT COMPONENT MỚI Ở ĐÂY ---
 import NotificationDetail from './pages/NotificationDetail'; 
@@ -125,12 +126,7 @@ const AppContent = () => {
                   <Routes>
                     <Route path="/ho-so" element={<ProfilePage />} />
                     <Route path="/dang-ky" element={<RegistrationPage />} />
-                    <Route path="/xem-dssv" element={
-                      <div className="p-8">
-                        <h1 className="text-2xl font-bold text-blue-900 mb-4 uppercase">Danh sách sinh viên thực tập</h1>
-                        <div className="bg-white p-8 rounded-2xl shadow-sm border border-gray-100">Dữ liệu sẽ hiển thị ở đây...</div>
-                      </div>
-                    } />
+                    <Route path="/xem-dssv" element={<XemDSSVPage />} />
                     <Route path="/nop-bao-cao" element={
                       <div className="w-full h-full flex flex-col">
                         <div className="bg-white p-4 shadow-sm font-bold text-blue-900 border-b uppercase">Hệ thống nộp báo cáo</div>

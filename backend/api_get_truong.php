@@ -9,7 +9,7 @@ require_once 'config/db_config.php';
 try {
     $conn->exec("set names utf8mb4");
     
-    // ĐÃ SỬA: Lấy MaDV thay vì MaDonVi
+  
     $query = "SELECT MaDV, TenDonVi FROM DonViThucTap ORDER BY TenDonVi ASC";
     $stmt = $conn->prepare($query);
     $stmt->execute();
