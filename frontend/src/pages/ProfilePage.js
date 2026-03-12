@@ -1,9 +1,11 @@
 import React, { useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import Navbar from '../components/Navbar';
+import ChangePasswordModal from '../components/ChangePasswordModal/ChangePasswordModal';
 
 const ProfilePage = () => {
   const [profile, setProfile] = useState(null);
+  const [isModalOpen, setIsModalOpen] = useState(false); // Quản lý đóng mở Modal
   const navigate = useNavigate();
 
   useEffect(() => {
@@ -31,12 +33,15 @@ const ProfilePage = () => {
 
   return (
     <div className="bg-gray-50 min-h-screen font-sans text-gray-800">
-      <Navbar userProfile={profile} />
+     <Navbar 
+  userProfile={profile} 
+  onOpenChangePassword={() => setIsModalOpen(true)} 
+/>
       
       <div className="bg-blue-800 h-48 shadow-inner"></div>
 
       <div className="max-w-6xl mx-auto px-6 -mt-24 pb-20">
-        {/* Header Hồ sơ - Tăng kích thước ảnh đại diện và chữ */}
+        {/* Header Hồ sơ */}
         <div className="bg-white rounded-[2.5rem] p-10 shadow-2xl flex flex-col md:flex-row items-center gap-10 border border-gray-100 relative z-10">
           <div className="bg-yellow-400 w-40 h-40 rounded-[2rem] flex items-center justify-center text-white text-6xl font-black shadow-xl">
             {profile.HoTen?.charAt(0).toUpperCase() || "?"}
@@ -47,13 +52,10 @@ const ProfilePage = () => {
             </h1>
             <div className="flex gap-3 mt-5 justify-center md:justify-start">
               <span className="bg-blue-100 text-blue-700 text-sm px-6 py-2 rounded-full font-bold uppercase tracking-wide">
-                {/* Thay đoạn {Number(profile.Quyen) === 3 ? ...} cũ bằng đoạn này */}
-<span className="bg-blue-100 text-blue-700 text-sm px-6 py-2 rounded-full font-bold uppercase tracking-wide">
-  {Number(profile.Quyen) === 1 && 'Quản trị viên'}
-  {Number(profile.Quyen) === 2 && 'Sinh Viên'}
-  {Number(profile.Quyen) === 3 && 'Giảng Viên ĐH'}
-  {Number(profile.Quyen) === 4 && 'Giáo Viên Phổ Thông'}
-</span>
+                {Number(profile.Quyen) === 1 && 'Quản trị viên'}
+                {Number(profile.Quyen) === 2 && 'Sinh Viên'}
+                {Number(profile.Quyen) === 3 && 'Giảng Viên ĐH'}
+                {Number(profile.Quyen) === 4 && 'Giáo Viên Phổ Thông'}
               </span>
               <span className="bg-green-100 text-green-700 text-sm px-6 py-2 rounded-full font-bold uppercase tracking-wide">Chính thức</span>
             </div>
@@ -63,11 +65,13 @@ const ProfilePage = () => {
         <div className="grid grid-cols-1 md:grid-cols-3 gap-10 mt-12">
           <div className="md:col-span-2 space-y-10">
             <div className="bg-white p-10 rounded-[2.5rem] shadow-md border border-gray-100">
-              <h3 className="text-blue-900 font-black mb-10 flex items-center gap-3 uppercase tracking-widest text-lg">
-                <span className="w-2.5 h-8 bg-blue-600 rounded-full"></span> Chi tiết hồ sơ
-              </h3>
+              {/* Phần tiêu đề có chứa nút Đổi mật khẩu */}
+              <div className="flex justify-between items-center mb-10">
+                <h3 className="text-blue-900 font-black flex items-center gap-3 uppercase tracking-widest text-lg">
+                  <span className="w-2.5 h-8 bg-blue-600 rounded-full"></span> Chi tiết hồ sơ
+                </h3>
+              </div>
               
-              {/* Grid thông tin với text-lg để dễ đọc hơn */}
               <div className="grid grid-cols-1 sm:grid-cols-2 gap-x-16 gap-y-10">
                 <DetailItem label="Họ và Tên" value={profile.HoTen} />
                 <DetailItem 
@@ -100,11 +104,17 @@ const ProfilePage = () => {
           </div>
         </div>
       </div>
+
+      {/* MODAL ĐỔI MẬT KHẨU */}
+      <ChangePasswordModal 
+        isOpen={isModalOpen} 
+        onClose={() => setIsModalOpen(false)} 
+        maTK={profile.MaTK} // Truyền MaTK xuống để Modal biết đổi mật khẩu cho ai
+      />
     </div>
   );
 };
 
-// Component con với kích thước chữ lớn hơn
 const DetailItem = ({ label, value }) => (
   <div className="group">
     <p className="text-xs font-black text-gray-400 uppercase tracking-[0.15em] mb-2 transition-colors group-hover:text-blue-500">{label}</p>

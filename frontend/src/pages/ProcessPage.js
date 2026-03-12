@@ -43,42 +43,45 @@ const ProcessPage = () => {
 
   return (
     // Nền tối sâu thẳm để làm nổi bật Neon
-    <div className="relative min-h-screen overflow-hidden font-sans selection:bg-cyan-900 selection:text-cyan-100 bg-gradient-to-b from-[#0b1736] via-[#0f1f45] to-[#132a5e]">
+    <div className="relative min-h-screen overflow-hidden font-sans selection:bg-cyan-600 selection:text-cyan-100 bg-gradient-to-br from-[#f0f9ff] via-[#e0f2fe] to-[#dbeafe]">
       
       {/* --- LAYER NỀN VŨ TRỤ SỐ (CYBER BACKGROUND) --- */}
       <div className="fixed inset-0 -z-10">
         {/* Lưới Grid xanh neon mờ */}
-        <div className="absolute inset-0 bg-cyber-grid opacity-20"></div>
-        
-        {/* Các quầng sáng màu (Mesh Gradient) tạo độ sâu và cảm giác công nghệ */}
-        <div className="absolute top-[-10%] left-[-10%] w-[60%] h-[60%] rounded-full bg-blue-600/40 blur-[150px] animate-pulse-slow"></div>
-        <div className="absolute bottom-[-10%] right-[-10%] w-[60%] h-[60%] rounded-full bg-purple-600/40 blur-[150px] animate-pulse-slow" style={{ animationDelay: '5s' }}></div>
+        <div className="absolute inset-0 bg-cyber-grid opacity-30"></div>
+        <div className="absolute top-[-10%] left-[-10%] w-[60%] h-[60%] rounded-full bg-blue-400/20 blur-[150px] animate-pulse-slow"></div>
+        <div className="absolute bottom-[-10%] right-[-10%] w-[60%] h-[60%] rounded-full bg-purple-400/20 blur-[150px] animate-pulse-slow" style={{ animationDelay: '5s' }}></div>
 
+        <div className="absolute inset-0 overflow-hidden pointer-events-none">
+          <div className="w-full h-[1px] bg-gradient-to-r from-transparent via-blue-500/20 to-transparent animate-scan-line"></div>
+        </div>
+      </div>
+
+      <div className="relative z-10">
+        
+        
         {/* Tia quét mờ lướt nhẹ dọc màn hình */}
         <div className="absolute inset-0 overflow-hidden pointer-events-none">
           <div className="w-full h-[1px] bg-gradient-to-r from-transparent via-cyan-400/20 to-transparent animate-scan-line"></div>
         </div>
       </div>
       {/* TIÊU ĐỀ CHÍNH - Chỉnh lại để nổi chữ trên nền tối */}
-        <div className="text-center mb-36 mt-20 space-y-6">
-          {/* Label nhỏ với hiệu ứng Ping xanh Cyan */}
-          <div className="inline-flex items-center gap-3 px-6 py-2 rounded-full border border-cyan-500/30 bg-cyan-950/50 backdrop-blur-xl shadow-[0_0_15px_rgba(34,211,238,0.2)] animate-fade-in">
-            <span className="relative flex h-2.5 w-2.5">
-              <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-cyan-400 opacity-75"></span>
-              <span className="relative inline-flex rounded-full h-2.5 w-2.5 bg-cyan-500"></span>
-            </span>
-            <span className="text-[11px] font-mono text-cyan-200 font-bold uppercase tracking-[0.4em]">Core Protocol v8.0</span>
-          </div>
-          
-          <h1 className="text-6xl md:text-8xl font-black text-white leading-[1.1] tracking-tighter drop-shadow-[0_0_15px_rgba(255,255,255,0.1)]">
+<div className="text-center mb-36 mt-20 space-y-10 relative z-10">
+        <div className="inline-flex items-center gap-3 px-6 py-2 rounded-full border border-blue-400/30 bg-white/60 backdrop-blur-xl shadow-sm animate-fade-in">
+          <span className="relative flex h-2.5 w-2.5">
+            <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-blue-400 opacity-75"></span>
+            <span className="relative inline-flex rounded-full h-2.5 w-2.5 bg-blue-500"></span>
+          </span>
+          <span className="text-[11px] font-mono text-blue-700 font-bold uppercase tracking-[0.4em]">Core Protocol v8.0</span>
+        </div>
+          <h1 className="text-6xl md:text-8xl font-black text-slate-900 leading-[1.1] tracking-tighter drop-shadow-[0_0_15px_rgba(255,255,255,0.1)]">
             QUY TRÌNH <br/>
             <span className="animate-gradient-text drop-shadow-[0_0_30px_rgba(34,211,238,0.5)]">THỰC TẬP AI</span>
           </h1>
-          <p className="max-w-xl mx-auto text-slate-300 font-medium text-lg leading-relaxed">
-            Nền tảng tự động hóa quy trình nghiệp vụ thông minh cho sinh viên <br/>
-            <span className="text-white font-bold">Khoa Sư phạm — Đại học Quy Nhơn.</span>
-          </p>
-        </div>
+          <p className="max-w-none px-4 mx-auto text-slate-600 font-semibold text-lg leading-relaxed mt-10">
+    Nền tảng tự động hóa quy trình nghiệp vụ thông minh cho sinh viên <span className="text-blue-600 font-extrabold ml-1">Khoa Sư phạm — Đại học Quy Nhơn.</span>
+  </p>
+</div>
 
         {/* DANH SÁCH CÁC BƯỚC (Bản Glassmorphism Neon) */}
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-10 px-10 xl:px-15 max-w-7xl mx-auto">
@@ -123,52 +126,40 @@ const ProcessPage = () => {
             </div>
           ))}
         </div>
-      <footer className="mt-40 pt-16 border-t border-cyan-400/20 w-full bg-[#0f1f45]/70 backdrop-blur-xl shadow-[0_10px_40px_rgba(0,0,0,0.4)]">
+   {/* FOOTER ĐÃ FIX LỖI VÀ THU GỌN */}
+      <footer className="mt-20 pt-8 border-t border-cyan-400/20 w-full bg-[#0f1f45]/80 backdrop-blur-xl shadow-[0_-10px_40px_rgba(0,0,0,0.2)]">
+        <div className="max-w-7xl mx-auto px-10">
+          <div className="flex flex-col md:flex-row justify-between items-center gap-8 py-8">
+            <div className="text-center md:text-left">
+              <h2 className="text-white font-black text-2xl tracking-tighter uppercase">
+                QNU <span className="text-cyan-400 italic">Pedagogy</span>
+              </h2>
+              <p className="text-slate-400 text-[9px] font-mono uppercase tracking-[0.3em] mt-1">
+                QUẢN LÝ THỰC TẬP — NHÓM 08
+              </p>
+            </div>
 
-  <div className="flex flex-col md:flex-row justify-between items-center gap-12 px-12 py-16 w-full">
-
-    <div className="text-center md:text-left space-y-3">
-      <h2 className="text-white font-black text-3xl tracking-tighter uppercase">
-        QNU <span className="text-cyan-400 italic">Pedagogy</span>
-      </h2>
-      <p className="text-slate-300 text-[10px] font-mono uppercase tracking-[0.5em]">
-        QUẢN LÝ THỰC TẬP SƯ PHẠM — Nhóm 08
-      </p>
-    </div>
-
-    <div className="flex gap-16">
-      <div className="text-center">
-        <span className="block text-slate-400 text-[9px] font-mono uppercase tracking-widest mb-2">
-          Build Version
-        </span>
-        <span className="text-slate-300 text-xs font-bold bg-white/[0.03] px-3 py-1 rounded-full border border-white/5">
-          8.0.2 STABLE
-        </span>
-      </div>
-
-      <div className="text-center">
-        <span className="block text-slate-400 text-[9px] font-mono uppercase tracking-widest mb-2">
-          Encryption
-        </span>
-        <span className="text-cyan-400 text-xs font-extrabold uppercase tracking-widest flex items-center gap-2">
-          <span className="w-2.5 h-2.5 bg-green-500 rounded-full animate-pulse"></span>
-          NHOM 8
-        </span>
-      </div>
-    </div>
-
-  </div>
-
-   <div className="pb-10 text-center opacity-40">
-    <p className="text-slate-400 text-[9px] font-mono uppercase tracking-[1.5em]">
-    © MMXXVI UNIVERSITY OF QUY NHON
-    </p>
-  </div>
-
-</footer>
-
-
-
+            <div className="flex gap-10 items-center">
+              <div className="text-right border-r border-white/10 pr-10 hidden sm:block">
+                <span className="block text-slate-500 text-[8px] font-mono uppercase tracking-widest mb-1">Build</span>
+                <span className="text-slate-300 text-[10px] font-bold">8.0.2 STABLE</span>
+              </div>
+              <div className="text-center md:text-left">
+                <span className="block text-slate-500 text-[8px] font-mono uppercase tracking-widest mb-1">Encryption</span>
+                <span className="text-cyan-400 text-[10px] font-extrabold uppercase tracking-widest flex items-center gap-2">
+                  <span className="w-1.5 h-1.5 bg-green-500 rounded-full animate-pulse"></span>
+                  NHOM 8
+                </span>
+              </div>
+            </div>
+          </div>
+          <div className="py-6 border-t border-white/5 text-center opacity-40">
+            <p className="text-slate-400 text-[8px] font-mono uppercase tracking-[1em]">
+              © MMXXVI UNIVERSITY OF QUY NHON
+            </p>
+          </div>
+        </div>
+      </footer>
       {/* CSS CUSTOMIZATION */}
       <style>{`
         /* Lưới Grid xanh neon mờ dạng đường kẻ mảnh */

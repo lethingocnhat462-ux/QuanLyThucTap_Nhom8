@@ -196,25 +196,35 @@ left:100%;
 }
 
 
-/* --- FOOTER SANG TRỌNG --- */
-
-.footer-glass {
-  background: rgba(2, 6, 23, 0.8) !important;
-  backdrop-filter: blur(40px);
-  border-top: 1px solid rgba(59, 130, 246, 0.2);
+/* --- CẬP NHẬT FOOTER XÁM XANH MỜ --- */
+footer {
+  /* Ép màu nền xám xanh tối có độ trong suốt */
+  background: rgba(15, 23, 42, 0.8) !important; 
+  backdrop-filter: blur(20px) saturate(180%) !important;
+  -webkit-backdrop-filter: blur(20px) saturate(180%) !important;
+  
+  /* Viền trên mảnh để tách biệt với phần body đen */
+  border-top: 1px solid rgba(255, 255, 255, 0.1) !important;
+  
+  /* Đổ bóng ngược để tạo cảm giác Footer nổi lên */
+  box-shadow: 0 -20px 40px rgba(0, 0, 0, 0.4) !important;
+  
+  padding: 3rem 2rem 2rem 2rem !important;
+  margin-top: 4rem !important;
   position: relative;
+  z-index: 50;
 }
 
-.footer-link {
-  color: #94a3b8;
-  transition: all 0.3s ease;
-  font-weight: 500;
+/* Chỉnh màu chữ tiêu đề trong Footer */
+footer h4 {
+  color: #f8fafc !important; /* Trắng xám rất sáng */
+  text-shadow: 0 0 10px rgba(255, 255, 255, 0.1);
+  font-weight: 700 !important;
 }
 
-.footer-link:hover {
-  color: #60a5fa;
-  text-shadow: 0 0 10px rgba(59, 130, 246, 0.5);
-  transform: translateX(5px);
+/* Chỉnh màu chữ mô tả và Copyright */
+footer p, footer span {
+  color: #94a3b8 !important; /* Xám xanh dịu mắt */
 }
 /* BUTTON PRIMARY UPGRADE */
 

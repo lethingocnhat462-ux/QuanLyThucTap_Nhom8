@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react'; 
 import { BrowserRouter as Router, Routes, Route, Link, useLocation } from 'react-router-dom';
 import RegistrationPage from './pages/RegistrationPage';
 import HomePage from './pages/HomePage';
@@ -8,11 +8,35 @@ import InternshipUnitsPage from './pages/InternshipUnitsPage';
 import AboutPage from './pages/AboutPage';
 import ProcessPage from './pages/ProcessPage';
 import Navbar from './components/Navbar';
+// Đảm bảo em đã import Modal vào đây
+import ChangePasswordModal from './components/ChangePasswordModal/ChangePasswordModal'; 
 
 const AppContent = () => {
   const location = useLocation();
+  
+  // --- PHẦN SỬA CHÍNH: QUẢN LÝ TRẠNG THÁI NGƯỜI DÙNG TẬP TRUNG ---
+  const [userProfile, setUserProfile] = useState(null);
+  const [isModalOpen, setIsModalOpen] = useState(false);
   const userRole = parseInt(localStorage.getItem('userRole')) || 0;
-  const userProfile = JSON.parse(localStorage.getItem('user'));
+
+  useEffect(() => {
+    // Lấy thông tin từ localStorage khi vừa load ứng dụng
+    const savedUser = JSON.parse(localStorage.getItem('user'));
+    if (savedUser && savedUser.MaTK) {
+      // Cập nhật vào state để Navbar ở mọi trang đều nhận được dữ liệu
+      setUserProfile(savedUser); 
+      
+      // (Tùy chọn) Gọi thêm fetch nếu muốn dữ liệu luôn mới nhất từ DB
+      fetch(`http://localhost/get_profile.php?id=${savedUser.MaTK}`)
+        .then(res => res.json())
+        .then(result => {
+          if (result.status === "success") {
+            setUserProfile(result.data);
+          }
+        })
+        .catch(err => console.error("Lỗi đồng bộ dữ liệu:", err));
+    }
+  }, []);
 
   // Kiểm tra nếu là trang quản trị (Dashboard/Sidebar)
   const isManagementPage = [
@@ -27,13 +51,16 @@ const AppContent = () => {
 
   return (
     <>
-      {/* 1. CHỈ HIỆN NAVBAR Ở TRANG CÔNG KHAI */}
-      {!isManagementPage && <Navbar userProfile={userProfile} />}
+      {/* TRUYỀN userProfile VÀO NAVBAR ĐỂ KHÔNG BỊ HIỆN NÚT "ĐĂNG NHẬP" SAI LỆCH */}
+      {!isManagementPage && (
+        <Navbar 
+          userProfile={userProfile} 
+          onOpenChangePassword={() => setIsModalOpen(true)} 
+        />
+      )}
 
-      {/* 2. CẤU TRÚC PHẦN THÂN TRANG */}
       <div className={!isManagementPage ? "pt-20" : ""}>
         <Routes>
-          {/* --- NHÓM 1: CÁC TRANG CÔNG KHAI (Dùng chung Layout) --- */}
           <Route path="/" element={<HomePage />} />
           <Route path="/home" element={<HomePage />} />
           <Route path="/don-vi" element={<InternshipUnitsPage />} />
@@ -41,12 +68,10 @@ const AppContent = () => {
           <Route path="/login" element={<LoginPage />} />
           <Route path="/gioi-thieu" element={<AboutPage />} />
 
-          {/* --- NHÓM 2: CÁC TRANG QUẢN LÝ (Có Sidebar) --- */}
           <Route
             path="/*"
             element={
               <div className="flex h-screen overflow-hidden">
-                {/* SIDEBAR CỐ ĐỊNH BÊN TRÁI */}
                 <aside className="w-72 bg-[#1e3a8a] text-white flex flex-col shadow-inner shrink-0">
                   <div className="p-6 flex items-center gap-3 border-b border-blue-800">
                     <div className="bg-white text-blue-800 px-2 py-1 rounded font-bold">KSP</div>
@@ -63,8 +88,7 @@ const AppContent = () => {
 
                     <hr className="border-blue-800 my-2" />
 
-                    {/* HIỂN THỊ THEO QUYỀN */}
-                    {userRole === 2 && ( // SINH VIÊN
+                    {userRole === 2 && ( 
                       <>
                         <Link to="/dang-ky" className={`flex items-center gap-3 p-4 rounded-lg no-underline text-white ${location.pathname === '/dang-ky' ? 'bg-blue-900 border-l-4 border-yellow-400 font-bold' : 'hover:bg-blue-800'}`}>
                           📄 ĐĂNG KÝ NGUYỆN VỌNG
@@ -75,7 +99,7 @@ const AppContent = () => {
                       </>
                     )}
 
-                    {userRole === 4 && ( // GIÁO VIÊN PHỔ THÔNG
+                    {userRole === 4 && ( 
                       <>
                         <Link to="/xem-dssv" className={`flex items-center gap-3 p-4 rounded-lg no-underline text-white ${location.pathname === '/xem-dssv' ? 'bg-blue-900 border-l-4 border-yellow-400 font-bold' : 'hover:bg-blue-800'}`}>
                           📋 XEM DANH SÁCH SV
@@ -85,13 +109,14 @@ const AppContent = () => {
                         </Link>
                       </>
                     )}
-                    {userRole === 3 && ( // GIẢNG VIÊN ĐẠI HỌC
-                    <Link to="/doan-thuc-tap" className="flex items-center gap-3 p-4 hover:bg-blue-800 rounded-lg no-underline text-white font-bold text-green-300">
-                      👥 XEM ĐOÀN THỰC TẬP
-                    </Link>
-                  )}
 
-                    {userRole === 1 && ( // ADMIN
+                    {userRole === 3 && ( 
+                      <Link to="/doan-thuc-tap" className="flex items-center gap-3 p-4 hover:bg-blue-800 rounded-lg no-underline text-white font-bold text-green-300">
+                        👥 XEM ĐOÀN THỰC TẬP
+                      </Link>
+                    )}
+
+                    {userRole === 1 && ( 
                       <Link to="/admin-tai-khoan" className={`flex items-center gap-3 p-4 rounded-lg no-underline text-white font-bold text-red-300 ${location.pathname === '/admin-tai-khoan' ? 'bg-blue-900 border-l-4 border-red-400' : 'hover:bg-blue-800'}`}>
                         ⚙️ QUẢN LÝ TÀI KHOẢN
                       </Link>
@@ -99,7 +124,6 @@ const AppContent = () => {
                   </nav>
                 </aside>
 
-                {/* NỘI DUNG CHÍNH BÊN PHẢI */}
                 <main className="flex-1 bg-gray-100 overflow-y-auto">
                   <Routes>
                     <Route path="/ho-so" element={<ProfilePage />} />
@@ -123,6 +147,15 @@ const AppContent = () => {
           />
         </Routes>
       </div>
+
+      {/* MODAL ĐẶT Ở ĐÂY ĐỂ CÓ THỂ MỞ TỪ BẤT KỲ TRANG NÀO QUA NAVBAR */}
+      {userProfile && (
+        <ChangePasswordModal 
+          isOpen={isModalOpen} 
+          onClose={() => setIsModalOpen(false)} 
+          maTK={userProfile.MaTK} 
+        />
+      )}
     </>
   );
 };
