@@ -8,25 +8,21 @@ import InternshipUnitsPage from './pages/InternshipUnitsPage';
 import AboutPage from './pages/AboutPage';
 import ProcessPage from './pages/ProcessPage';
 import Navbar from './components/Navbar';
-// Đảm bảo em đã import Modal vào đây
 import ChangePasswordModal from './components/ChangePasswordModal/ChangePasswordModal'; 
+
+// --- 1. IMPORT COMPONENT MỚI Ở ĐÂY ---
+import NotificationDetail from './pages/NotificationDetail'; 
 
 const AppContent = () => {
   const location = useLocation();
-  
-  // --- PHẦN SỬA CHÍNH: QUẢN LÝ TRẠNG THÁI NGƯỜI DÙNG TẬP TRUNG ---
   const [userProfile, setUserProfile] = useState(null);
   const [isModalOpen, setIsModalOpen] = useState(false);
   const userRole = parseInt(localStorage.getItem('userRole')) || 0;
 
   useEffect(() => {
-    // Lấy thông tin từ localStorage khi vừa load ứng dụng
     const savedUser = JSON.parse(localStorage.getItem('user'));
     if (savedUser && savedUser.MaTK) {
-      // Cập nhật vào state để Navbar ở mọi trang đều nhận được dữ liệu
       setUserProfile(savedUser); 
-      
-      // (Tùy chọn) Gọi thêm fetch nếu muốn dữ liệu luôn mới nhất từ DB
       fetch(`http://localhost/get_profile.php?id=${savedUser.MaTK}`)
         .then(res => res.json())
         .then(result => {
@@ -38,7 +34,6 @@ const AppContent = () => {
     }
   }, []);
 
-  // Kiểm tra nếu là trang quản trị (Dashboard/Sidebar)
   const isManagementPage = [
     '/ho-so', 
     '/dang-ky', 
@@ -51,7 +46,6 @@ const AppContent = () => {
 
   return (
     <>
-      {/* TRUYỀN userProfile VÀO NAVBAR ĐỂ KHÔNG BỊ HIỆN NÚT "ĐĂNG NHẬP" SAI LỆCH */}
       {!isManagementPage && (
         <Navbar 
           userProfile={userProfile} 
@@ -67,6 +61,9 @@ const AppContent = () => {
           <Route path="/quy-trinh" element={<ProcessPage />} />
           <Route path="/login" element={<LoginPage />} />
           <Route path="/gioi-thieu" element={<AboutPage />} />
+          
+          {/* --- 2. THÊM ĐƯỜNG DẪN THÔNG BÁO Ở ĐÂY --- */}
+          <Route path="/thong-bao/:id" element={<NotificationDetail />} />
 
           <Route
             path="/*"
@@ -148,7 +145,6 @@ const AppContent = () => {
         </Routes>
       </div>
 
-      {/* MODAL ĐẶT Ở ĐÂY ĐỂ CÓ THỂ MỞ TỪ BẤT KỲ TRANG NÀO QUA NAVBAR */}
       {userProfile && (
         <ChangePasswordModal 
           isOpen={isModalOpen} 
