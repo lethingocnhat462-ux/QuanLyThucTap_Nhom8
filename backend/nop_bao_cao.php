@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Nộp Báo Cáo - KSP</title>
+    <title>Nộp Báo Cáo - KSP Secure Portal</title>
     <script src="https://cdn.tailwindcss.com"></script>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700;900&display=swap" rel="stylesheet">
     <style>
@@ -47,52 +47,55 @@
 
                 <div class="space-y-2">
                     <div class="flex items-center gap-2 mb-1">
-<div class="w-1.5 h-1.5 bg-blue-400 rounded-full"></div>
+                        <div class="w-1.5 h-1.5 bg-blue-400 rounded-full"></div>
                         <label class="text-[12px] font-bold text-slate-600 uppercase tracking-widest">Phân loại báo cáo</label>
                     </div>
-                    <div class="relative">
-                        <select name="loai" 
-                            class="w-full bg-slate-50 border-2 border-slate-100 p-4 rounded-2xl outline-none appearance-none transition-all focus:border-blue-400 focus:bg-white font-medium text-slate-800 cursor-pointer">
-                            <option value="Báo cáo">Báo cáo thực tập cuối kỳ</option>
-                            <option value="Giáo án">Hồ sơ giáo án giảng dạy</option>
-                            <option value="Khác">Tài liệu bổ sung khác</option>
-                        </select>
-                        <div class="absolute inset-y-0 right-4 flex items-center pointer-events-none text-blue-500">
-                            <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" viewBox="0 0 20 20" fill="currentColor">
-                                <path fill-rule="evenodd" d="M5.293 7.293a1 1 0 011.414 0L10 10.586l3.293-3.293a1 1 0 111.414 1.414l-4 4a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414z" clip-rule="evenodd" />
-                            </svg>
-                        </div>
-                    </div>
+                    <select name="loai" class="w-full bg-slate-50 border-2 border-slate-100 p-4 rounded-2xl outline-none appearance-none transition-all focus:border-blue-400 focus:bg-white font-medium text-slate-800 cursor-pointer">
+                        <option value="Báo cáo">Báo cáo thực tập cuối kỳ</option>
+                        <option value="Giáo án">Hồ sơ giáo án giảng dạy</option>
+                        <option value="Khác">Tài liệu bổ sung khác</option>
+                    </select>
                 </div>
 
                 <div class="space-y-2">
                     <div class="flex items-center gap-2 mb-1">
                         <div class="w-1.5 h-1.5 bg-indigo-500 rounded-full"></div>
-                        <label class="text-[12px] font-bold text-slate-600 uppercase tracking-widest">Tệp đính kèm (PDF/Word)</label>
+                        <label class="text-[12px] font-bold text-slate-600 uppercase tracking-widest">Tệp đính kèm (Tối đa 3 file PDF/Word)</label>
                     </div>
                     <div class="group relative">
-                        <input type="file" name="file_tai_lieu" accept=".pdf,.doc,.docx" required 
+                        <input type="file" id="file_input" name="file_tai_lieu[]" accept=".pdf,.doc,.docx" required multiple 
                             class="w-full text-sm text-slate-500 file:mr-4 file:py-3 file:px-6 file:rounded-xl file:border-0 file:text-xs file:font-black file:uppercase file:bg-blue-600 file:text-white hover:file:bg-blue-700 file:transition-all file:cursor-pointer p-2 bg-slate-50 border-2 border-dashed border-slate-200 rounded-2xl group-hover:border-blue-300 transition-colors">
                     </div>
-                    <p class="text-[10px] text-slate-400 italic mt-1 font-medium">* Dung lượng tối đa: 20MB. Định dạng hỗ trợ: .pdf, .docx</p>
+                    <p id="file_count_error" class="text-[10px] text-red-500 font-bold hidden mt-1">⚠️ Bạn chỉ được phép chọn tối đa 3 tệp tin.</p>
+                    <p class="text-[10px] text-slate-400 italic mt-1 font-medium">* Dung lượng tối đa: 20MB/file. Định dạng: .pdf, .docx</p>
                 </div>
 
                 <div class="flex justify-center pt-4">
                     <button type="submit" name="btnNop" 
-                        class="group relative overflow-hidden bg-[#1e3a8a] text-white font-black py-4 px-12 rounded-2xl shadow-[0_15px_30px_rgba(30,58,138,0.2)] transition-all hover:scale-105 active:scale-95 tracking-[0.1em] text-sm w-full md:w-auto">
-                        <span class="relative z-10 uppercase">Xác nhận gửi báo cáo</span>
-<div class="absolute inset-0 bg-gradient-to-r from-transparent via-white/10 to-transparent -translate-x-full group-hover:translate-x-full transition-transform duration-1000"></div>
+                        class="group relative overflow-hidden bg-[#1e3a8a] text-white font-black py-4 px-12 rounded-2xl shadow-[0_15px_30px_rgba(30,58,138,0.2)] transition-all hover:scale-105 active:scale-95 tracking-[0.1em] text-sm w-full md:w-auto uppercase">
+                        Xác nhận gửi báo cáo
                     </button>
                 </div>
             </form>
 
             <div class="bg-slate-50/50 border-t border-slate-100 p-6 text-center">
-                <p class="text-[9px] text-slate-400 font-mono uppercase tracking-[0.4em]">
-                    Đảm bảo an toàn dữ liệu bởi KSP Cloud Security
-                </p>
+                <p class="text-[9px] text-slate-400 font-mono uppercase tracking-[0.4em]">Đảm bảo an toàn dữ liệu bởi KSP Cloud Security</p>
             </div>
         </div>
     </div>
 
+    <script>
+        const fileInput = document.getElementById('file_input');
+        const errorMsg = document.getElementById('file_count_error');
+
+        fileInput.addEventListener('change', function() {
+            if (this.files.length > 3) {
+                errorMsg.classList.remove('hidden');
+                this.value = ''; // Reset lại nếu chọn quá 3
+            } else {
+                errorMsg.classList.add('hidden');
+            }
+        });
+    </script>
 </body>
 </html>

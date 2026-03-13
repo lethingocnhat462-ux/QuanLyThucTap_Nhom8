@@ -10,6 +10,7 @@ import ProcessPage from './pages/ProcessPage';
 import Navbar from './components/Navbar';
 import ChangePasswordModal from './components/ChangePasswordModal/ChangePasswordModal'; 
 import XemDSSVPage from './pages/XemDSSVPage';
+import NhanXetChamDiemPage from './pages/NhanXetChamDiemPage';
 
 // --- 1. IMPORT COMPONENT MỚI Ở ĐÂY ---
 import NotificationDetail from './pages/NotificationDetail'; 
@@ -127,6 +128,7 @@ const AppContent = () => {
                     <Route path="/ho-so" element={<ProfilePage />} />
                     <Route path="/dang-ky" element={<RegistrationPage />} />
                     <Route path="/xem-dssv" element={<XemDSSVPage />} />
+                    <Route path="/nhan-xet-cham-diem" element={<NhanXetChamDiemPage />} />
                     <Route path="/nop-bao-cao" element={
                       <div className="w-full h-full flex flex-col">
                         <div className="bg-white p-4 shadow-sm font-bold text-blue-900 border-b uppercase">Hệ thống nộp báo cáo</div>
