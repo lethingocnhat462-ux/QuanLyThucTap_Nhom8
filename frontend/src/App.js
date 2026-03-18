@@ -12,9 +12,10 @@ import ChangePasswordModal from './components/ChangePasswordModal/ChangePassword
 import XemDSSVPage from './pages/XemDSSVPage';
 import NhanXetChamDiemPage from './pages/NhanXetChamDiemPage';
 import NotificationDetail from './pages/NotificationDetail'; 
-
-// --- 1. IMPORT TRANG QUẢN LÝ TÀI KHOẢN ---
 import AccountManagementPage from './pages/AccountManagementPage'; 
+
+// --- IMPORT TRANG XEM ĐOÀN THỰC TẬP ---
+import XemDoanThucTapPage from './pages/XemDoanThucTapPage'; 
 
 const AppContent = () => {
   const location = useLocation();
@@ -37,7 +38,7 @@ const AppContent = () => {
     }
   }, []);
 
-  // Thêm '/admin-tai-khoan' vào danh sách trang có Sidebar
+  // Cập nhật danh sách các trang sử dụng Layout Sidebar
   const isManagementPage = [
     '/ho-so', 
     '/dang-ky', 
@@ -45,7 +46,7 @@ const AppContent = () => {
     '/nop-bao-cao', 
     '/admin-tai-khoan',
     '/cham-diem',
-    '/doan-thuc-tap'
+    '/doan-thuc-tap' // Thêm trang này vào list
   ].includes(location.pathname);
 
   return (
@@ -88,9 +89,12 @@ const AppContent = () => {
 
                     <hr className="border-blue-800 my-2" />
 
-                    {/* Menu cho Sinh viên */}
+                    {/* Menu cho Sinh viên (Role 2) */}
                     {userRole === 2 && ( 
                       <>
+                        <Link to="/doan-thuc-tap" className={`flex items-center gap-3 p-4 rounded-lg no-underline text-white ${location.pathname === '/doan-thuc-tap' ? 'bg-blue-900 border-l-4 border-yellow-400 font-bold' : 'hover:bg-blue-800'}`}>
+                          👥 XEM ĐOÀN THỰC TẬP
+                        </Link>
                         <Link to="/dang-ky" className={`flex items-center gap-3 p-4 rounded-lg no-underline text-white ${location.pathname === '/dang-ky' ? 'bg-blue-900 border-l-4 border-yellow-400 font-bold' : 'hover:bg-blue-800'}`}>
                           📄 ĐĂNG KÝ NGUYỆN VỌNG
                         </Link>
@@ -100,7 +104,7 @@ const AppContent = () => {
                       </>
                     )}
 
-                    {/* Menu cho Đơn vị tiếp nhận */}
+                    {/* Menu cho Đơn vị tiếp nhận (Role 4) */}
                     {userRole === 4 && ( 
                       <>
                         <Link to="/xem-dssv" className={`flex items-center gap-3 p-4 rounded-lg no-underline text-white ${location.pathname === '/xem-dssv' ? 'bg-blue-900 border-l-4 border-yellow-400 font-bold' : 'hover:bg-blue-800'}`}>
@@ -112,14 +116,14 @@ const AppContent = () => {
                       </>
                     )}
 
-                    {/* Menu cho Giảng viên */}
+                    {/* Menu cho Giảng viên (Role 3) */}
                     {userRole === 3 && ( 
-                      <Link to="/doan-thuc-tap" className="flex items-center gap-3 p-4 hover:bg-blue-800 rounded-lg no-underline text-white font-bold text-green-300">
+                      <Link to="/doan-thuc-tap" className={`flex items-center gap-3 p-4 rounded-lg no-underline text-white font-bold text-green-300 ${location.pathname === '/doan-thuc-tap' ? 'bg-blue-900 border-l-4 border-yellow-400' : 'hover:bg-blue-800'}`}>
                         👥 XEM ĐOÀN THỰC TẬP
                       </Link>
                     )}
 
-                    {/* Menu cho ADMIN */}
+                    {/* Menu cho ADMIN (Role 1) */}
                     {userRole === 1 && ( 
                       <Link to="/admin-tai-khoan" className={`flex items-center gap-3 p-4 rounded-lg no-underline text-white font-bold text-red-300 ${location.pathname === '/admin-tai-khoan' ? 'bg-blue-900 border-l-4 border-red-400' : 'hover:bg-blue-800'}`}>
                         ⚙️ QUẢN LÝ TÀI KHOẢN
@@ -135,9 +139,10 @@ const AppContent = () => {
                     <Route path="/dang-ky" element={<RegistrationPage />} />
                     <Route path="/xem-dssv" element={<XemDSSVPage />} />
                     <Route path="/nhan-xet-cham-diem" element={<NhanXetChamDiemPage />} />
-                    
-                    {/* --- 2. THÊM ROUTE QUẢN LÝ TÀI KHOẢN TẠI ĐÂY --- */}
                     <Route path="/admin-tai-khoan" element={<AccountManagementPage />} />
+                    
+                    {/* ROUTE XEM ĐOÀN THỰC TẬP */}
+                    <Route path="/doan-thuc-tap" element={<XemDoanThucTapPage />} />
 
                     <Route path="/nop-bao-cao" element={
                       <div className="w-full h-full flex flex-col">
