@@ -92,9 +92,7 @@ const AppContent = () => {
                     {/* Menu cho Sinh viên (Role 2) */}
                     {userRole === 2 && ( 
                       <>
-                        <Link to="/doan-thuc-tap" className={`flex items-center gap-3 p-4 rounded-lg no-underline text-white ${location.pathname === '/doan-thuc-tap' ? 'bg-blue-900 border-l-4 border-yellow-400 font-bold' : 'hover:bg-blue-800'}`}>
-                          👥 XEM ĐOÀN THỰC TẬP
-                        </Link>
+
                         <Link to="/dang-ky" className={`flex items-center gap-3 p-4 rounded-lg no-underline text-white ${location.pathname === '/dang-ky' ? 'bg-blue-900 border-l-4 border-yellow-400 font-bold' : 'hover:bg-blue-800'}`}>
                           📄 ĐĂNG KÝ NGUYỆN VỌNG
                         </Link>
