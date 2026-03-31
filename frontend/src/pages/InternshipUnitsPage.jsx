@@ -2,7 +2,6 @@ import React, { useState } from 'react';
 import Navbar from '../components/Navbar';
 import { useTranslation } from 'react-i18next';
 
-// Import hình ảnh (Giữ nguyên phần import của em)
 import imgQuocHoc from '../images/quoc-hoc.jpg';
 import imgLeQuyDon from '../images/thpt chuyen le quy don.jpg'; 
 import imgBuiThiXuan from '../images/thcs bui thi xuan.jpg';
