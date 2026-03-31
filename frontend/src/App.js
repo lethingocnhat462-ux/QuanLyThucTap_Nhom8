@@ -1,5 +1,8 @@
 import React, { useState, useEffect } from 'react'; 
 import { BrowserRouter as Router, Routes, Route, Link, useLocation } from 'react-router-dom';
+import { useTranslation } from 'react-i18next';
+
+// --- IMPORT CÁC TRANG ---
 import RegistrationPage from './pages/RegistrationPage';
 import HomePage from './pages/HomePage';
 import LoginPage from './pages/LoginPage';
@@ -13,11 +16,11 @@ import XemDSSVPage from './pages/XemDSSVPage';
 import NhanXetChamDiemPage from './pages/NhanXetChamDiemPage';
 import NotificationDetail from './pages/NotificationDetail'; 
 import AccountManagementPage from './pages/AccountManagementPage'; 
-
-// --- IMPORT TRANG XEM ĐOÀN THỰC TẬP ---
 import XemDoanThucTapPage from './pages/XemDoanThucTapPage'; 
+import ReportsPage from './pages/ReportsPage';
 
 const AppContent = () => {
+  const { t } = useTranslation();
   const location = useLocation();
   const [userProfile, setUserProfile] = useState(null);
   const [isModalOpen, setIsModalOpen] = useState(false);
@@ -38,15 +41,9 @@ const AppContent = () => {
     }
   }, []);
 
-  // Cập nhật danh sách các trang sử dụng Layout Sidebar
   const isManagementPage = [
-    '/ho-so', 
-    '/dang-ky', 
-    '/xem-dssv', 
-    '/nop-bao-cao', 
-    '/admin-tai-khoan',
-    '/cham-diem',
-    '/doan-thuc-tap' // Thêm trang này vào list
+    '/ho-so', '/dang-ky', '/xem-dssv', '/nop-bao-cao', 
+    '/admin-tai-khoan', '/nhan-xet-cham-diem', '/doan-thuc-tap'
   ].includes(location.pathname);
 
   return (
@@ -71,66 +68,66 @@ const AppContent = () => {
           <Route
             path="/*"
             element={
-              <div className="flex h-screen overflow-hidden">
-                {/* SIDEBAR */}
-                <aside className="w-72 bg-[#1e3a8a] text-white flex flex-col shadow-inner shrink-0">
+              <div className="flex h-screen overflow-hidden bg-gray-100">
+                <aside className="w-72 bg-[#1e3a8a] text-white flex flex-col shadow-xl shrink-0">
                   <div className="p-6 flex items-center gap-3 border-b border-blue-800">
                     <div className="bg-white text-blue-800 px-2 py-1 rounded font-bold">KSP</div>
-                    <span className="font-bold text-sm uppercase italic">Quản lý thực tập</span>
+                    <span className="font-bold text-sm uppercase italic tracking-wider">
+                      {t("QUẢN LÝ THỰC TẬP")}
+                    </span>
                   </div>
 
                   <nav className="flex flex-col p-3 gap-2 mt-4 overflow-y-auto">
                     <Link to="/" className="flex items-center gap-3 p-4 hover:bg-blue-800 rounded-lg no-underline text-white transition-all">
-                      🏠 TRANG CHỦ HỆ THỐNG
+                      🏠 {t("TRANG CHỦ HỆ THỐNG")}
                     </Link>
+                    
                     <Link to="/ho-so" className={`flex items-center gap-3 p-4 rounded-lg no-underline text-white transition-all ${location.pathname === '/ho-so' ? 'bg-blue-900 border-l-4 border-yellow-400 font-bold' : 'hover:bg-blue-800'}`}>
-                      👤 HỒ SƠ CÁ NHÂN
+                      👤 {t("HỒ SƠ CÁ NHÂN")}
                     </Link>
 
-                    <hr className="border-blue-800 my-2" />
+                    <hr className="border-blue-800 my-2 mx-4" />
 
-                    {/* Menu cho Sinh viên (Role 2) */}
+                    {/* Menu Sinh viên (Role 2) */}
                     {userRole === 2 && ( 
                       <>
-
                         <Link to="/dang-ky" className={`flex items-center gap-3 p-4 rounded-lg no-underline text-white ${location.pathname === '/dang-ky' ? 'bg-blue-900 border-l-4 border-yellow-400 font-bold' : 'hover:bg-blue-800'}`}>
-                          📄 ĐĂNG KÝ NGUYỆN VỌNG
+                          📄 {t("ĐĂNG KÝ NGUYỆN VỌNG")}
                         </Link>
                         <Link to="/nop-bao-cao" className={`flex items-center gap-3 p-4 rounded-lg no-underline text-white ${location.pathname === '/nop-bao-cao' ? 'bg-blue-900 border-l-4 border-yellow-400 font-bold' : 'hover:bg-blue-800'}`}>
-                          📤 NỘP BÁO CÁO
+                          📤 {t("NỘP BÁO CÁO")}
                         </Link>
                       </>
                     )}
 
-                    {/* Menu cho Đơn vị tiếp nhận (Role 4) */}
+                    {/* Menu Đơn vị tiếp nhận (Role 4) */}
                     {userRole === 4 && ( 
                       <>
                         <Link to="/xem-dssv" className={`flex items-center gap-3 p-4 rounded-lg no-underline text-white ${location.pathname === '/xem-dssv' ? 'bg-blue-900 border-l-4 border-yellow-400 font-bold' : 'hover:bg-blue-800'}`}>
-                          📋 XEM DANH SÁCH SV
+                          📋 {t("XEM DANH SÁCH SV")}
                         </Link>
-                        <Link to="/cham-diem" className="flex items-center gap-3 p-4 hover:bg-blue-800 rounded-lg no-underline text-white">
-                          ⭐ NHẬN XÉT CHẤM ĐIỂM
+                        <Link to="/nhan-xet-cham-diem" className={`flex items-center gap-3 p-4 rounded-lg no-underline text-white ${location.pathname === '/nhan-xet-cham-diem' ? 'bg-blue-900 border-l-4 border-yellow-400 font-bold' : 'hover:bg-blue-800'}`}>
+                          ⭐ {t("NHẬN XÉT CHẤM ĐIỂM")}
                         </Link>
                       </>
                     )}
 
-                    {/* Menu cho Giảng viên (Role 3) */}
+                    {/* Menu Giảng viên (Role 3) */}
                     {userRole === 3 && ( 
-                      <Link to="/doan-thuc-tap" className={`flex items-center gap-3 p-4 rounded-lg no-underline text-white font-bold text-green-300 ${location.pathname === '/doan-thuc-tap' ? 'bg-blue-900 border-l-4 border-yellow-400' : 'hover:bg-blue-800'}`}>
-                        👥 XEM ĐOÀN THỰC TẬP
+                      <Link to="/doan-thuc-tap" className={`flex items-center gap-3 p-4 rounded-lg no-underline text-white font-bold text-green-300 ${location.pathname === '/doan-thuc-tap' ? 'bg-blue-900 border-l-4 border-yellow-400 font-bold text-white' : 'hover:bg-blue-800'}`}>
+                        👥 {t("XEM ĐOÀN THỰC TẬP")}
                       </Link>
                     )}
 
-                    {/* Menu cho ADMIN (Role 1) */}
+                    {/* Menu ADMIN (Role 1) */}
                     {userRole === 1 && ( 
-                      <Link to="/admin-tai-khoan" className={`flex items-center gap-3 p-4 rounded-lg no-underline text-white font-bold text-red-300 ${location.pathname === '/admin-tai-khoan' ? 'bg-blue-900 border-l-4 border-red-400' : 'hover:bg-blue-800'}`}>
-                        ⚙️ QUẢN LÝ TÀI KHOẢN
+                      <Link to="/admin-tai-khoan" className={`flex items-center gap-3 p-4 rounded-lg no-underline text-white font-bold text-red-300 ${location.pathname === '/admin-tai-khoan' ? 'bg-blue-900 border-l-4 border-red-400 font-bold text-white' : 'hover:bg-blue-800'}`}>
+                        ⚙️ {t("QUẢN LÝ TÀI KHOẢN")}
                       </Link>
                     )}
                   </nav>
                 </aside>
 
-                {/* NỘI DUNG CHÍNH (MAIN) */}
                 <main className="flex-1 bg-gray-100 overflow-y-auto">
                   <Routes>
                     <Route path="/ho-so" element={<ProfilePage />} />
@@ -138,16 +135,8 @@ const AppContent = () => {
                     <Route path="/xem-dssv" element={<XemDSSVPage />} />
                     <Route path="/nhan-xet-cham-diem" element={<NhanXetChamDiemPage />} />
                     <Route path="/admin-tai-khoan" element={<AccountManagementPage />} />
-                    
-                    {/* ROUTE XEM ĐOÀN THỰC TẬP */}
                     <Route path="/doan-thuc-tap" element={<XemDoanThucTapPage />} />
-
-                    <Route path="/nop-bao-cao" element={
-                      <div className="w-full h-full flex flex-col">
-                        <div className="bg-white p-4 shadow-sm font-bold text-blue-900 border-b uppercase">Hệ thống nộp báo cáo</div>
-                        <iframe src="http://localhost/nop_bao_cao.php" className="flex-1 w-full border-none" title="Upload Form" />
-                      </div>
-                    } />
+                    <Route path="/nop-bao-cao" element={<ReportsPage />} />
                   </Routes>
                 </main>
               </div>

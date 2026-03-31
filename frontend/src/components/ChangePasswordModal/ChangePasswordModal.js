@@ -1,7 +1,9 @@
 import React, { useState } from 'react';
-import './ChangePasswordModal.css'; // Đảm bảo đã import file CSS của em
+import { useTranslation } from 'react-i18next'; // Thêm hook đa ngôn ngữ
+import './ChangePasswordModal.css';
 
 const ChangePasswordModal = ({ isOpen, onClose, maTK }) => {
+  const { t } = useTranslation(); // Khởi tạo hàm t
   const [formData, setFormData] = useState({
     oldPassword: '',
     newPassword: '',
@@ -10,30 +12,30 @@ const ChangePasswordModal = ({ isOpen, onClose, maTK }) => {
 
   if (!isOpen) return null;
 
-const handleSubmit = async (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
+    
+    // Kiểm tra khớp mật khẩu (Dùng đa ngôn ngữ cho thông báo alert)
     if (formData.newPassword !== formData.confirmPassword) {
-      alert("Mật khẩu xác nhận không khớp!");
+      alert(t("Mật khẩu xác nhận không khớp!")); 
       return;
     }
 
     try {
+      const response = await fetch('http://localhost/update_password.php', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({
+          userId: maTK, 
+          oldPassword: formData.oldPassword,
+          newPassword: formData.newPassword
+        })
+      });
 
-const response = await fetch('http://localhost/update_password.php', {
-    method: 'POST',
-    headers: {
-        'Content-Type': 'application/json',
-    },
-    body: JSON.stringify({
-        userId: maTK, 
-        oldPassword: formData.oldPassword,
-        newPassword: formData.newPassword
-    })
-});
-
-      // Kiểm tra nếu response trả về không phải dạng JSON (có thể do lỗi PHP)
       if (!response.ok) {
-          throw new Error('Mạng có vấn đề hoặc URL sai');
+        throw new Error('Network response was not ok');
       }
 
       const result = await response.json();
@@ -42,7 +44,7 @@ const response = await fetch('http://localhost/update_password.php', {
       
     } catch (error) {
       console.error("Lỗi chi tiết:", error);
-      alert("Lỗi kết nối server! Vui lòng kiểm tra lại địa chỉ backend.");
+      alert(t("❌ Lỗi kết nối Server!"));
     }
   };
 
@@ -50,11 +52,14 @@ const response = await fetch('http://localhost/update_password.php', {
     <div className="modal-overlay">
       <div className="modal-container">
         <div className="modal-header">
-          <h3>Đổi mật khẩu</h3>
+          {/* Dùng Key: ĐỔI MẬT KHẨU */}
+          <h3>{t("ĐỔI MẬT KHẨU")}</h3>
         </div>
+        
         <form className="modal-form" onSubmit={handleSubmit}>
           <div className="form-group">
-            <label>Mật khẩu cũ</label>
+            {/* Dùng Key: MẬT KHẨU CŨ */}
+            <label>{t("MẬT KHẨU CŨ")}</label>
             <input 
               type="password" 
               placeholder="••••••••"
@@ -62,8 +67,10 @@ const response = await fetch('http://localhost/update_password.php', {
               required 
             />
           </div>
+
           <div className="form-group">
-            <label>Mật khẩu mới</label>
+            {/* Dùng Key: MẬT KHẨU MỚI */}
+            <label>{t("MẬT KHẨU MỚI")}</label>
             <input 
               type="password" 
               placeholder="••••••••"
@@ -71,8 +78,10 @@ const response = await fetch('http://localhost/update_password.php', {
               required 
             />
           </div>
+
           <div className="form-group">
-            <label>Xác nhận mật khẩu</label>
+            {/* Dùng Key: XÁC NHẬN MẬT KHẨU */}
+            <label>{t("XÁC NHẬN MẬT KHẨU")}</label>
             <input 
               type="password" 
               placeholder="••••••••"
@@ -80,9 +89,15 @@ const response = await fetch('http://localhost/update_password.php', {
               required 
             />
           </div>
+
           <div className="modal-footer">
-            <button type="button" className="btn-cancel" onClick={onClose}>HỦY</button>
-            <button type="submit" className="btn-submit">CẬP NHẬT</button>
+            {/* Dùng Key: HỦY và CẬP NHẬT */}
+            <button type="button" className="btn-cancel" onClick={onClose}>
+              {t("HỦY")}
+            </button>
+            <button type="submit" className="btn-submit">
+              {t("CẬP NHẬT")}
+            </button>
           </div>
         </form>
       </div>

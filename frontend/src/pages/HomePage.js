@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { Link } from 'react-router-dom';
+import { useTranslation } from 'react-i18next'; // 1. Import hook
 
 // --- CÁC COMPONENT CON ---
 
@@ -12,13 +13,13 @@ const StatCard = ({ icon, title, value, color }) => (
   </div>
 );
 
-// --- CẬP NHẬT NEWSITEM ĐỂ CÓ THỂ NHẤN ĐƯỢC ---
 const NewsItem = ({ tag, title, time, id }) => {
   const navigate = useNavigate();
+  const { t } = useTranslation(); // Dùng t() trong component con
   
   return (
     <div 
-      onClick={() => navigate(`/thong-bao/${id}`)} // Chuyển trang dựa trên ID
+      onClick={() => navigate(`/thong-bao/${id}`)}
       className="glass-card-tech p-5 flex gap-5 items-center cursor-pointer group"
     >
       <div className="w-12 h-12 bg-blue-50 rounded-lg flex-shrink-0 flex items-center justify-center border border-blue-100 group-hover:border-blue-400">
@@ -26,27 +27,31 @@ const NewsItem = ({ tag, title, time, id }) => {
       </div>
       <div>
         <div className="flex gap-3 items-center mb-1">
-          <span className="text-[9px] font-bold text-blue-500 uppercase">{tag}</span>
-          <span className="text-[9px] text-slate-400">{time}</span>
+          <span className="text-[9px] font-bold text-blue-500 uppercase">{t(tag)}</span>
+          <span className="text-[9px] text-slate-400">{t(time)}</span>
         </div>
-        <h4 className="text-md font-bold text-slate-700 group-hover:text-blue-600 transition-colors">{title}</h4>
+        <h4 className="text-md font-bold text-slate-700 group-hover:text-blue-600 transition-colors">{t(title)}</h4>
       </div>
     </div>
   );
 };
 
-const Step = ({ num, text, active }) => (
-  <div className="flex items-center gap-4">
-    <div className={`w-8 h-8 rounded-lg flex items-center justify-center text-xs font-bold border ${active ? 'bg-blue-600 border-blue-400 text-white shadow-md shadow-blue-200' : 'border-slate-200 text-slate-400 bg-slate-50'
-      }`}>{num}</div>
-    <span className={`text-xs font-bold uppercase tracking-tighter ${active ? 'text-slate-800' : 'text-slate-400'}`}>{text}</span>
-  </div>
-);
+const Step = ({ num, text, active }) => {
+  const { t } = useTranslation();
+  return (
+    <div className="flex items-center gap-4">
+      <div className={`w-8 h-8 rounded-lg flex items-center justify-center text-xs font-bold border ${active ? 'bg-blue-600 border-blue-400 text-white shadow-md shadow-blue-200' : 'border-slate-200 text-slate-400 bg-slate-50'
+        }`}>{num}</div>
+      <span className={`text-xs font-bold uppercase tracking-tighter ${active ? 'text-slate-800' : 'text-slate-400'}`}>{t(text)}</span>
+    </div>
+  );
+};
 
 // --- COMPONENT CHÍNH ---
 
 function HomePage() {
   const navigate = useNavigate();
+  const { t } = useTranslation(); // 2. Khai báo hàm t()
   const [bubbles, setBubbles] = useState([]);
   const [glitters, setGlitters] = useState([]);
 
@@ -171,42 +176,41 @@ function HomePage() {
 
         <header className="relative pt-16 pb-16 px-4 text-center z-10">
           <div className="inline-block px-4 py-1.5 mb-8 text-[10px] font-bold tracking-[0.4em] text-blue-600 uppercase bg-blue-50 border border-blue-200 rounded-full">
-            Intelligence Education System
+            {t('Intelligence Education System')}
           </div>
           <h1 className="text-5xl md:text-7xl mb-8 leading-tight heading-ai-glow uppercase">
-            HỆ THỐNG QUẢN LÝ <br />
-            <span className="text-main-blue">THỰC TẬP SƯ PHẠM</span>
+            {t('HỆ THỐNG QUẢN LÝ')} <br />
+            <span className="text-main-blue">{t('THỰC TẬP SƯ PHẠM')}</span>
           </h1>
           <p className="w-full text-slate-500 text-lg md:text-xl mb-10 font-light flex items-center justify-center gap-1">
-            Nâng tầm trải nghiệm thực tập với công nghệ 
+            {t('Nâng tầm trải nghiệm thực tập với công nghệ')} 
             <span className="text-blue-600 font-semibold px-2 py-0.5 mx-1 bg-blue-50 rounded-md">Smart-AI</span> 
-            , kết nối tri thức và tối ưu hóa tương lai.
+            {t(', kết nối tri thức và tối ưu hóa tương lai.')}
           </p>
           <div className="flex justify-center gap-6">
             <button onClick={() => navigate('/login')} className="btn-start btn-glow-effect px-10 py-4 rounded-xl font-bold transition-all hover:scale-105">
-              BẮT ĐẦU NGAY
+              {t('BẮT ĐẦU NGAY')}
             </button>
             <Link to="/quy-trinh" className="flex items-center gap-2 px-8 py-3.5 border border-slate-200 text-slate-700 font-medium rounded-xl bg-white/80 no-underline shadow-sm transition-all hover:border-blue-400 hover:scale-105">
-              <span>XEM QUY TRÌNH</span>
+              <span>{t('XEM QUY TRÌNH')}</span>
             </Link>
           </div>
         </header>
 
         <section className="max-w-7xl mx-auto grid grid-cols-2 md:grid-cols-4 gap-6 px-6 relative z-10 w-full">
-          <StatCard icon="👨‍🎓" title="Sinh viên" value="1,250+" color="#3b82f6" />
-          <StatCard icon="🏫" title="Trường đối tác" value="45" color="#a855f7" />
-          <StatCard icon="📄" title="Báo cáo" value="85%" color="#06b6d4" />
-          <StatCard icon="✅" title="Hoàn thành" value="320" color="#10b881" />
+          <StatCard icon="👨‍🎓" title={t("Sinh viên")} value="1,250+" color="#3b82f6" />
+          <StatCard icon="🏫" title={t("Trường đối tác")} value="45" color="#a855f7" />
+          <StatCard icon="📄" title={t("Báo cáo")} value="85%" color="#06b6d4" />
+          <StatCard icon="✅" title={t("Hoàn thành")} value="320" color="#10b881" />
         </section>
 
         <main className="max-w-7xl mx-auto py-20 px-6 grid grid-cols-1 lg:grid-cols-3 gap-10 relative z-10 w-full flex-grow">
           <div className="lg:col-span-2 space-y-8">
             <h3 className="text-2xl font-bold text-main-blue flex items-center gap-3">
               <span className="w-1.5 h-8 bg-blue-500 rounded-full"></span>
-              BẢN TIN CÔNG NGHỆ
+              {t('BẢN TIN CÔNG NGHỆ')}
             </h3>
             <div className="grid gap-6">
-              {/* --- TRUYỀN ID VÀO ĐỂ XỬ LÝ NHẤN --- */}
               <NewsItem 
                 id="huong-dan-nop-ho-so" 
                 tag="AI UPDATE" 
@@ -220,16 +224,16 @@ function HomePage() {
                 time="1 ngày trước" 
               />
               <NewsItem 
-    id="ket-thuc-thuc-tap" 
-    tag="THÔNG BÁO" 
-    title="Thông báo kết thúc đợt thực tập sư phạm và nộp báo cáo cuối kỳ" 
-    time="Vừa xong" 
-  />
+                id="ket-thuc-thuc-tap" 
+                tag="THÔNG BÁO" 
+                title="Thông báo kết thúc đợt thực tập sư phạm và nộp báo cáo cuối kỳ" 
+                time="Vừa xong" 
+              />
             </div>
           </div>
 
           <aside className="glass-card-tech p-8 h-fit shadow-md">
-            <h3 className="text-lg font-bold mb-8 text-blue-600 tracking-widest uppercase">Lộ trình số</h3>
+            <h3 className="text-lg font-bold mb-8 text-blue-600 tracking-widest uppercase">{t('Lộ trình số')}</h3>
             <div className="space-y-6">
               <Step num="1" text="Đăng ký nguyện vọng" active />
               <Step num="2" text="Nhận phân công AI" />
@@ -245,17 +249,17 @@ function HomePage() {
                 <div className="flex items-center gap-3">
                   <div className="w-10 h-10 bg-blue-600 rounded-lg flex items-center justify-center font-bold text-white">KSP</div>
                   <div>
-                    <h3 className="text-white font-bold text-lg">KHOA SƯ PHẠM</h3>
-                    <p className="text-blue-400 text-[10px] uppercase">Đại học Quy Nhơn</p>
+                    <h3 className="text-white font-bold text-lg">{t('KHOA SƯ PHẠM')}</h3>
+                    <p className="text-blue-400 text-[10px] uppercase">{t('Đại học Quy Nhơn')}</p>
                   </div>
                 </div>
               </div>
               <div className="grid grid-cols-2 gap-4">
                 <div className="space-y-3">
-                  <h4 className="text-slate-200 font-bold text-sm uppercase">Hệ thống</h4>
+                  <h4 className="text-slate-200 font-bold text-sm uppercase">{t('Hệ thống')}</h4>
                   <ul className="text-slate-500 text-sm space-y-2 list-none p-0">
-                    <li><Link to="/" className="no-underline text-inherit hover:text-blue-400">Trang chủ</Link></li>
-                    <li><Link to="/quy-trinh" className="no-underline text-inherit hover:text-blue-400">Quy trình</Link></li>
+                    <li><Link to="/" className="no-underline text-inherit hover:text-blue-400">{t('Trang chủ')}</Link></li>
+                    <li><Link to="/quy-trinh" className="no-underline text-inherit hover:text-blue-400">{t('Quy trình')}</Link></li>
                   </ul>
                 </div>
               </div>

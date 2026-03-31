@@ -1,6 +1,8 @@
 import React, { useState } from 'react';
 import Navbar from '../components/Navbar';
+import { useTranslation } from 'react-i18next';
 
+// Import hình ảnh (Giữ nguyên phần import của em)
 import imgQuocHoc from '../images/quoc-hoc.jpg';
 import imgLeQuyDon from '../images/thpt chuyen le quy don.jpg'; 
 import imgBuiThiXuan from '../images/thcs bui thi xuan.jpg';
@@ -11,87 +13,25 @@ import imgLeLoi from '../images/thcs le loi.jpg';
 import imgTuyPhuoc from '../images/thpt so 1 tuy phuoc.jpg';
 import imgPhanBoiChau from '../images/thpt phan boi chau.jpg';
 import imgHungVuong from '../images/thpt hung vuong.jpg';
+
 const InternshipUnitsPage = () => {
-  // 1. Khai báo State để lưu từ khóa tìm kiếm và loại trường muốn lọc
+  const { t } = useTranslation();
   const [searchTerm, setSearchTerm] = useState("");
   const [filterType, setFilterType] = useState("Tất cả");
 
-  // Dữ liệu gốc (Các em nên để link ảnh thật vào đây)
   const units = [
-  { 
-    id: 1, 
-    name: "THPT CHUYÊN LÊ QUÝ ĐÔN", 
-    type: "THPT", 
-    status: "Còn chỗ", 
-    img: imgLeQuyDon // Sử dụng biến đã import
-  },
-  { 
-    id: 2, 
-    name: "THPT QUỐC HỌC QUY NHƠN", 
-    type: "THPT", 
-    status: "Hết chỗ", 
-    img: imgQuocHoc 
-  },
-  { 
-    id: 3, 
-    name: "THCS BÙI THỊ XUÂN", 
-    type: "THCS", 
-    status: "Còn chỗ", 
-    img: imgBuiThiXuan 
-  },
-  { 
-    id: 4, 
-    name: "THPT TRƯNG VƯƠNG", 
-    type: "THPT", 
-    status: "Còn chỗ", 
-    img: imgTrungVuong 
-  },
-  { 
-    id: 5, 
-    name: "THCS LÊ HỒNG PHONG", 
-    type: "THCS", 
-    status: "Còn chỗ", 
-    img: imgLeHongPhong // Sử dụng biến đã import
-  },
-  { 
-    id: 6, 
-    name: "THPT NGUYỄN HUỆ", 
-    type: "THPT", 
-    status: "Còn chỗ", 
-    img: imgNguyenHue // Sử dụng biến đã import
-  },
-  { 
-    id: 7, 
-    name: "THCS LÊ LỢI", 
-    type: "THCS", 
-    status: "Hết chỗ", 
-    img: imgLeLoi // Sử dụng biến đã import
-  },
-  { 
-    id: 8, 
-    name: "THPT SỐ 1 TUY PHƯỚC", 
-    type: "THPT", 
-    status: "Còn chỗ", 
-    img: imgTuyPhuoc// Sử dụng biến đã import
-  },
-  { 
-    id: 9, 
-    name: "THPT PHAN BỘI CHÂU", 
-    type: "THPT", 
-    status: "Còn chỗ", 
-    img: imgPhanBoiChau// Sử dụng biến đã import
-  },
-  { 
-    id: 10, 
-    name: "THPT HÙNG VƯƠNG", 
-    type: "THPT", 
-    status: "Còn chỗ", 
-    img: imgHungVuong// Sử dụng biến đã import
-  },
-
+    { id: 1, name: "THPT CHUYÊN LÊ QUÝ ĐÔN", type: "THPT", status: "Còn chỗ", img: imgLeQuyDon },
+    { id: 2, name: "THPT QUỐC HỌC QUY NHƠN", type: "THPT", status: "Hết chỗ", img: imgQuocHoc },
+    { id: 3, name: "THCS BÙI THỊ XUÂN", type: "THCS", status: "Còn chỗ", img: imgBuiThiXuan },
+    { id: 4, name: "THPT TRƯNG VƯƠNG", type: "THPT", status: "Còn chỗ", img: imgTrungVuong },
+    { id: 5, name: "THCS LÊ HỒNG PHONG", type: "THCS", status: "Còn chỗ", img: imgLeHongPhong },
+    { id: 6, name: "THPT NGUYỄN HUỆ", type: "THPT", status: "Còn chỗ", img: imgNguyenHue },
+    { id: 7, name: "THCS LÊ LỢI", type: "THCS", status: "Hết chỗ", img: imgLeLoi },
+    { id: 8, name: "THPT SỐ 1 TUY PHƯỚC", type: "THPT", status: "Còn chỗ", img: imgTuyPhuoc },
+    { id: 9, name: "THPT PHAN BỘI CHÂU", type: "THPT", status: "Còn chỗ", img: imgPhanBoiChau },
+    { id: 10, name: "THPT HÙNG VƯƠNG", type: "THPT", status: "Còn chỗ", img: imgHungVuong },
   ];
 
-  // 2. Logic quan trọng nhất: Lọc danh sách dựa trên SEARCH và FILTER
   const filteredUnits = units.filter((unit) => {
     const matchesSearch = unit.name.toLowerCase().includes(searchTerm.toLowerCase());
     const matchesFilter = filterType === "Tất cả" || unit.type === filterType;
@@ -99,39 +39,44 @@ const InternshipUnitsPage = () => {
   });
 
   return (
-    <div className="min-h-screen bg-gray-50">
+    <div className="min-h-screen bg-gray-50 font-sans">
       <Navbar />
       
-      {/* Banner */}
-      <div className="bg-[#1e3a8a] py-20 text-center text-white relative">
-        <h1 className="text-4xl font-bold mb-2 uppercase tracking-widest">Hệ thống đơn vị thực tập</h1>
-        <p className="opacity-80">Tìm kiếm và lựa chọn đơn vị thực tập phù hợp với chuyên môn của bạn.</p>
+      <div className="bg-gradient-to-r from-[#1e3a8a] to-[#1e40af] py-24 text-center text-white relative overflow-hidden">
+        <div className="relative z-10">
+            <h1 className="text-4xl md:text-5xl font-black mb-4 uppercase tracking-tighter">
+                {t('Hệ thống đơn vị thực tập')}
+            </h1>
+            <p className="opacity-80 max-w-2xl mx-auto px-6 text-lg font-light">
+                {t('Tìm kiếm và lựa chọn đơn vị thực tập phù hợp với chuyên môn của bạn.')}
+            </p>
+        </div>
         
-        {/* Thanh tìm kiếm & Lọc */}
-        <div className="absolute -bottom-8 left-1/2 -translate-x-1/2 w-full max-w-4xl px-4">
-          <div className="bg-white rounded-full shadow-xl p-2 flex items-center border">
-            {/* INPUT TÌM KIẾM */}
-            <input 
-              type="text" 
-              placeholder="🔍 Tìm tên trường..." 
-              className="flex-1 px-6 py-3 outline-none text-gray-700 rounded-l-full"
-              value={searchTerm}
-              onChange={(e) => setSearchTerm(e.target.value)} // Cập nhật khi gõ chữ
-            />
+        <div className="absolute -bottom-10 left-1/2 -translate-x-1/2 w-full max-w-5xl px-4">
+          <div className="bg-white rounded-[2rem] shadow-[0_20px_50px_rgba(0,0,0,0.1)] p-3 flex flex-col md:flex-row items-center gap-3 border border-white">
+            <div className="relative flex-1 w-full">
+                <span className="absolute left-5 top-1/2 -translate-y-1/2 text-gray-400">🔍</span>
+                <input 
+                    type="text" 
+                    placeholder={t("Tìm tên trường...")} 
+                    className="w-full pl-12 pr-6 py-4 outline-none text-gray-700 rounded-2xl bg-gray-50 focus:bg-white focus:ring-2 focus:ring-blue-100 transition-all font-medium"
+                    value={searchTerm}
+                    onChange={(e) => setSearchTerm(e.target.value)}
+                />
+            </div>
             
-            {/* CÁC NÚT LỌC */}
-            <div className="flex gap-2 pr-2">
+            <div className="flex gap-2 p-1 bg-gray-50 rounded-2xl w-full md:w-auto">
                {["Tất cả", "THPT", "THCS"].map((type) => (
                  <button 
                    key={type}
-                   onClick={() => setFilterType(type)} // Cập nhật loại trường khi nhấn
-                   className={`px-6 py-2 rounded-full font-bold transition-all ${
+                   onClick={() => setFilterType(type)}
+                   className={`flex-1 md:flex-none px-8 py-3 rounded-xl font-bold transition-all duration-300 text-sm whitespace-nowrap ${
                      filterType === type 
-                     ? 'bg-blue-600 text-white shadow-md' // Style khi đang chọn
-                     : 'bg-blue-50 text-blue-800 hover:bg-blue-100' // Style bình thường
+                     ? 'bg-blue-600 text-white shadow-lg' 
+                     : 'text-gray-500 hover:bg-white hover:text-blue-600'
                    }`}
                  >
-                   {type}
+                   {t(type)} {/* Đã bọc t() để dịch chữ "Tất cả" */}
                  </button>
                ))}
             </div>
@@ -139,26 +84,44 @@ const InternshipUnitsPage = () => {
         </div>
       </div>
 
-      {/* Danh sách hiển thị kết quả */}
-      <div className="max-w-7xl mx-auto mt-24 p-6 grid grid-cols-1 md:grid-cols-3 gap-8">
+      <div className="max-w-7xl mx-auto mt-28 p-6 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 pb-20">
         {filteredUnits.length > 0 ? (
           filteredUnits.map((item) => (
-            <div key={item.id} className="bg-white rounded-2xl overflow-hidden shadow-md hover:shadow-2xl hover:-translate-y-2 transition-all cursor-pointer border border-gray-100">
-               <div className="relative h-48 bg-gray-200">
-                  <span className={`absolute top-4 right-4 px-3 py-1 rounded-full text-xs font-bold text-white z-10 ${item.status === 'Còn chỗ' ? 'bg-green-500' : 'bg-red-500'}`}>
-                      {item.status.toUpperCase()}
+            <div key={item.id} className="group bg-white rounded-[2.5rem] overflow-hidden shadow-sm hover:shadow-[0_20px_40px_rgba(30,58,138,0.1)] hover:-translate-y-2 transition-all duration-500 border border-gray-100">
+               <div className="relative h-56 bg-gray-100 overflow-hidden">
+                  <span className={`absolute top-5 right-5 px-4 py-1.5 rounded-full text-[10px] font-black text-white z-10 shadow-lg backdrop-blur-md ${item.status === 'Còn chỗ' ? 'bg-green-500/90' : 'bg-red-500/90'}`}>
+                      {t(item.status).toUpperCase()} {/* SỬA TẠI ĐÂY: bọc t() cho trạng thái */}
                   </span>
-                  <img src={item.img} alt={item.name} className="w-full h-full object-cover" />
+                  
+                  <span className="absolute bottom-5 left-5 px-4 py-1.5 bg-white/90 backdrop-blur-md rounded-lg text-[10px] font-black text-blue-900 z-10 shadow-sm uppercase">
+                      {t(item.type)} {/* SỬA TẠI ĐÂY: bọc t() cho THPT/THCS */}
+                  </span>
+
+                  <img src={item.img} alt={item.name} className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110" />
                </div>
-               <div className="p-5">
-                 <span className="text-blue-600 font-bold text-sm">{item.type}</span>
-                 <h3 className="text-lg font-black text-blue-900 mt-1 uppercase leading-tight">{item.name}</h3>
+
+               <div className="p-7">
+                 <h3 className="text-xl font-black text-blue-950 uppercase leading-tight group-hover:text-blue-600 transition-colors duration-300">
+                    {item.name}
+                 </h3>
+                 <div className="mt-4 flex items-center justify-between">
+                    <div className="flex -space-x-2">
+                        <div className="w-8 h-8 rounded-full border-2 border-white bg-blue-100 flex items-center justify-center text-[10px] font-bold">🎓</div>
+                        <div className="w-8 h-8 rounded-full border-2 border-white bg-indigo-100 flex items-center justify-center text-[10px] font-bold">🏫</div>
+                    </div>
+                    <button className="text-blue-600 font-black text-[11px] uppercase tracking-wider hover:underline">
+                        {t('Xem chi tiết')} →
+                    </button>
+                 </div>
                </div>
             </div>
           ))
         ) : (
-          <div className="col-span-3 text-center py-20 text-gray-400 italic font-medium">
-            Không tìm thấy trường nào phù hợp với từ khóa "{searchTerm}"...
+          <div className="col-span-full text-center py-32 bg-white rounded-[3rem] border-2 border-dashed border-gray-200">
+            <div className="text-5xl mb-4">🔍</div>
+            <p className="text-gray-400 italic font-bold text-lg">
+                {t('Không tìm thấy trường nào phù hợp với từ khóa')} "{searchTerm}"...
+            </p>
           </div>
         )}
       </div>

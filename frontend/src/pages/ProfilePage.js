@@ -1,11 +1,13 @@
 import React, { useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
+import { useTranslation } from 'react-i18next'; // 1. Import hook
 import Navbar from '../components/Navbar';
 import ChangePasswordModal from '../components/ChangePasswordModal/ChangePasswordModal';
 
 const ProfilePage = () => {
+  const { t } = useTranslation(); // 2. Khai báo hàm t()
   const [profile, setProfile] = useState(null);
-  const [isModalOpen, setIsModalOpen] = useState(false); // Quản lý đóng mở Modal
+  const [isModalOpen, setIsModalOpen] = useState(false);
   const navigate = useNavigate();
 
   useEffect(() => {
@@ -27,16 +29,16 @@ const ProfilePage = () => {
 
   if (!profile) return (
     <div className="flex justify-center items-center h-screen font-bold text-blue-800 text-xl">
-      Đang tải hồ sơ định danh...
+      {t('Đang tải hồ sơ định danh...')}
     </div>
   );
 
   return (
     <div className="bg-gray-50 min-h-screen font-sans text-gray-800">
-     <Navbar 
-  userProfile={profile} 
-  onOpenChangePassword={() => setIsModalOpen(true)} 
-/>
+      <Navbar 
+        userProfile={profile} 
+        onOpenChangePassword={() => setIsModalOpen(true)} 
+      />
       
       <div className="bg-blue-800 h-48 shadow-inner"></div>
 
@@ -52,12 +54,14 @@ const ProfilePage = () => {
             </h1>
             <div className="flex gap-3 mt-5 justify-center md:justify-start">
               <span className="bg-blue-100 text-blue-700 text-sm px-6 py-2 rounded-full font-bold uppercase tracking-wide">
-                {Number(profile.Quyen) === 1 && 'Quản trị viên'}
-                {Number(profile.Quyen) === 2 && 'Sinh Viên'}
-                {Number(profile.Quyen) === 3 && 'Giảng Viên ĐH'}
-                {Number(profile.Quyen) === 4 && 'Giáo Viên Phổ Thông'}
+                {Number(profile.Quyen) === 1 && t('QUẢN TRỊ VIÊN')}
+                {Number(profile.Quyen) === 2 && t('SINH VIÊN')}
+                {Number(profile.Quyen) === 3 && t('GIẢNG VIÊN')}
+                {Number(profile.Quyen) === 4 && t('GIÁO VIÊN THPT')}
               </span>
-              <span className="bg-green-100 text-green-700 text-sm px-6 py-2 rounded-full font-bold uppercase tracking-wide">Chính thức</span>
+              <span className="bg-green-100 text-green-700 text-sm px-6 py-2 rounded-full font-bold uppercase tracking-wide">
+                {t('CHÍNH THỨC')}
+              </span>
             </div>
           </div>
         </div>
@@ -65,29 +69,31 @@ const ProfilePage = () => {
         <div className="grid grid-cols-1 md:grid-cols-3 gap-10 mt-12">
           <div className="md:col-span-2 space-y-10">
             <div className="bg-white p-10 rounded-[2.5rem] shadow-md border border-gray-100">
-              {/* Phần tiêu đề có chứa nút Đổi mật khẩu */}
               <div className="flex justify-between items-center mb-10">
                 <h3 className="text-blue-900 font-black flex items-center gap-3 uppercase tracking-widest text-lg">
-                  <span className="w-2.5 h-8 bg-blue-600 rounded-full"></span> Chi tiết hồ sơ
+                  <span className="w-2.5 h-8 bg-blue-600 rounded-full"></span> {t('CHI TIẾT HỒ SƠ')}
                 </h3>
               </div>
               
               <div className="grid grid-cols-1 sm:grid-cols-2 gap-x-16 gap-y-10">
-                <DetailItem label="Họ và Tên" value={profile.HoTen} />
+                <DetailItem label={t("HỌ VÀ TÊN")} value={profile.HoTen} />
                 <DetailItem 
-                  label={Number(profile.Quyen) === 2 ? "Ngành học" : "Chuyên môn/Khoa"} 
-                  value={profile.Nganh || profile.Mon_PhuTrach} 
+                  label={Number(profile.Quyen) === 2 ? t("NGÀNH HỌC") : t("Chuyên môn/Khoa")} 
+                  value={t(profile.Nganh || profile.Mon_PhuTrach)} 
                 />
-                <DetailItem label="Giới tính" value={Number(profile.GioiTinh) === 1 ? "NAM" : "NỮ"} />
-                <DetailItem label="Số điện thoại" value={profile.SoDienThoai} />
+                <DetailItem 
+                  label={t("Giới tính")} 
+                  value={Number(profile.GioiTinh) === 1 ? t("NAM") : t("NỮ")} 
+                />
+                <DetailItem label={t("Số điện thoại")} value={profile.SoDienThoai} />
                 
                 <div className="sm:col-span-2 border-t border-gray-100 pt-8 mt-4">
-                  <DetailItem label="Email liên hệ" value={profile.Email} />
+                  <DetailItem label={t("Email liên hệ")} value={profile.Email} />
                 </div>
                 
                 {profile.DiaChi && (
                    <div className="sm:col-span-2">
-                    <DetailItem label="Địa chỉ liên hệ" value={profile.DiaChi} />
+                    <DetailItem label={t("Địa chỉ liên hệ")} value={profile.DiaChi} />
                   </div>
                 )}
               </div>
@@ -97,27 +103,31 @@ const ProfilePage = () => {
           <div className="md:col-span-1">
             <div className="bg-white p-6 rounded-[2.5rem] border-2 border-dashed border-gray-200 text-center shadow-sm">
               <div className="bg-gray-50 aspect-[3/4] rounded-[1.5rem] flex items-center justify-center text-gray-300 italic mb-6 text-lg">
-                [Ảnh thẻ định danh]
+                {t("[Ảnh thẻ định danh]")}
               </div>
-              <p className="text-xs text-gray-400 font-black uppercase tracking-[0.2em]">Khoa Sư Phạm - ĐHQN</p>
+              <p className="text-xs text-gray-400 font-black uppercase tracking-[0.2em]">
+                {t("KHOA SƯ PHẠM")} - {t("Đại học Quy Nhơn")}
+              </p>
             </div>
           </div>
         </div>
       </div>
 
-      {/* MODAL ĐỔI MẬT KHẨU */}
       <ChangePasswordModal 
         isOpen={isModalOpen} 
         onClose={() => setIsModalOpen(false)} 
-        maTK={profile.MaTK} // Truyền MaTK xuống để Modal biết đổi mật khẩu cho ai
+        maTK={profile.MaTK} 
       />
     </div>
   );
 };
 
+// Component con cũng dùng hàm t() truyền từ props hoặc gọi hook riêng
 const DetailItem = ({ label, value }) => (
   <div className="group">
-    <p className="text-xs font-black text-gray-400 uppercase tracking-[0.15em] mb-2 transition-colors group-hover:text-blue-500">{label}</p>
+    <p className="text-xs font-black text-gray-400 uppercase tracking-[0.15em] mb-2 transition-colors group-hover:text-blue-500">
+      {label}
+    </p>
     <p className="text-lg font-bold text-gray-800 tracking-tight">{value || "---"}</p>
   </div>
 );
