@@ -27,24 +27,42 @@ const RegistrationPage = () => {
         fetchTruongs();
     }, []);
 
-    const handleRegister = async () => {
-        // 3. Sử dụng t() cho các thông báo Alert
-        if (!nv1) { alert(t("⚠️ Vui lòng chọn Nguyện vọng 1!")); return; }
-        
-        const data = { maSV: "4551150001", nv1, nv2, nv3, ghiChu };
-        try {
-            const response = await fetch('http://localhost/api_nguyenvong.php', {
-                method: 'POST',
-                headers: { 'Content-Type': 'application/json' },
-                body: JSON.stringify(data)
-            });
-            const result = await response.json();
-            if (result.status === "success") alert(t("✅ Đăng ký thành công!"));
-        } catch (error) { 
-            alert(t("❌ Lỗi kết nối Server!")); 
-        }
+   const handleRegister = async () => {
+    const savedUser = JSON.parse(localStorage.getItem('user'));
+    
+    // Sửa ở đây: Lấy MaTK vì dữ liệu của em dùng tên này làm mã định danh
+    const currentMaSV = savedUser?.MaTK; 
+
+    if (!currentMaSV) {
+        alert(t("❌ Lỗi: Không tìm thấy mã định danh (MaTK). Vui lòng đăng nhập lại!"));
+        return;
+    }
+
+    // Các phần check nguyện vọng giữ nguyên...
+    const data = { 
+        maSV: currentMaSV, 
+        nv1, 
+        nv2, 
+        nv3, 
+        ghiChu 
     };
 
+    try {
+        const response = await fetch('http://localhost/api_nguyenvong.php', {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify(data)
+        });
+        const result = await response.json();
+        if (result.status === "success") {
+            alert(t("✅ Đăng ký thành công cho sinh viên: ") + currentMaSV);
+        } else {
+            alert(t("❌ Lỗi: ") + result.message);
+        }
+    } catch (error) { 
+        alert(t("❌ Lỗi kết nối Server!")); 
+    }
+};
     const renderOptions = (currentValue, otherValues) => {
         if (loading) return <option value="">{t("Đang tải dữ liệu...")}</option>;
         if (danhSachTruong.length === 0) return <option value="">{t("(Bảng dữ liệu trống)")}</option>;

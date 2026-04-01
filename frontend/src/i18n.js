@@ -37,6 +37,7 @@ i18n
           "Quay lại": "Back",
           "Ghi chú": "Note",
           "CẬP NHẬT": "UPDATE",
+          "TRA CỨU KẾT QUẢ": "INTERNSHIP RESULTS",
 
           // --- TRANG GIỚI THIỆU ---
           "Nền tảng hiện đại kết nối sinh viên và các trường đối tác tại": "Modern platform connecting students and partner schools at",
@@ -116,6 +117,24 @@ i18n
           "XÁC NHẬN ĐĂNG KÝ HỆ THỐNG": "CONFIRM SYSTEM REGISTRATION",
           "Mọi thông tin sẽ được tự động đồng bộ hóa với cơ sở dữ liệu khoa sư phạm": "All information will be automatically synced with the faculty database",
           "⚠️ Vui lòng chọn Nguyện vọng 1!": "⚠️ Please select Aspiration 1!",
+          //---TRANG TRA CỨU KẾT QUẢ ---
+          "Kết quả xét tuyển": "Internship Results",
+"Tra cứu trạng thái": "Track Status",
+"🎉 Kết quả xét tuyển": "🎉 Internship Results",
+"📊 Tra cứu trạng thái": "📊 Track Status",
+"Chúc mừng bạn!": "Congratulations!",
+"Nguyện vọng:": "Aspiration:",
+"Ngày xét:": "Review Date:",
+"Hồ sơ đang chờ duyệt": "Application Pending",
+"Hệ thống chưa tìm thấy kết quả xét tuyển cho mã sinh viên này.": "The system has not found results for this student ID.",
+"Lưu ý": "Note",
+"Kết quả dựa trên thời gian đăng ký và chỉ tiêu của đơn vị thực tập.": "Results are based on registration time and unit quotas.",
+"Hỗ trợ": "Support",
+"Liên hệ Văn phòng Khoa (Nội bộ 102) nếu có sai sót về thông tin.": "Contact the Faculty Office (Ext. 102) for any information errors.",
+"Vui lòng nhập mã sinh viên để tra cứu!": "Please enter a student ID to search!",
+"Nhập mã sinh viên (Ví dụ: TK_003)...": "Enter student ID (Ex: TK_003)...",
+"Tìm kiếm": "Search",
+"Hệ thống xét duyệt thực tập tự động - QNU AI Smart Portal": "Automated Internship Review System - QNU AI Smart Portal",
 
           // --- SIDEBAR ---
           "QUẢN LÝ THỰC TẬP": "INTERNSHIP MANAGEMENT",
@@ -264,7 +283,8 @@ i18n
         }
       },
       vi: {
-        translation: {}
+        "TRA CỨU KẾT QUẢ": "TRA CỨU KẾT QUẢ",
+        "Hệ thống xét duyệt thực tập tự động - QNU AI Smart Portal": "Hệ thống xét duyệt thực tập tự động - QNU AI Smart Portal",
       }
     },
     fallbackLng: 'vi',

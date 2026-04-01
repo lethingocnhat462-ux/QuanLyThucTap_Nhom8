@@ -57,7 +57,15 @@ const MainLayout = ({ userProfile }) => {
               <span className="text-xl">📝</span>
               <span className="tracking-tight">{t("ĐĂNG KÝ NGUYỆN VỌNG")}</span>
             </Link>
-            
+            <Link 
+  to="/student/result" 
+  className={`p-4 rounded-2xl font-bold flex items-center gap-3 transition-all duration-200 ${
+    isActive('/student/result') ? 'bg-blue-800 shadow-lg translate-x-2' : 'hover:bg-blue-800/50 hover:translate-x-1'
+  }`}
+>
+  <span className="text-xl">📊</span>
+  <span className="tracking-tight">{t("TRA CỨU KẾT QUẢ")}</span>
+</Link>
             <Link 
               to="/student/reports" 
               className={`p-4 rounded-2xl font-bold flex items-center gap-3 transition-all duration-200 ${
