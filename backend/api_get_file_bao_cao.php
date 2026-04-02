@@ -1,6 +1,13 @@
 <?php
-header("Access-Control-Allow-Origin: *");
-header("Content-Type: application/json");
+// Cho phép cổng 3000 truy cập
+header("Access-Control-Allow-Origin: http://localhost:3000");
+header("Access-Control-Allow-Methods: POST, GET, OPTIONS");
+header("Access-Control-Allow-Headers: Content-Type, Authorization");
+
+// Xử lý yêu cầu OPTIONS (Preflight request)
+if ($_SERVER['REQUEST_METHOD'] == 'OPTIONS') {
+    exit;
+}
 
 $conn = mysqli_connect("db", "root", "password123", "quan_ly_thuc_tap");
 

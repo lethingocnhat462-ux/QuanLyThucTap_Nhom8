@@ -41,7 +41,8 @@ const InternshipUnitsPage = () => {
     <div className="min-h-screen bg-gray-50 font-sans">
       <Navbar />
       
-      <div className="bg-gradient-to-r from-[#1e3a8a] to-[#1e40af] py-24 text-center text-white relative overflow-hidden">
+      {/* Phần Banner đã bỏ absolute cho thanh tìm kiếm */}
+      <div className="bg-gradient-to-r from-[#1e3a8a] to-[#1e40af] pt-24 pb-32 text-center text-white relative overflow-hidden">
         <div className="relative z-10">
             <h1 className="text-4xl md:text-5xl font-black mb-4 uppercase tracking-tighter">
                 {t('Hệ thống đơn vị thực tập')}
@@ -50,8 +51,10 @@ const InternshipUnitsPage = () => {
                 {t('Tìm kiếm và lựa chọn đơn vị thực tập phù hợp với chuyên môn của bạn.')}
             </p>
         </div>
-        
-        <div className="absolute -bottom-10 left-1/2 -translate-x-1/2 w-full max-w-5xl px-4">
+      </div>
+
+      {/* Thanh tìm kiếm được đặt ở ngoài Banner để không bị che */}
+      <div className="max-w-5xl mx-auto px-4 -mt-12 relative z-20">
           <div className="bg-white rounded-[2rem] shadow-[0_20px_50px_rgba(0,0,0,0.1)] p-3 flex flex-col md:flex-row items-center gap-3 border border-white">
             <div className="relative flex-1 w-full">
                 <span className="absolute left-5 top-1/2 -translate-y-1/2 text-gray-400">🔍</span>
@@ -75,25 +78,25 @@ const InternshipUnitsPage = () => {
                      : 'text-gray-500 hover:bg-white hover:text-blue-600'
                    }`}
                  >
-                   {t(type)} {/* Đã bọc t() để dịch chữ "Tất cả" */}
+                   {t(type)}
                  </button>
                ))}
             </div>
           </div>
-        </div>
       </div>
 
-      <div className="max-w-7xl mx-auto mt-28 p-6 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 pb-20">
+      {/* Padding top nhẹ để tránh dính vào thanh tìm kiếm */}
+      <div className="max-w-7xl mx-auto mt-12 p-6 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 pb-20">
         {filteredUnits.length > 0 ? (
           filteredUnits.map((item) => (
             <div key={item.id} className="group bg-white rounded-[2.5rem] overflow-hidden shadow-sm hover:shadow-[0_20px_40px_rgba(30,58,138,0.1)] hover:-translate-y-2 transition-all duration-500 border border-gray-100">
                <div className="relative h-56 bg-gray-100 overflow-hidden">
                   <span className={`absolute top-5 right-5 px-4 py-1.5 rounded-full text-[10px] font-black text-white z-10 shadow-lg backdrop-blur-md ${item.status === 'Còn chỗ' ? 'bg-green-500/90' : 'bg-red-500/90'}`}>
-                      {t(item.status).toUpperCase()} {/* SỬA TẠI ĐÂY: bọc t() cho trạng thái */}
+                      {t(item.status).toUpperCase()} 
                   </span>
                   
                   <span className="absolute bottom-5 left-5 px-4 py-1.5 bg-white/90 backdrop-blur-md rounded-lg text-[10px] font-black text-blue-900 z-10 shadow-sm uppercase">
-                      {t(item.type)} {/* SỬA TẠI ĐÂY: bọc t() cho THPT/THCS */}
+                      {t(item.type)} 
                   </span>
 
                   <img src={item.img} alt={item.name} className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110" />

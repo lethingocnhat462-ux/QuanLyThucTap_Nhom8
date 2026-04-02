@@ -13,6 +13,52 @@ const ReportsPage = () => {
       setFileError(false);
     }
   };
+const handleSubmit = async (e) => {
+  e.preventDefault();
+
+  // 1. Lấy dữ liệu từ form
+  const studentId = e.target.elements[0].value; 
+  const reportType = e.target.elements[1].value; 
+  const files = e.target.elements[2].files;
+
+  if (files.length === 0) {
+    alert("Vui lòng chọn ít nhất một tệp tin!");
+    return;
+  }
+
+  // 2. Tạo đối tượng FormData - PHẢI KHỚP VỚI PHP
+  const formData = new FormData();
+  formData.append('ma_sv', studentId);       // Khớp với $_POST['ma_sv']
+  formData.append('loai', reportType);       // Khớp với $_POST['loai']
+  formData.append('btnNop', 'true');         // Để vượt qua kiểm tra isset($_POST['btnNop'])
+  
+  for (let i = 0; i < files.length; i++) {
+    formData.append('file_tai_lieu[]', files[i]); // Khớp với $_FILES['file_tai_lieu']
+  }
+
+  try {
+    const response = await fetch('http://localhost/xuly_nop.php', {
+      method: 'POST',
+      body: formData,
+    });
+
+    // Vì PHP của bạn đang trả về <script>alert...</script> chứ không phải JSON
+    // Nên đoạn .json() dưới đây có thể gây lỗi. 
+    // Tạm thời hãy dùng .text() để kiểm tra nếu chưa sửa PHP thành JSON.
+    const resultText = await response.text();
+    
+    if (resultText.includes("thành công")) {
+      alert("Nộp báo cáo thành công!");
+    } else {
+      console.log("Phản hồi từ Server:", resultText);
+      alert("Có thông báo từ hệ thống (Xem console)");
+    }
+
+  } catch (error) {
+    console.error("Lỗi kết nối:", error);
+    alert("Không thể kết nối đến máy chủ.");
+  }
+};
 
   return (
     <div className="w-full h-full flex flex-col bg-gray-100">
@@ -38,7 +84,7 @@ const ReportsPage = () => {
             </div>
           </div>
 
-          <form className="p-8 space-y-6">
+          <form onSubmit={handleSubmit} className="p-8 space-y-6">
             <div>
               <label className="block text-[12px] font-bold text-slate-600 uppercase mb-2">{t("Mã số sinh viên")}</label>
               <input type="text" placeholder={t("Nhập MSSV của bạn...")} className="w-full bg-slate-50 border-2 p-4 rounded-2xl outline-none focus:border-blue-500 font-semibold" />

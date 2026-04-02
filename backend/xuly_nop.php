@@ -1,4 +1,12 @@
 <?php
+header("Access-Control-Allow-Origin: http://localhost:3000");
+header("Access-Control-Allow-Methods: POST, GET, OPTIONS");
+header("Access-Control-Allow-Headers: Content-Type, Authorization");
+
+if ($_SERVER['REQUEST_METHOD'] == 'OPTIONS') {
+    exit;
+}
+
 $conn = mysqli_connect("db", "root", "password123", "quan_ly_thuc_tap");
 
 function unsignedString($str) {
@@ -13,7 +21,7 @@ function unsignedString($str) {
     return $str;
 }
 
-if (isset($_POST['btnNop'])) {
+if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     $ma_sv = mysqli_real_escape_string($conn, $_POST['ma_sv']);
     $loai = mysqli_real_escape_string($conn, $_POST['loai']);
     $files = $_FILES['file_tai_lieu'];
@@ -48,9 +56,11 @@ if (isset($_POST['btnNop'])) {
     }
 
     if ($success_count > 0) {
-        echo "<script>alert('Đã nộp thành công $success_count tài liệu!'); window.location.href='nop_bao_cao.php';</script>";
+        // Thay vì echo script, hãy trả về JSON
+        echo json_encode(["success" => true, "message" => "Đã nộp thành công $success_count tài liệu!"]);
     } else {
-        echo "<script>alert('Lỗi: Không thể lưu file. Hãy kiểm tra quyền uploads trong Docker!'); window.history.back();</script>";
+        echo json_encode(["success" => false, "message" => "Lỗi: Không thể lưu file vào hệ thống."]);
     }
+    exit; // Dừng lại sau khi trả về kết quả
 }
 ?>
