@@ -5,11 +5,19 @@ import { useTranslation } from 'react-i18next'; // 1. Import hook
 
 // --- CÁC COMPONENT CON ---
 
-const StatCard = ({ icon, title, value, color }) => (
+const StatCard = ({ icon, title, value, color, year }) => (
   <div className="glass-card-tech p-6 group cursor-pointer" style={{ '--glow-color': color }}>
     <div className="text-3xl mb-4" style={{ filter: `drop-shadow(0 0 5px ${color}88)` }}>{icon}</div>
-    <div className="text-slate-500 text-[10px] font-bold uppercase tracking-wider mb-1">{title}</div>
-    <div className="text-3xl font-black text-slate-800 group-hover:text-blue-600 transition-colors">{value}</div>
+    <div className="text-slate-500 text-[13px] font-bold uppercase tracking-wider mb-1">{title}</div>
+    <div className="flex flex-col">
+      <div className="text-3xl font-black text-slate-800 group-hover:text-blue-600 transition-colors">
+        {value}
+      </div>
+     
+      <div className="text-[11px] text-slate-400 font-medium mt-1">
+        Năm {year}
+      </div>
+    </div>
   </div>
 );
 
@@ -196,13 +204,14 @@ function HomePage() {
             </Link>
           </div>
         </header>
-
         <section className="max-w-7xl mx-auto grid grid-cols-2 md:grid-cols-4 gap-6 px-6 relative z-10 w-full">
-          <StatCard icon="👨‍🎓" title={t("Sinh viên")} value="1,250+" color="#3b82f6" />
-          <StatCard icon="🏫" title={t("Trường đối tác")} value="45" color="#a855f7" />
-          <StatCard icon="📄" title={t("Báo cáo")} value="85%" color="#06b6d4" />
-          <StatCard icon="✅" title={t("Hoàn thành")} value="320" color="#10b881" />
-        </section>
+  <StatCard  title={t("Sinh viên")} value="1,250+" color="#3b82f6" year="2025-2026" />
+  <StatCard  title={t("Trường đối tác")} value="30+" color="#a855f7" year="2025-2026" />
+  <StatCard  title={t("Báo cáo")} value="99%" color="#06b6d4" year="2025-2026" />
+  <StatCard  title={t("Hoàn thành")} value="1200+" color="#10b881" year="2025-2026" />
+</section>
+
+
 
         <main className="max-w-7xl mx-auto py-20 px-6 grid grid-cols-1 lg:grid-cols-3 gap-10 relative z-10 w-full flex-grow">
           <div className="lg:col-span-2 space-y-8">

@@ -22,7 +22,7 @@
             <div class="bg-gradient-to-r from-[#1e3a8a] via-[#2563eb] to-[#3b82f6] p-8 md:p-10 text-white relative">
                 <div class="flex items-center gap-4">
                     <div class="w-12 h-12 bg-white/20 backdrop-blur-md rounded-xl flex items-center justify-center border border-white/30 shadow-lg">
-                        <span class="text-2xl">📤</span>
+                        <span class="text-2xl"></span>
                     </div>
                     <div>
                         <h2 class="text-xl md:text-2xl font-black uppercase tracking-tight">

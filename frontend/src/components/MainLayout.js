@@ -32,7 +32,7 @@ const MainLayout = ({ userProfile }) => {
                 isActive('/home') ? 'bg-blue-800 shadow-lg translate-x-2' : 'hover:bg-blue-800/50 hover:translate-x-1'
               }`}
             >
-              <span className="text-xl">🏠</span>
+              <span className="text-xl"></span>
               <span className="tracking-tight">{t("TRANG CHỦ HỆ THỐNG")}</span>
             </Link>
             
@@ -42,7 +42,7 @@ const MainLayout = ({ userProfile }) => {
                 isActive('/student/profile') ? 'bg-blue-800 shadow-lg translate-x-2' : 'hover:bg-blue-800/50 hover:translate-x-1'
               }`}
             >
-              <span className="text-xl">👤</span>
+              <span className="text-xl"></span>
               <span className="tracking-tight">{t("HỒ SƠ CÁ NHÂN")}</span>
             </Link>
             
@@ -54,7 +54,7 @@ const MainLayout = ({ userProfile }) => {
                   : 'bg-yellow-500 text-blue-950 hover:bg-yellow-400'
               }`}
             >
-              <span className="text-xl">📝</span>
+              <span className="text-xl"></span>
               <span className="tracking-tight">{t("ĐĂNG KÝ NGUYỆN VỌNG")}</span>
             </Link>
             <Link 
@@ -63,8 +63,12 @@ const MainLayout = ({ userProfile }) => {
     isActive('/student/result') ? 'bg-blue-800 shadow-lg translate-x-2' : 'hover:bg-blue-800/50 hover:translate-x-1'
   }`}
 >
-  <span className="text-xl">📊</span>
+  <span className="text-xl"></span>
   <span className="tracking-tight">{t("TRA CỨU KẾT QUẢ")}</span>
+</Link>
+<Link to="/xem-diem-bao-cao" className="flex items-center p-3 hover:bg-blue-700 text-white">
+   <i className="fas fa-file-signature mr-3"></i>
+   <span>XEM ĐIỂM & NHẬN XÉT</span>
 </Link>
             <Link 
               to="/student/reports" 
@@ -72,7 +76,7 @@ const MainLayout = ({ userProfile }) => {
                 isActive('/student/reports') ? 'bg-blue-800 shadow-lg translate-x-2' : 'hover:bg-blue-800/50 hover:translate-x-1'
               }`}
             >
-              <span className="text-xl">📥</span>
+              <span className="text-xl"></span>
               <span className="tracking-tight">{t("NỘP BÁO CÁO")}</span>
             </Link>
           </nav>

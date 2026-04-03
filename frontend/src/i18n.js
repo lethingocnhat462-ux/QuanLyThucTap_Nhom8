@@ -100,6 +100,18 @@ i18n
           "Cập nhật danh sách phân công trường đợt 2 - Năm 2026": "Update assignment list phase 2 - 2026",
           "Thông báo kết thúc đợt thực tập sư phạm và nộp báo cáo cuối kỳ": "Notice of internship end and final report submission",
           "Lộ trình số": "Digital Roadmap", // Thêm key này để khớp với aside trang Home
+          // --- XEM ĐIỂM BÁO CÁO (VIEW REPORT GRADES) ---
+"XEM ĐIỂM BÁO CÁO": "VIEW REPORT GRADES",
+"Xem điểm báo cáo": "View Report Grades",
+"KẾT QUẢ CHẤM ĐIỂM TỪ GV PHỔ THÔNG": "GRADING RESULTS FROM HIGH SCHOOL TEACHERS",
+"Tên tệp tin": "File Name",
+"Loại báo cáo": "Report Type",
+"Điểm": "Grade",
+"Nhận xét của Giáo viên": "Teacher's Comments",
+"Đang chấm...": "Grading...",
+"Chưa có nhận xét": "No comments yet",
+
+
 
           // --- TRANG ĐĂNG KÝ NGUYỆN VỌNG ---
           "Đăng ký": "Register",
