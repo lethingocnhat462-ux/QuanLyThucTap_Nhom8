@@ -37,7 +37,7 @@ i18n
           "Quay lại": "Back",
           "Ghi chú": "Note",
           "CẬP NHẬT": "UPDATE",
-          "TRA CỨU KẾT QUẢ": "INTERNSHIP RESULTS",
+          "4. TRA CỨU KẾT QUẢ": "4. INTERNSHIP RESULTS",
 
           // --- TRANG GIỚI THIỆU ---
           "Nền tảng hiện đại kết nối sinh viên và các trường đối tác tại": "Modern platform connecting students and partner schools at",
@@ -101,7 +101,7 @@ i18n
           "Thông báo kết thúc đợt thực tập sư phạm và nộp báo cáo cuối kỳ": "Notice of internship end and final report submission",
           "Lộ trình số": "Digital Roadmap", // Thêm key này để khớp với aside trang Home
           // --- XEM ĐIỂM BÁO CÁO (VIEW REPORT GRADES) ---
-"XEM ĐIỂM BÁO CÁO": "VIEW REPORT GRADES",
+"6. XEM ĐIỂM BÁO CÁO": "6. VIEW REPORT GRADES",
 "Xem điểm báo cáo": "View Report Grades",
 "KẾT QUẢ CHẤM ĐIỂM TỪ GV PHỔ THÔNG": "GRADING RESULTS FROM HIGH SCHOOL TEACHERS",
 "Tên tệp tin": "File Name",
@@ -151,15 +151,15 @@ i18n
           // --- SIDEBAR ---
           "QUẢN LÝ THỰC TẬP": "INTERNSHIP MANAGEMENT",
           "Quản lý thực tập": "Internship Management",
-          "TRANG CHỦ HỆ THỐNG": "SYSTEM HOME",
-          "HỒ SƠ CÁ NHÂN": "PERSONAL PROFILE",
-          "ĐĂNG KÝ NGUYỆN VỌNG": "REGISTER ASPIRATIONS",
-          "NỘP BÁO CÁO": "SUBMIT REPORTS",
+          "1. TRANG CHỦ HỆ THỐNG": "1. SYSTEM HOME",
+          "2. HỒ SƠ CÁ NHÂN": "2. PERSONAL PROFILE",
+          "3. ĐĂNG KÝ NGUYỆN VỌNG": "3. REGISTER ASPIRATIONS",
+          "5. NỘP BÁO CÁO": "5. SUBMIT REPORTS",
           "Hệ thống điều phối": "Coordination System",
-          "XEM DANH SÁCH SV": "VIEW STUDENT LIST",
-          "NHẬN XÉT CHẤM ĐIỂM": "REVIEWS & GRADING",
-          "XEM ĐOÀN THỰC TẬP": "VIEW INTERN GROUPS",
-          "QUẢN LÝ TÀI KHOẢN": "ACCOUNT MANAGEMENT",
+          "3. XEM DANH SÁCH SV": "3. VIEW STUDENT LIST",
+          "4. NHẬN XÉT CHẤM ĐIỂM": "4. REVIEWS & GRADING",
+          "3. XEM ĐOÀN THỰC TẬP": "3. VIEW INTERN GROUPS",
+          "3. QUẢN LÝ TÀI KHOẢN": "3. ACCOUNT MANAGEMENT",
 
           // --- HỒ SƠ CHI TIẾT & ĐỔI MẬT KHẨU ---
           "Đang tải hồ sơ định danh...": "Loading identity profile...",
