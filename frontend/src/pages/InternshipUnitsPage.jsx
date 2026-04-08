@@ -10,8 +10,58 @@ import imgLeHongPhong from '../images/thcs le hong phong.jpg';
 import imgNguyenHue from '../images/thpt nguyen hue.jpg'; 
 import imgLeLoi from '../images/thcs le loi.jpg';
 import imgTuyPhuoc from '../images/thpt so 1 tuy phuoc.jpg';
-import imgPhanBoiChau from '../images/thpt phan boi chau.jpg';
 import imgHungVuong from '../images/thpt hung vuong.jpg';
+import imgHoaiChauBac from '../images/thcs hoai chau bac.jpg';
+import imgCatHai from '../images/thcs cat hai.jpg';
+import imgCatKhanh from '../images/thcs cat khanh.jpg';
+import imgTamQuanBac from '../images/thcs tam quan bac.jpg';
+import imgTamQuan from '../images/thcs tam quan.jpg';
+import imgTamQuanNam from '../images/thcs tam quan nam.jpg';
+import imgSo2BongSon from '../images/thcs so 2 bong son.jpg';
+import imgHoaiXuan from '../images/thcs hoai xuan.jpg';
+import imgHoaiThanhTay from '../images/thcs hoai thanh tay.jpg';
+import imgVinhThanh from '../images/thpt vinh thanh.jpg';
+import imgTranQuocTuan from '../images/thpt tran quoc tuan.jpg';
+import imgChuyenHungVuong from '../images/thpt chuyen hung vuong.jpg';
+import imgNgoGiaTu from '../images/thpt ngo gia tu.jpg';
+import imgNguyenTrai from '../images/thpt nguyen trai.jpg';
+import imgChuyenNguyenDu from '../images/thpt chuyen nguyen du.jpg';
+import imgVoGiu from '../images/thpt vo giu.jpg';
+import imgNguyenBinhKhiem from '../images/thpt nguyen binh khiem.jpg';
+import imgHoaiAn from '../images/thpt hoai an.jpg';
+import imgNguyenDu from '../images/thpt nguyen du.jpg';
+import imgChuyenChuVanAn from '../images/thpt chuyen chu van an.jpg';
+import imgTangBatHo from '../images/thpt tang bat ho.jpg';
+import imgthptPhanBoiChau from '../images/thpt phan boi chau.jpg';
+import imgNguyenTran from '../images/thpt nguyen tran.jpg';
+import imgthptTamQuan from '../images/thpt tam quan.jpg';
+import imgQuyNhon from '../images/thpt quy nhon.jpg';
+import imgNguyenThaiHoc from '../images/thpt nguyen thai hoc.jpg';
+import imgTranCaoVan from '../images/thpt tran cao van.jpg';
+import imgSo3TuyPhuoc from '../images/thpt so 3 tuy phuoc.jpg';
+import imgAnLao from '../images/ptdtnt an lao.jpg';
+import imgAnHoa from '../images/thcs an hoa.jpg';
+import imgAnTan from '../images/thcs an tan.jpg';
+import imgBongSon from '../images/thcs bong son.jpg';
+import imgDapDa from '../images/thcs dap da.jpg';
+import imgDongDa from '../images/thcs dong da.jpg';
+import imgHoaiMy from '../images/thcs hoai my.jpg';
+import imgHoaiPhu from '../images/thcs hoai phu.jpg';
+import imgHoaiSon from '../images/thcs hoai son.jpg';
+import imgHoaiTan from '../images/thcs hoai tan.jpg';
+import imgHoaiThanh from '../images/thcs hoai thanh.jpg';
+import imgNgoMay from '../images/thcs ngo may.jpg';
+import imgTranHungDao from '../images/thcs tran hung dao.jpg';
+import imgAnLuong from '../images/thpt an luong.jpg';
+import imgBinhDuong from '../images/thpt binh duong.jpg';
+import imgLyTuTrong from '../images/thpt ly tu trong.jpg';
+import imgMyTho from '../images/thpt my tho.jpg';
+import imgSo1PhuMy from '../images/thpt so 1 phu my.jpg';
+import imgSo2PhuMy from '../images/thpt so 2 phu my.jpg';
+
+
+
+
 
 const InternshipUnitsPage = () => {
   const { t } = useTranslation();
@@ -27,8 +77,54 @@ const InternshipUnitsPage = () => {
     { id: 6, name: "THPT NGUYỄN HUỆ", type: "THPT", status: "Còn chỗ", img: imgNguyenHue },
     { id: 7, name: "THCS LÊ LỢI", type: "THCS", status: "Hết chỗ", img: imgLeLoi },
     { id: 8, name: "THPT SỐ 1 TUY PHƯỚC", type: "THPT", status: "Còn chỗ", img: imgTuyPhuoc },
-    { id: 9, name: "THPT PHAN BỘI CHÂU", type: "THPT", status: "Còn chỗ", img: imgPhanBoiChau },
+    { id: 9, name: "THPT VÕ GIỮ", type: "THPT", status: "Còn chỗ", img: imgVoGiu },
     { id: 10, name: "THPT HÙNG VƯƠNG", type: "THPT", status: "Còn chỗ", img: imgHungVuong },
+    { id: 11, name: "THCS HOÀI CHÂU BẮC", type: "THCS", status: "Còn chỗ", img: imgHoaiChauBac },
+    { id: 12, name: "THCS CÁT HẢI", type: "THCS", status: "Còn chỗ", img: imgCatHai },
+    { id: 13, name: "THCS CÁT KHÁNH", type: "THCS", status: "Còn chỗ", img: imgCatKhanh },
+    { id: 14, name: "THCS TAM QUAN BẮC", type: "THCS", status: "Còn chỗ", img: imgTamQuanBac },
+    { id: 15, name: "THCS TAM QUAN", type: "THCS", status: "Còn chỗ", img: imgTamQuan },
+    { id: 16, name: "THCS TAM QUAN NAM", type: "THCS", status: "Còn chỗ", img: imgTamQuanNam },
+    { id: 17, name: "THCS SỐ 2 BỒNG SƠN", type: "THCS", status: "Còn chỗ", img: imgSo2BongSon },
+    { id: 18, name: "THCS HOÀI XUÂN", type: "THCS", status: "Còn chỗ", img: imgHoaiXuan },
+    { id: 19, name: "THCS HOÀI THANH TÂY", type: "THCS", status: "Còn chỗ", img: imgHoaiThanhTay },
+    { id: 20, name: "THPT VĨNH THẠNH", type: "THPT", status: "Còn chỗ", img: imgVinhThanh },
+    { id: 21, name: "THPT TRẦN QUỐC TUẤN", type: "THPT", status: "Còn chỗ", img: imgTranQuocTuan },
+    { id: 22, name: "THPT CHUYÊN HÙNG VƯƠNG", type: "THPT", status: "Hết chỗ", img: imgChuyenHungVuong },
+    { id: 23, name: "THPT NGÔ GIA TỰ", type: "THPT", status: "Còn chỗ", img: imgNgoGiaTu },
+    { id: 24, name: "THPT NGUYỄN TRÃI", type: "THPT", status: "Còn chỗ", img: imgNguyenTrai },
+    { id: 25, name: "THPT CHUYÊN NGUYỄN DU", type: "THPT", status: "Còn chỗ", img: imgChuyenNguyenDu },
+    { id: 26, name: "THPT NGUYỄN BÍNH KHIÊM", type: "THPT", status: "Còn chỗ", img: imgNguyenBinhKhiem },
+    { id: 27, name: "THPT HOÀI ÂN", type: "THPT", status: "Còn chỗ", img: imgHoaiAn },
+    { id: 28, name: "THPT NGUYỄN DU", type: "THPT", status: "Còn chỗ", img: imgNguyenDu },
+    { id: 29, name: "THPT CHUYÊN CHU VĂN AN", type: "THPT", status: "Còn chỗ", img: imgChuyenChuVanAn },
+    { id: 30, name: "THPT TĂNG BẠT HỔ", type: "THPT", status: "Còn chỗ", img: imgTangBatHo },
+    { id: 31, name: "THPT PHAN BỘI CHÂU", type: "THPT", status: "Còn chỗ", img: imgthptPhanBoiChau },
+    { id: 32, name: "THPT NGUYỄN TRÂN", type: "THPT", status: "Còn chỗ", img: imgNguyenTran },
+    { id: 33, name: "THPT TAM QUAN", type: "THPT", status: "Còn chỗ", img: imgthptTamQuan },
+    { id: 34, name: "THPT QUY NHƠN", type: "THPT", status: "Còn chỗ", img: imgQuyNhon },
+    { id: 35, name: "THPT NGUYỄN THÁI HỌC", type: "THPT", status: "Còn chỗ", img: imgNguyenThaiHoc },
+    { id: 36, name: "THPT TRẦN CAO VÂN", type: "THPT", status: "Còn chỗ", img: imgTranCaoVan },
+    { id: 37, name: "THPT SỐ 3 TUY PHƯỚC", type: "THPT", status: "Còn chỗ", img: imgSo3TuyPhuoc },
+    { id: 38, name: "PTDTNT AN LÃO", type: "THPT", status: "Còn chỗ", img: imgAnLao },
+  { id: 39, name: "THCS AN HÒA", type: "THCS", status: "Còn chỗ", img: imgAnHoa },
+  { id: 40, name: "THCS AN TÂN", type: "THCS", status: "Còn chỗ", img: imgAnTan },
+  { id: 41, name: "THCS BỒNG SƠN", type: "THCS", status: "Còn chỗ", img: imgBongSon },
+  { id: 42, name: "THCS ĐẬP ĐÁ", type: "THCS", status: "Còn chỗ", img: imgDapDa },
+  { id: 43, name: "THCS ĐỐNG ĐA", type: "THCS", status: "Còn chỗ", img: imgDongDa },
+  { id: 44, name: "THCS HOÀI MỸ", type: "THCS", status: "Còn chỗ", img: imgHoaiMy },
+  { id: 45, name: "THCS HOÀI PHÚ", type: "THCS", status: "Còn chỗ", img: imgHoaiPhu },
+  { id: 46, name: "THCS HOÀI SƠN", type: "THCS", status: "Còn chỗ", img: imgHoaiSon },
+  { id: 47, name: "THCS HOÀI TÂN", type: "THCS", status: "Còn chỗ", img: imgHoaiTan },
+  { id: 48, name: "THCS HOÀI THANH", type: "THCS", status: "Còn chỗ", img: imgHoaiThanh },
+  { id: 49, name: "THCS NGÔ MÂY", type: "THCS", status: "Còn chỗ", img: imgNgoMay },
+  { id: 50, name: "THCS TRẦN HƯNG ĐẠO", type: "THCS", status: "Còn chỗ", img: imgTranHungDao },
+  { id: 51, name: "THPT AN LƯƠNG", type: "THPT", status: "Còn chỗ", img: imgAnLuong },
+  { id: 52, name: "THPT BÌNH DƯƠNG", type: "THPT", status: "Còn chỗ", img: imgBinhDuong },
+  { id: 53, name: "THPT LÝ TỰ TRỌNG", type: "THPT", status: "Còn chỗ", img: imgLyTuTrong },
+  { id: 54, name: "THPT MỸ THỌ", type: "THPT", status: "Còn chỗ", img: imgMyTho },
+  { id: 55, name: "THPT SỐ 1 PHÙ MỸ", type: "THPT", status: "Còn chỗ", img: imgSo1PhuMy },
+  { id: 56, name: "THPT SỐ 2 PHÙ MỸ", type: "THPT", status: "Còn chỗ", img: imgSo2PhuMy },
   ];
 
   const filteredUnits = units.filter((unit) => {
