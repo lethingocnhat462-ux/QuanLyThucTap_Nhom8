@@ -82,7 +82,7 @@ const AboutPage = () => {
         <p className="max-w-3xl mx-auto text-blue-100 text-xl leading-relaxed font-light">
           {t('Nền tảng hiện đại kết nối sinh viên và các trường đối tác tại')}{' '}
           <span className="font-bold text-white border-b-2 border-blue-400 pb-1">
-            {t('ĐH Quy Nhơn')}
+            {t('Trường Đại học Quy Nhơn')}
           </span>
         </p>
       </div>

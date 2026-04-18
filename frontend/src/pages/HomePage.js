@@ -195,14 +195,38 @@ function HomePage() {
             <span className="text-blue-600 font-semibold px-2 py-0.5 mx-1 bg-blue-50 rounded-md">Smart-AI</span> 
             {t(', kết nối tri thức và tối ưu hóa tương lai.')}
           </p>
-          <div className="flex justify-center gap-6">
-            <button onClick={() => navigate('/login')} className="btn-start btn-glow-effect px-10 py-4 rounded-xl font-bold transition-all hover:scale-105">
-              {t('BẮT ĐẦU NGAY')}
-            </button>
-            <Link to="/quy-trinh" className="flex items-center gap-2 px-8 py-3.5 border border-slate-200 text-slate-700 font-medium rounded-xl bg-white/80 no-underline shadow-sm transition-all hover:border-blue-400 hover:scale-105">
-              <span>{t('XEM QUY TRÌNH')}</span>
-            </Link>
-          </div>
+     <div className="flex flex-wrap justify-center gap-6 mt-12">
+  
+  {/* NÚT BẮT ĐẦU NGAY - Giữ nguyên onClick navigate */}
+  <button 
+    onClick={() => navigate('/login')} 
+    className="group relative px-10 py-4 bg-[#2563eb] text-white font-bold rounded-2xl overflow-hidden transition-all duration-300 hover:scale-105 hover:shadow-[0_20px_40px_rgba(37,99,235,0.4)] active:scale-95"
+  >
+    {/* Hiệu ứng tia sáng quét qua */}
+    <div className="absolute inset-0 w-1/2 h-full bg-white/20 skew-x-[-25deg] -translate-x-full group-hover:animate-shimmer" />
+    
+    <span className="relative z-10 flex items-center gap-2">
+      {t('BẮT ĐẦU NGAY')}
+      <svg className="w-5 h-5 group-hover:translate-x-1 transition-transform" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M13 7l5 5m0 0l-5 5m5-5H6" />
+      </svg>
+    </span>
+  </button>
+
+  {/* NÚT XEM QUY TRÌNH - Giữ nguyên Link to */}
+  <Link 
+    to="/quy-trinh" 
+    className="group relative px-10 py-4 bg-white/40 backdrop-blur-md border border-blue-200 text-blue-700 font-bold rounded-2xl no-underline transition-all duration-300 hover:bg-white/80 hover:border-blue-400 hover:shadow-xl active:scale-95 flex items-center gap-2"
+  >
+    <span>{t('XEM QUY TRÌNH')}</span>
+    {/* Dấu chấm xanh nhấp nháy tạo điểm nhấn hiện đại */}
+    <span className="relative flex h-3 w-3">
+      <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-blue-400 opacity-75"></span>
+      <span className="relative inline-flex rounded-full h-3 w-3 bg-blue-500"></span>
+    </span>
+  </Link>
+
+</div>
         </header>
         <section className="max-w-7xl mx-auto grid grid-cols-2 md:grid-cols-4 gap-6 px-6 relative z-10 w-full">
   <StatCard  title={t("Sinh viên")} value="1,250+" color="#3b82f6" year="2025-2026" />

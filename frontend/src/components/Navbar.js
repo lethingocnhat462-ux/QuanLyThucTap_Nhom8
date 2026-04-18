@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { Link, useNavigate, useLocation } from 'react-router-dom';
 import { useTranslation } from 'react-i18next';
+import logoImg from '../images/logo.png';
 
 const Navbar = ({ userProfile, onOpenChangePassword }) => {
   const navigate = useNavigate();
@@ -39,19 +40,25 @@ const Navbar = ({ userProfile, onOpenChangePassword }) => {
     }`}>
       
       {/* Logo & Brand */}
-      <div className="flex items-center gap-4 cursor-pointer group" onClick={() => navigate('/')}>
-        <div className="bg-[#1e3a8a] text-white w-12 h-12 rounded-xl flex items-center justify-center font-black text-lg shadow-blue-200 shadow-xl group-hover:scale-105 transition-transform">
-          KSP
-        </div>
-        <div className="flex flex-col text-left">
-          <span className="font-extrabold text-[#1e3a8a] uppercase text-xl tracking-tighter leading-none">
-            {t('KHOA SƯ PHẠM')}
-          </span>
-          <span className="font-bold text-blue-500 text-[10px] tracking-[0.2em] mt-1 whitespace-nowrap">
-            {t('Đại học Quy Nhơn')}
-          </span>
-        </div>
-      </div>
+<div className="flex items-center gap-4 cursor-pointer group" onClick={() => navigate('/')}>
+  
+  {/* 1. Hiển thị hình ảnh logo từ thư mục images */}
+  <img 
+    src={logoImg} 
+    alt="Logo QNU" 
+    className="w-12 h-12 object-contain group-hover:scale-105 transition-transform" 
+  />
+
+  <div className="flex flex-col text-left">
+    
+ <span className="font-semibold text-[#1e3a8a] text-[11px] tracking-[0.1em] uppercase mb-1 opacity-70 leading-none">
+  {t('Trường Đại học Quy Nhơn')}
+</span>
+    <span className="font-extrabold text-[#1e3a8a] uppercase text-xl tracking-tighter leading-none">
+      {t('KHOA SƯ PHẠM')}
+    </span>
+  </div>
+</div>
       
       {/* Menu trung tâm */}
       <div className="hidden md:flex items-center gap-2">

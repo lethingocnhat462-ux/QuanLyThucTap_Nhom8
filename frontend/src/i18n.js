@@ -32,8 +32,7 @@ i18n
           "ĐĂNG NHẬP": "LOGIN",
           "KHOA SƯ PHẠM": "FACULTY OF PEDAGOGY",
           "Khoa Sư Phạm": "Faculty of Pedagogy",
-          "Đại học Quy Nhơn": "Quy Nhon University",
-          "ĐH QUY NHƠN": "QUY NHON UNIVERSITY",
+          "Trường Đại học Quy Nhơn": "Quy Nhon University",
           "Quay lại": "Back",
           "Ghi chú": "Note",
           "CẬP NHẬT": "UPDATE",
@@ -41,7 +40,6 @@ i18n
 
           // --- TRANG GIỚI THIỆU ---
           "Nền tảng hiện đại kết nối sinh viên và các trường đối tác tại": "Modern platform connecting students and partner schools at",
-          "ĐH Quy Nhơn": "Quy Nhon University",
           "Đội ngũ phát triển": "Development Team",
           "Trưởng nhóm": "Team Leader",
           "Lập trình viên": "Developer",
