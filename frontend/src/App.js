@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react'; 
 import { BrowserRouter as Router, Routes, Route, Link, useLocation } from 'react-router-dom';
 import { useTranslation } from 'react-i18next';
-
+import logoKSP from './images/logo.png'; 
 // --- IMPORT CÁC TRANG ---
 import RegistrationPage from './pages/RegistrationPage';
 import HomePage from './pages/HomePage';
@@ -47,7 +47,7 @@ const AppContent = () => {
     '/ho-so', '/dang-ky', '/xem-dssv', '/nop-bao-cao', 
     '/admin-tai-khoan', '/nhan-xet-cham-diem', '/doan-thuc-tap', '/ket-qua', '/xem-diem-bao-cao'
   ].includes(location.pathname);
-console.log("KIỂM TRA USER:", userProfile);
+
   return (
     <>
       {!isManagementPage && (
@@ -73,7 +73,14 @@ console.log("KIỂM TRA USER:", userProfile);
               <div className="flex h-screen overflow-hidden bg-gray-100">
                 <aside className="w-72 bg-[#1e3a8a] text-white flex flex-col shadow-xl shrink-0">
                   <div className="p-6 flex items-center gap-3 border-b border-blue-800">
-                    <div className="bg-white text-blue-800 px-2 py-1 rounded font-bold">KSP</div>
+                    {/* ĐÃ SỬA: Loại bỏ bg-white và các khoảng trắng dư thừa */}
+                    <div className="flex items-center justify-center">
+                      <img 
+                        src={logoKSP} 
+                        alt="Logo KSP" 
+                        className="h-10 w-auto object-contain" 
+                      />
+                    </div>
                     <span className="font-bold text-sm uppercase italic tracking-wider">
                       {t("QUẢN LÝ THỰC TẬP")}
                     </span>
@@ -143,11 +150,10 @@ console.log("KIỂM TRA USER:", userProfile);
                     <Route path="/admin-tai-khoan" element={<AccountManagementPage />} />
                     <Route path="/doan-thuc-tap" element={<XemDoanThucTapPage />} />
                     <Route path="/nop-bao-cao" element={<ReportsPage />} />
-                    {/* Sửa user.maSV thành userProfile?.MaSV hoặc MaTK tùy database của bạn */}
                     <Route 
                       path="/xem-diem-bao-cao" 
                       element={<XemDiemBaoCao maSV={userProfile?.MaDinhDanh} />} 
-/>
+                    />
                     <Route path="/ket-qua" element={<TraCuuKetQua userProfile={userProfile} />} />
                   </Routes>
                 </main>

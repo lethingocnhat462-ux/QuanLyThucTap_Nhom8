@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { useTranslation } from 'react-i18next'; // 1. Import hook
+import logoKSP from '../images/logo.png';
 
 const LoginPage = () => {
   const { t } = useTranslation(); // 2. Khai báo hàm t()
@@ -68,8 +69,12 @@ const LoginPage = () => {
         {/* Form Đăng nhập */}
         <form onSubmit={handleLogin} className="bg-white/90 backdrop-blur-xl p-10 rounded-[2.5rem] shadow-2xl w-full max-w-md border border-white">
           <div className="flex justify-center mb-6">
-              <div className="bg-blue-600 text-white p-3 rounded-2xl font-bold text-2xl shadow-lg">KSP</div>
-          </div>
+  <img 
+    src={logoKSP} 
+    alt="Logo KSP" 
+    className="h-20 w-auto object-contain drop-shadow-md" 
+  />
+</div>
           
           <h2 className="text-3xl font-black text-center text-gray-800 mb-2 uppercase tracking-tighter">
             {t('ĐĂNG NHẬP')}
@@ -123,7 +128,7 @@ const LoginPage = () => {
       </div>
 
       <footer className="p-6 text-center text-blue-100 text-[10px] font-bold uppercase tracking-[0.3em] relative z-10">
-        {t('KHOA SƯ PHẠM')} - {t('Đại học Quy Nhơn')} © 2026
+        {t('KHOA SƯ PHẠM')} - {t('Trường Đại học Quy Nhơn')} © 2026
       </footer>
     </div>
   );

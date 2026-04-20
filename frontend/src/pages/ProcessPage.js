@@ -1,6 +1,8 @@
 import React from 'react';
+import { Link } from 'react-router-dom';
 import { useTranslation } from 'react-i18next'; 
 import { FiCpu, FiClipboard, FiZap, FiSend } from 'react-icons/fi';
+import logoKSP from '../images/logo.png';
 
 const ProcessPage = () => {
   const { t } = useTranslation(); // 2. Khai báo hàm t()
@@ -141,21 +143,102 @@ const ProcessPage = () => {
 </div>
 
         {/* FOOTER */}
-        <footer className="mt-20 pt-8 border-t border-cyan-400/20 w-full bg-[#0f1f45]/80 backdrop-blur-xl">
-          <div className="max-w-7xl mx-auto px-10 text-center md:text-left py-8 flex flex-col md:flex-row justify-between items-center gap-8">
-            <div>
-              <h2 className="text-white font-black text-2xl tracking-tighter uppercase">
-                QNU <span className="text-cyan-400 italic">Pedagogy</span>
-              </h2>
-              <p className="text-slate-400 text-[9px] font-mono uppercase tracking-[0.3em] mt-1">
-                {t('HỆ THỐNG QUẢN LÝ')} — {t('NHÓM 08')}
-              </p>
-            </div>
-            <div className="text-slate-400 text-[8px] font-mono uppercase tracking-[1em] opacity-40">
-              © MMXXVI {t('Đại học Quy Nhơn')}
-            </div>
+        <footer className="relative mt-20 pt-16 pb-8 bg-[#0f172a] text-slate-300">
+  {/* Hiệu ứng viền mỏng phía trên tạo sự tách biệt */}
+  <div className="absolute top-0 left-0 w-full h-[1px] bg-gradient-to-r from-transparent via-blue-500/50 to-transparent"></div>
+
+  <div className="max-w-7xl mx-auto px-6 relative z-10">
+    <div className="grid grid-cols-1 md:grid-cols-3 lg:grid-cols-4 gap-12 mb-16">
+      
+      {/* Cột 1: Giới thiệu Khoa */}
+      <div className="col-span-1 lg:col-span-2 space-y-6">
+        <div className="flex items-center gap-3">
+          <div className="w-16 h-16 flex items-center justify-center transform hover:rotate-6 transition-transform duration-300 bg-white rounded-2xl p-2 shadow-xl shadow-blue-500/10">
+                              <img 
+                                src={logoKSP} 
+                                alt="Logo Khoa Sư Phạm" 
+                                className="w-full h-full object-contain" 
+                              />
+                            </div>
+          <div>
+            <p className="text-blue-400 text-[10px] tracking-widest font-bold uppercase">{t('Trường Đại học Quy Nhơn')}</p>
+            <h3 className="text-white font-bold text-xl tracking-tight leading-tight">{t('KHOA SƯ PHẠM')}</h3>
           </div>
-        </footer>
+        </div>
+        <p className="text-sm leading-relaxed text-slate-400 max-w-sm">
+          {t('Đào tạo những thế hệ nhà giáo tương lai tâm huyết, tài năng, góp phần xây dựng nền giáo dục hiện đại cho đất nước.')}
+        </p>
+      </div>
+
+      {/* Cột 2: Liên kết hệ thống */}
+      <div className="space-y-6">
+        <h4 className="text-white font-bold text-sm uppercase tracking-wider relative inline-block">
+          {t('Hệ thống')}
+          <span className="absolute -bottom-1 left-0 w-8 h-[2px] bg-blue-500"></span>
+        </h4>
+        <ul className="text-sm space-y-3 list-none p-0">
+          <li>
+            <Link to="/" className="no-underline text-slate-400 hover:text-blue-400 transition-colors flex items-center gap-2 group">
+              <span className="w-1.5 h-1.5 rounded-full bg-slate-700 group-hover:bg-blue-400 transition-colors"></span>
+              {t('Trang chủ')}
+            </Link>
+          </li>
+          <li>
+            <Link to="/don-vi" className="no-underline text-slate-400 hover:text-blue-400 transition-colors flex items-center gap-2 group">
+              <span className="w-1.5 h-1.5 rounded-full bg-slate-700 group-hover:bg-blue-400 transition-colors"></span>
+              {t('Đơn vị thực tập')}
+            </Link>
+          </li>
+          <li>
+           <Link 
+  to="/gioi-thieu" 
+  className="no-underline text-slate-400 hover:text-blue-400 transition-colors flex items-center gap-2 group"
+>
+  <span className="w-1.5 h-1.5 rounded-full bg-slate-700 group-hover:bg-blue-400 transition-colors"></span>
+  {t('Giới thiệu')}
+</Link>
+          </li>
+        </ul>
+      </div>
+
+      {/* Cột 3: Liên hệ */}
+      <div className="space-y-6">
+        <h4 className="text-white font-bold text-sm uppercase tracking-wider relative inline-block">
+          {t('Liên hệ')}
+          <span className="absolute -bottom-1 left-0 w-8 h-[2px] bg-blue-500"></span>
+        </h4>
+        <div className="space-y-4 text-sm text-slate-400">
+          <div className="flex items-start gap-3">
+            <span className="text-blue-400">📍</span>
+            <p>170 An Dương Vương, Quy Nhơn, Gia Lai</p>
+          </div>
+          <div className="flex items-center gap-3">
+            <span className="text-blue-400">📞</span>
+            <p>(0256) 3846 156</p>
+          </div>
+          <div className="flex items-center gap-3">
+            <span className="text-blue-400">✉️</span>
+            <p>khoasupham@qnu.edu.vn</p>
+          </div>
+        </div>
+      </div>
+
+    </div>
+
+    {/* Phần chân cuối cùng (Copyright) */}
+    <div className="pt-8 border-t border-slate-800 flex flex-col md:flex-row justify-between items-center gap-4 text-xs text-slate-500">
+      <p>© {new Date().getFullYear()} {t('Khoa Sư phạm - Trường Đại học Quy Nhơn. All rights reserved.')}</p>
+      <div className="flex items-center gap-6">
+  <span className="cursor-pointer hover:text-blue-400 transition-colors uppercase tracking-widest">
+    {t('Chính sách')}
+  </span>
+  <span className="cursor-pointer hover:text-blue-400 transition-colors uppercase tracking-widest">
+    {t('Bảo mật')}
+  </span>
+</div>
+    </div>
+  </div>
+</footer>
       </div>
 
       <style>{`

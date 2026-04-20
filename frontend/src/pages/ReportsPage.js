@@ -73,7 +73,7 @@ const handleSubmit = async (e) => {
           <div className="bg-gradient-to-r from-[#1e3a8a] via-[#2563eb] to-[#3b82f6] p-8 text-white">
             <div className="flex items-center gap-4">
               <div className="w-12 h-12 bg-white/20 backdrop-blur-md rounded-xl flex items-center justify-center border border-white/30">
-                <span className="text-2xl">📤</span>
+                <span className="text-2xl"></span>
               </div>
               <div>
                 <h2 className="text-xl font-black uppercase tracking-tight">

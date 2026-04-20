@@ -1,7 +1,8 @@
 import React, { useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { Link } from 'react-router-dom';
-import { useTranslation } from 'react-i18next'; // 1. Import hook
+import { useTranslation } from 'react-i18next';
+import logoKSP from '../images/logo.png';
 
 // --- CÁC COMPONENT CON ---
 
@@ -13,7 +14,6 @@ const StatCard = ({ icon, title, value, color, year }) => (
       <div className="text-3xl font-black text-slate-800 group-hover:text-blue-600 transition-colors">
         {value}
       </div>
-     
       <div className="text-[11px] text-slate-400 font-medium mt-1">
         Năm {year}
       </div>
@@ -23,7 +23,7 @@ const StatCard = ({ icon, title, value, color, year }) => (
 
 const NewsItem = ({ tag, title, time, id }) => {
   const navigate = useNavigate();
-  const { t } = useTranslation(); // Dùng t() trong component con
+  const { t } = useTranslation();
   
   return (
     <div 
@@ -59,7 +59,7 @@ const Step = ({ num, text, active }) => {
 
 function HomePage() {
   const navigate = useNavigate();
-  const { t } = useTranslation(); // 2. Khai báo hàm t()
+  const { t } = useTranslation();
   const [bubbles, setBubbles] = useState([]);
   const [glitters, setGlitters] = useState([]);
 
@@ -162,6 +162,8 @@ function HomePage() {
           background: linear-gradient(135deg, #3b82f6, #2563eb);
           box-shadow: 0 10px 25px rgba(37, 99, 235, 0.3); color: white !important;
         }
+        @keyframes shimmer { 100% { transform: translateX(200%); } }
+        .animate-shimmer { animation: shimmer 2s infinite; }
       `}</style>
 
       <div className="bg-ai-network min-h-screen relative overflow-hidden flex flex-col">
@@ -195,47 +197,40 @@ function HomePage() {
             <span className="text-blue-600 font-semibold px-2 py-0.5 mx-1 bg-blue-50 rounded-md">Smart-AI</span> 
             {t(', kết nối tri thức và tối ưu hóa tương lai.')}
           </p>
-     <div className="flex flex-wrap justify-center gap-6 mt-12">
-  
-  {/* NÚT BẮT ĐẦU NGAY - Giữ nguyên onClick navigate */}
-  <button 
-    onClick={() => navigate('/login')} 
-    className="group relative px-10 py-4 bg-[#2563eb] text-white font-bold rounded-2xl overflow-hidden transition-all duration-300 hover:scale-105 hover:shadow-[0_20px_40px_rgba(37,99,235,0.4)] active:scale-95"
-  >
-    {/* Hiệu ứng tia sáng quét qua */}
-    <div className="absolute inset-0 w-1/2 h-full bg-white/20 skew-x-[-25deg] -translate-x-full group-hover:animate-shimmer" />
-    
-    <span className="relative z-10 flex items-center gap-2">
-      {t('BẮT ĐẦU NGAY')}
-      <svg className="w-5 h-5 group-hover:translate-x-1 transition-transform" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M13 7l5 5m0 0l-5 5m5-5H6" />
-      </svg>
-    </span>
-  </button>
+          
+          <div className="flex flex-wrap justify-center gap-6 mt-12">
+            <button 
+              onClick={() => navigate('/login')} 
+              className="group relative px-10 py-4 bg-[#2563eb] text-white font-bold rounded-2xl overflow-hidden transition-all duration-300 hover:scale-105 hover:shadow-[0_20px_40px_rgba(37,99,235,0.4)] active:scale-95"
+            >
+              <div className="absolute inset-0 w-1/2 h-full bg-white/20 skew-x-[-25deg] -translate-x-full group-hover:animate-shimmer" />
+              <span className="relative z-10 flex items-center gap-2">
+                {t('BẮT ĐẦU NGAY')}
+                <svg className="w-5 h-5 group-hover:translate-x-1 transition-transform" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M13 7l5 5m0 0l-5 5m5-5H6" />
+                </svg>
+              </span>
+            </button>
 
-  {/* NÚT XEM QUY TRÌNH - Giữ nguyên Link to */}
-  <Link 
-    to="/quy-trinh" 
-    className="group relative px-10 py-4 bg-white/40 backdrop-blur-md border border-blue-200 text-blue-700 font-bold rounded-2xl no-underline transition-all duration-300 hover:bg-white/80 hover:border-blue-400 hover:shadow-xl active:scale-95 flex items-center gap-2"
-  >
-    <span>{t('XEM QUY TRÌNH')}</span>
-    {/* Dấu chấm xanh nhấp nháy tạo điểm nhấn hiện đại */}
-    <span className="relative flex h-3 w-3">
-      <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-blue-400 opacity-75"></span>
-      <span className="relative inline-flex rounded-full h-3 w-3 bg-blue-500"></span>
-    </span>
-  </Link>
-
-</div>
+            <Link 
+              to="/quy-trinh" 
+              className="group relative px-10 py-4 bg-white/40 backdrop-blur-md border border-blue-200 text-blue-700 font-bold rounded-2xl no-underline transition-all duration-300 hover:bg-white/80 hover:border-blue-400 hover:shadow-xl active:scale-95 flex items-center gap-2"
+            >
+              <span>{t('XEM QUY TRÌNH')}</span>
+              <span className="relative flex h-3 w-3">
+                <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-blue-400 opacity-75"></span>
+                <span className="relative inline-flex rounded-full h-3 w-3 bg-blue-500"></span>
+              </span>
+            </Link>
+          </div>
         </header>
+
         <section className="max-w-7xl mx-auto grid grid-cols-2 md:grid-cols-4 gap-6 px-6 relative z-10 w-full">
-  <StatCard  title={t("Sinh viên")} value="1,250+" color="#3b82f6" year="2025-2026" />
-  <StatCard  title={t("Trường đối tác")} value="30+" color="#a855f7" year="2025-2026" />
-  <StatCard  title={t("Báo cáo")} value="99%" color="#06b6d4" year="2025-2026" />
-  <StatCard  title={t("Hoàn thành")} value="1200+" color="#10b881" year="2025-2026" />
-</section>
-
-
+          <StatCard title={t("Sinh viên")} value="1,250+" color="#3b82f6" year="2025-2026" />
+          <StatCard title={t("Trường đối tác")} value="30+" color="#a855f7" year="2025-2026" />
+          <StatCard title={t("Báo cáo")} value="99%" color="#06b6d4" year="2025-2026" />
+          <StatCard title={t("Hoàn thành")} value="1200+" color="#10b881" year="2025-2026" />
+        </section>
 
         <main className="max-w-7xl mx-auto py-20 px-6 grid grid-cols-1 lg:grid-cols-3 gap-10 relative z-10 w-full flex-grow">
           <div className="lg:col-span-2 space-y-8">
@@ -244,24 +239,9 @@ function HomePage() {
               {t('BẢN TIN CÔNG NGHỆ')}
             </h3>
             <div className="grid gap-6">
-              <NewsItem 
-                id="huong-dan-nop-ho-so" 
-                tag="AI UPDATE" 
-                title="Hướng dẫn nộp hồ sơ thực tập qua cổng AI Smart" 
-                time="3 giờ trước" 
-              />
-              <NewsItem 
-                id="cap-nhat-danh-sach" 
-                tag="LỊCH TRÌNH" 
-                title="Cập nhật danh sách phân công trường đợt 2 - Năm 2026" 
-                time="1 ngày trước" 
-              />
-              <NewsItem 
-                id="ket-thuc-thuc-tap" 
-                tag="THÔNG BÁO" 
-                title="Thông báo kết thúc đợt thực tập sư phạm và nộp báo cáo cuối kỳ" 
-                time="Vừa xong" 
-              />
+              <NewsItem id="huong-dan-nop-ho-so" tag="AI UPDATE" title="Hướng dẫn nộp hồ sơ thực tập qua cổng AI Smart" time="3 giờ trước" />
+              <NewsItem id="cap-nhat-danh-sach" tag="LỊCH TRÌNH" title="Cập nhật danh sách phân công trường đợt 2 - Năm 2026" time="1 ngày trước" />
+              <NewsItem id="ket-thuc-thuc-tap" tag="THÔNG BÁO" title="Thông báo kết thúc đợt thực tập sư phạm và nộp báo cáo cuối kỳ" time="Vừa xong" />
             </div>
           </div>
 
@@ -275,26 +255,66 @@ function HomePage() {
           </aside>
         </main>
 
-        <footer className="relative mt-20 pt-16 pb-8 bg-[#0f172a]">
+        <footer className="relative mt-20 pt-16 pb-8 bg-[#0f172a] text-slate-300">
+          <div className="absolute top-0 left-0 w-full h-[1px] bg-gradient-to-r from-transparent via-blue-500/50 to-transparent"></div>
+
           <div className="max-w-7xl mx-auto px-6 relative z-10">
-            <div className="grid grid-cols-1 md:grid-cols-3 gap-12 mb-16">
-              <div className="space-y-4">
-                <div className="flex items-center gap-3">
-                  <div className="w-10 h-10 bg-blue-600 rounded-lg flex items-center justify-center font-bold text-white">KSP</div>
+            <div className="grid grid-cols-1 md:grid-cols-3 lg:grid-cols-4 gap-12 mb-16">
+              
+              {/* Cột 1: Giới thiệu Khoa */}
+              <div className="col-span-1 lg:col-span-2 space-y-6">
+                <div className="flex items-center gap-4">
+                  <div className="w-16 h-16 flex items-center justify-center transform hover:rotate-6 transition-transform duration-300 bg-white rounded-2xl p-2 shadow-xl shadow-blue-500/10">
+                    <img 
+                      src={logoKSP} 
+                      alt="Logo Khoa Sư Phạm" 
+                      className="w-full h-full object-contain" 
+                    />
+                  </div>
                   <div>
-                    <h3 className="text-white font-bold text-lg">{t('KHOA SƯ PHẠM')}</h3>
-                    <p className="text-blue-400 text-[10px] uppercase">{t('Đại học Quy Nhơn')}</p>
+                    <p className="text-blue-400 text-[10px] tracking-widest font-bold uppercase mb-1">{t('Trường Đại học Quy Nhơn')}</p>
+                    <h3 className="text-white font-bold text-2xl tracking-tight leading-tight">{t('KHOA SƯ PHẠM')}</h3>
                   </div>
                 </div>
+                <p className="text-sm leading-relaxed text-slate-400 max-w-sm">
+                  {t('Đào tạo những thế hệ nhà giáo tương lai tâm huyết, tài năng, góp phần xây dựng nền giáo dục hiện đại cho đất nước.')}
+                </p>
               </div>
-              <div className="grid grid-cols-2 gap-4">
-                <div className="space-y-3">
-                  <h4 className="text-slate-200 font-bold text-sm uppercase">{t('Hệ thống')}</h4>
-                  <ul className="text-slate-500 text-sm space-y-2 list-none p-0">
-                    <li><Link to="/" className="no-underline text-inherit hover:text-blue-400">{t('Trang chủ')}</Link></li>
-                    <li><Link to="/quy-trinh" className="no-underline text-inherit hover:text-blue-400">{t('Quy trình')}</Link></li>
-                  </ul>
+
+              {/* Cột 2: Hệ thống */}
+              <div className="space-y-6">
+                <h4 className="text-white font-bold text-sm uppercase tracking-wider relative inline-block">
+                  {t('Hệ thống')}
+                  <span className="absolute -bottom-1 left-0 w-8 h-[2px] bg-blue-500"></span>
+                </h4>
+                <ul className="text-sm space-y-3 list-none p-0">
+                  <li><Link to="/" className="no-underline text-slate-400 hover:text-blue-400 transition-colors flex items-center gap-2 group"><span className="w-1.5 h-1.5 rounded-full bg-slate-700 group-hover:bg-blue-400"></span>{t('Trang chủ')}</Link></li>
+                  <li><Link to="/quy-trinh" className="no-underline text-slate-400 hover:text-blue-400 transition-colors flex items-center gap-2 group"><span className="w-1.5 h-1.5 rounded-full bg-slate-700 group-hover:bg-blue-400"></span>{t('Quy trình thực tập')}</Link></li>
+                  <li><Link to="/gioi-thieu" className="no-underline text-slate-400 hover:text-blue-400 transition-colors flex items-center gap-2 group"><span className="w-1.5 h-1.5 rounded-full bg-slate-700 group-hover:bg-blue-400"></span>{t('Giới thiệu')}</Link></li>
+                  <li><Link to="/don-vi" className="no-underline text-slate-400 hover:text-blue-400 transition-colors flex items-center gap-2 group"><span className="w-1.5 h-1.5 rounded-full bg-slate-700 group-hover:bg-blue-400"></span>{t('Đơn vị thực tập')}</Link></li>
+                </ul>
+              </div>
+
+              {/* Cột 3: Liên hệ */}
+              <div className="space-y-6">
+                <h4 className="text-white font-bold text-sm uppercase tracking-wider relative inline-block">
+                  {t('Liên hệ')}
+                  <span className="absolute -bottom-1 left-0 w-8 h-[2px] bg-blue-500"></span>
+                </h4>
+                <div className="space-y-4 text-sm text-slate-400">
+                  <div className="flex items-start gap-3"><span className="text-blue-400">📍</span><p>170 An Dương Vương, Quy Nhơn, Gia lai</p></div>
+                  <div className="flex items-center gap-3"><span className="text-blue-400">📞</span><p>(0256) 3846 156</p></div>
+                  <div className="flex items-center gap-3"><span className="text-blue-400">✉️</span><p>khoasupham@qnu.edu.vn</p></div>
                 </div>
+              </div>
+            </div>
+
+            {/* Copyright */}
+            <div className="pt-8 border-t border-slate-800 flex flex-col md:flex-row justify-between items-center gap-4 text-xs text-slate-500">
+              <p>© {new Date().getFullYear()} {t('Khoa Sư phạm - Trường Đại học Quy Nhơn. All rights reserved.')}</p>
+              <div className="flex items-center gap-6">
+                <span className="cursor-pointer hover:text-blue-400 transition-colors uppercase tracking-widest">{t('Chính sách')}</span>
+                <span className="cursor-pointer hover:text-blue-400 transition-colors uppercase tracking-widest">{t('Bảo mật')}</span>
               </div>
             </div>
           </div>
