@@ -1,11 +1,7 @@
 import React from 'react';
 import { useParams, useNavigate } from 'react-router-dom';
 
-// Import các tệp ảnh từ thư mục images của bạn
-import hinhThucTap1 from '../images/ảnh thực tập.jpg';
-import hinhThucTap2 from '../images/ảnh thực tập 2.jpg';
-import hinhThucTap3 from '../images/ảnh thực tập 3.jpg';
-
+const API_URL = "http://localhost";
 const NotificationDetail = () => {
   const { id } = useParams();
   const navigate = useNavigate();
@@ -28,7 +24,7 @@ const NotificationDetail = () => {
 
           <div className="my-8">
             <img 
-              src={hinhThucTap1} 
+              src={`${API_URL}/uploads/anh-thuc-tap.jpg`} 
               alt="Hướng dẫn nộp hồ sơ" 
               className="w-full max-h-[450px] object-cover rounded-[2rem] shadow-xl border-4 border-white" 
             />
@@ -67,7 +63,7 @@ const NotificationDetail = () => {
           </p>
 
           <img 
-            src={hinhThucTap2} 
+            src={`${API_URL}/uploads/anh-thuc-tap-2.jpg`} 
             alt="Danh sách phân công" 
             className="w-full max-h-[400px] object-cover rounded-[2rem] shadow-lg my-6 border-2 border-gray-100" 
           />
@@ -116,7 +112,7 @@ const NotificationDetail = () => {
         <div className="space-y-6 text-justify">
           <div className="relative w-full h-80 rounded-[2.5rem] overflow-hidden mb-8 shadow-2xl border-4 border-white">
              <img 
-               src={hinhThucTap3} 
+               src={`${API_URL}/uploads/anh-thuc-tap-3.jpg`} 
                alt="Graduation"
                className="w-full h-full object-cover"
              />
