@@ -185,9 +185,6 @@ function HomePage() {
         </div>
 
         <header className="relative pt-16 pb-16 px-4 text-center z-10">
-          <div className="inline-block px-4 py-1.5 mb-8 text-[10px] font-bold tracking-[0.4em] text-blue-600 uppercase bg-blue-50 border border-blue-200 rounded-full">
-            {t('Intelligence Education System')}
-          </div>
           <h1 className="text-5xl md:text-7xl mb-8 leading-tight heading-ai-glow uppercase">
             {t('HỆ THỐNG QUẢN LÝ')} <br />
             <span className="text-main-blue">{t('THỰC TẬP SƯ PHẠM')}</span>
@@ -212,16 +209,7 @@ function HomePage() {
               </span>
             </button>
 
-            <Link 
-              to="/quy-trinh" 
-              className="group relative px-10 py-4 bg-white/40 backdrop-blur-md border border-blue-200 text-blue-700 font-bold rounded-2xl no-underline transition-all duration-300 hover:bg-white/80 hover:border-blue-400 hover:shadow-xl active:scale-95 flex items-center gap-2"
-            >
-              <span>{t('XEM QUY TRÌNH')}</span>
-              <span className="relative flex h-3 w-3">
-                <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-blue-400 opacity-75"></span>
-                <span className="relative inline-flex rounded-full h-3 w-3 bg-blue-500"></span>
-              </span>
-            </Link>
+            
           </div>
         </header>
 
@@ -271,10 +259,15 @@ function HomePage() {
                       className="w-full h-full object-contain" 
                     />
                   </div>
-                  <div>
-                    <p className="text-blue-400 text-[10px] tracking-widest font-bold uppercase mb-1">{t('Trường Đại học Quy Nhơn')}</p>
-                    <h3 className="text-white font-bold text-2xl tracking-tight leading-tight">{t('KHOA SƯ PHẠM')}</h3>
-                  </div>
+  <div>
+  <p className="text-blue-600 text-[13px] tracking-[0.15em] font-black uppercase mb-0">
+    {t('Trường Đại học Quy Nhơn')}
+  </p>
+
+  <h3 className="text-blue-900 text-xl font-normal tracking-wide leading-tight">
+    {t('KHOA SƯ PHẠM')}
+  </h3>
+</div>
                 </div>
                 <p className="text-sm leading-relaxed text-slate-400 max-w-sm">
                   {t('Đào tạo những thế hệ nhà giáo tương lai tâm huyết, tài năng, góp phần xây dựng nền giáo dục hiện đại cho đất nước.')}

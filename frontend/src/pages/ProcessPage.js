@@ -54,14 +54,7 @@ const ProcessPage = () => {
 
       <div className="relative z-10">
         <div className="text-center mb-36 mt-20 space-y-10 relative z-10">
-          <div className="inline-flex items-center gap-3 px-6 py-2 rounded-full border border-blue-400/30 bg-white/60 backdrop-blur-xl shadow-sm animate-fade-in">
-            <span className="relative flex h-2.5 w-2.5">
-              <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-blue-400 opacity-75"></span>
-              <span className="relative inline-flex rounded-full h-2.5 w-2.5 bg-blue-500"></span>
-            </span>
-            <span className="text-[11px] font-mono text-blue-700 font-bold uppercase tracking-[0.4em]">Core Protocol v8.0</span>
-          </div>
-
+          
         <h1 className="text-6xl md:text-8xl font-black text-slate-900 leading-[1.3] tracking-normal mb-4">
   {t('QUY TRÌNH')} <br/>
   <span className="animate-gradient-text drop-shadow-[0_0_30px_rgba(34,211,238,0.5)] uppercase tracking-[0.05em]">
@@ -92,7 +85,7 @@ const ProcessPage = () => {
   
   {/* Chữ nhỏ: Đậm màu hơn một chút để dễ đọc */}
   <div className="mt-2 text-[9px] font-mono font-bold tracking-[0.4em] text-blue-600/70 uppercase">
-    Next Generation Workflow
+
   </div>
 </div>
         {/* DANH SÁCH CÁC BƯỚC */}
