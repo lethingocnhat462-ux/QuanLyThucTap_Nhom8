@@ -13,47 +13,66 @@ if (isset($_POST['btnLuu'])) {
     <title>Đặt Lại Mật Khẩu - Khoa Sư Phạm</title>
     <script src="https://cdn.tailwindcss.com"></script>
     <style>
+
 .bg-custom-blue {
-    background: linear-gradient(135deg, #0f172a 0%, #0a1e5f 50%, #000000 100%) !important;
+    background:
+    linear-gradient(135deg,#eef6ff 0%,#ffffff 50%,#dbeafe 100%) !important;
     background-attachment: fixed;
 }
 
-/* Thêm hiệu ứng hạt sáng cho đỡ trống */
+
+/* bỏ hiệu ứng sao tối */
 .bg-custom-blue::before {
-    content: "";
-    position: absolute;
-    width: 100%;
-    height: 100%;
-    background-image: url('https://www.transparenttextures.com/patterns/stardust.png');
-    opacity: 0.1;
-    pointer-events: none;
+    display:none;
 }
 
-        /* Hiệu ứng kính sáng bóng (Light Glassmorphism) */
-        .glass-form {
-            background: rgba(255, 255, 255, 0.15) !important;
-            backdrop-filter: blur(20px) saturate(160%);
-            -webkit-backdrop-filter: blur(20px) saturate(160%);
-            border: 1px solid rgba(255, 255, 255, 0.25);
-            box-shadow: 0 25px 50px -12px rgba(255, 255, 255, 0.3);
-        }
 
-        /* Ô nhập liệu trong suốt nhẹ */
-        .glass-input {
-            background: rgba(255, 255, 255, 0.1) !important;
-            border: 1px solid rgba(255, 255, 255, 0.2) !important;
-            color: white !important;
-            transition: all 0.3s ease;
-        }
-        .glass-input:focus {
-            background: rgba(255, 255, 255, 0.2) !important;
-            border-color: white !important;
-            box-shadow: 0 0 15px rgba(255, 255, 255, 0.2);
-        }
-        .glass-input::placeholder {
-            color: rgba(255, 255, 255, 0.4);
-        }
-    </style>
+/* Card trắng */
+.glass-form {
+    background: rgba(255,255,255,0.85) !important;
+    backdrop-filter: blur(20px);
+    -webkit-backdrop-filter: blur(20px);
+    border:1px solid #dbeafe;
+    box-shadow:
+    0 25px 60px rgba(37,99,235,.18);
+}
+
+/* Input sáng */
+.glass-input {
+    background:#f8fbff !important;
+    border:1px solid #bfdbfe !important;
+    color:#1e3a8a !important;
+}
+.glass-input:focus {
+    background:white !important;
+    border-color:#2563eb !important;
+    box-shadow:
+    0 0 0 4px rgba(37,99,235,.15);
+}
+.glass-input::placeholder {
+    color:#94a3b8;
+}
+/* text */
+.text-white {
+    color:#1e3a8a !important;
+}
+.text-blue-100\/60 {
+    color:#64748b !important;
+}
+.text-blue-200 {
+    color:#2563eb !important;
+}
+
+/* nút */
+button {
+    background:#2563eb !important;
+    color:white !important;
+}
+button:hover {
+    background:#1d4ed8 !important;
+}
+
+</style>
 </head>
 <body class="bg-custom-blue min-h-screen flex flex-col font-sans relative overflow-hidden">
 
@@ -61,7 +80,8 @@ if (isset($_POST['btnLuu'])) {
     <div class="absolute bottom-[-5%] right-[-5%] w-80 h-80 bg-blue-400/20 rounded-full blur-[100px]"></div>
 
     <div class="p-6 flex justify-between items-center relative z-10">
-        <a href="http://localhost:3000/login" class="text-white/80 font-bold hover:text-white transition-all flex items-center gap-2 text-xs uppercase tracking-widest">
+        <a href="http://localhost:3000/login" 
+class="text-blue-700 font-bold hover:text-blue-900 transition-all flex items-center gap-2 text-xs uppercase tracking-widest">
             <span class="text-xl">←</span> Quay lại đăng nhập
         </a>
         <span class="font-black text-white/30 uppercase tracking-[0.3em] text-[10px]">KSP Digital System</span>

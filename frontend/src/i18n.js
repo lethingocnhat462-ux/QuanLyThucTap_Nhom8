@@ -5,7 +5,8 @@ import LanguageDetector from 'i18next-browser-languagedetector';
 i18n
   .use(LanguageDetector)
   .use(initReactI18next)
-  .init({
+.init({
+    lng: 'vi',
     resources: {
       en: {
         translation: {
@@ -301,9 +302,9 @@ i18n
     debug: false,
     interpolation: { escapeValue: false },
     detection: {
-      order: ['localStorage', 'cookie', 'htmlTag'],
-      caches: ['localStorage']
-    }
+  order: [],
+  caches: []
+}
   });
 
 export default i18n;

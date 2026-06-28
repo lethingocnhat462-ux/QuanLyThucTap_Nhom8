@@ -7,7 +7,7 @@ import logoImg from '../images/logo.png';
 const Navbar = ({ userProfile, onOpenChangePassword }) => {
   const navigate = useNavigate();
   const location = useLocation();
-  const { t, i18n } = useTranslation(); 
+  const { t } = useTranslation(); 
   
   const [isScrolled, setIsScrolled] = useState(false);
   const [isMenuOpen, setIsMenuOpen] = useState(false);
@@ -27,9 +27,7 @@ const Navbar = ({ userProfile, onOpenChangePassword }) => {
     { name: t('GIỚI THIỆU'), path: '/gioi-thieu' },
   ];
 
-  const changeLanguage = (lng) => {
-    i18n.changeLanguage(lng);
-  };
+ 
 
   return (
     <nav className={`fixed top-0 left-0 w-full z-50 transition-all duration-300 px-6 md:px-12 flex justify-between items-center ${
@@ -45,14 +43,15 @@ const Navbar = ({ userProfile, onOpenChangePassword }) => {
           alt="Logo" 
           className="w-12 h-12 object-contain group-hover:scale-105 transition-transform" 
         />
-        <div className="flex flex-col text-left">
-          <span className="font-semibold text-[#1e3a8a] text-[11px] tracking-[0.1em] uppercase mb-1 opacity-70 leading-none">
-            {t('Trường Đại học Quy Nhơn')}
-          </span>
-          <span className="font-extrabold text-[#1e3a8a] uppercase text-xl tracking-tighter leading-none">
-            {t('KHOA SƯ PHẠM')}
-          </span>
-        </div>
+<div className="flex flex-col justify-center leading-tight">
+  <span className="font-bold text-[#1e3a8a] text-[17px] md:text-[19px] uppercase tracking-[-0.04em]">
+    {t('Trường Đại học Quy Nhơn')}
+  </span>
+
+  <span className="font-semibold text-[#3157a6] text-[14px] md:text-[15px] uppercase tracking-[0.03em] mt-1">
+    {t('KHOA SƯ PHẠM')}
+  </span>
+</div>
       </div>
       
       {/* Menu trung tâm */}
@@ -74,25 +73,7 @@ const Navbar = ({ userProfile, onOpenChangePassword }) => {
 
       {/* Right Side: Language & User */}
       <div className="flex items-center gap-4 relative">
-        <div className="flex items-center bg-gray-100 p-1 rounded-full border border-gray-200 shadow-inner">
-          <button 
-            onClick={() => changeLanguage('vi')}
-            className={`px-3 py-1 rounded-full text-[10px] font-black transition-all duration-300 ${
-              i18n.language === 'vi' ? 'bg-white text-blue-600 shadow-md' : 'text-gray-400'
-            }`}
-          >
-            VI
-          </button>
-          <button 
-            onClick={() => changeLanguage('en')}
-            className={`px-3 py-1 rounded-full text-[10px] font-black transition-all duration-300 ${
-              i18n.language === 'en' ? 'bg-white text-blue-600 shadow-md' : 'text-gray-400'
-            }`}
-          >
-            EN
-          </button>
-        </div>
-
+    
         {userProfile ? (
           <div className="relative flex items-center gap-1">
             <div 

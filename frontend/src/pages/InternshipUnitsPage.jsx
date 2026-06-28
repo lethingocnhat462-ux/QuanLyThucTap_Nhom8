@@ -88,9 +88,7 @@ const InternshipUnitsPage = () => {
             filteredUnits.map((item) => (
                 <div key={item.MaDV} className="group bg-white rounded-[2.5rem] overflow-hidden shadow-sm hover:shadow-[0_20px_40px_rgba(30,58,138,0.1)] hover:-translate-y-2 transition-all duration-500 border border-gray-100">
                     <div className="relative h-56 bg-gray-100 overflow-hidden">
-                    <span className={`absolute top-5 right-5 px-4 py-1.5 rounded-full text-[10px] font-black text-white z-10 shadow-lg backdrop-blur-md ${parseInt(item.ChiTieu) > 0 ? 'bg-green-500/90' : 'bg-red-500/90'}`}>
-                        {parseInt(item.ChiTieu) > 0 ? 'CÒN CHỖ' : 'HẾT CHỖ'} 
-                    </span>
+                  
                     
                     <span className="absolute bottom-5 left-5 px-4 py-1.5 bg-white/90 backdrop-blur-md rounded-lg text-[10px] font-black text-blue-900 z-10 shadow-sm uppercase">
                         {item.TenDonVi.includes('THPT') ? 'THPT' : 'THCS'} 
@@ -113,9 +111,6 @@ const InternshipUnitsPage = () => {
                         <div className="flex -space-x-2">
                             <div className="w-8 h-8 rounded-full border-2 border-white bg-blue-100 flex items-center justify-center text-[10px] font-bold" title="Chỉ tiêu">🎯 {item.ChiTieu}</div>
                         </div>
-                        <button className="text-blue-600 font-black text-[11px] uppercase tracking-wider hover:underline">
-                            {t('Xem chi tiết')} →
-                        </button>
                     </div>
                     </div>
                 </div>

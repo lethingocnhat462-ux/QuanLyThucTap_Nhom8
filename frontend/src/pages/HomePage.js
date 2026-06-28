@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React from 'react';
 import { useNavigate } from 'react-router-dom';
 import { Link } from 'react-router-dom';
 import { useTranslation } from 'react-i18next';
@@ -6,9 +6,9 @@ import logoKSP from '../images/logo.png';
 
 // --- CÁC COMPONENT CON ---
 
-const StatCard = ({ icon, title, value, color, year }) => (
-  <div className="glass-card-tech p-6 group cursor-pointer" style={{ '--glow-color': color }}>
-    <div className="text-3xl mb-4" style={{ filter: `drop-shadow(0 0 5px ${color}88)` }}>{icon}</div>
+const StatCard = ({ icon, title, value, year }) => (
+  <div className="glass-card-tech p-6 group cursor-pointer">
+    <div className="text-3xl mb-4">{icon}</div>
     <div className="text-slate-500 text-[13px] font-bold uppercase tracking-wider mb-1">{title}</div>
     <div className="flex flex-col">
       <div className="text-3xl font-black text-slate-800 group-hover:text-blue-600 transition-colors">
@@ -31,7 +31,7 @@ const NewsItem = ({ tag, title, time, id }) => {
       className="glass-card-tech p-5 flex gap-5 items-center cursor-pointer group"
     >
       <div className="w-12 h-12 bg-blue-50 rounded-lg flex-shrink-0 flex items-center justify-center border border-blue-100 group-hover:border-blue-400">
-        <div className="w-3 h-3 bg-blue-400 rounded-full animate-pulse"></div>
+        <div className="w-3 h-3 bg-blue-400 rounded-full"></div>
       </div>
       <div>
         <div className="flex gap-3 items-center mb-1">
@@ -60,130 +60,39 @@ const Step = ({ num, text, active }) => {
 function HomePage() {
   const navigate = useNavigate();
   const { t } = useTranslation();
-  const [bubbles, setBubbles] = useState([]);
-  const [glitters, setGlitters] = useState([]);
-
-  useEffect(() => {
-    const newBubbles = Array.from({ length: 30 }).map((_, i) => {
-      const isSparkle = Math.random() > 0.7;
-      return {
-        id: i,
-        size: isSparkle ? (Math.random() * 6 + 4 + 'px') : (Math.random() * 40 + 20 + 'px'),
-        left: Math.random() * 100 + '%',
-        duration: Math.random() * 15 + 10 + 's',
-        delay: Math.random() * 5 + 's',
-        opacity: isSparkle ? 0.8 : 0.4,
-        isSparkle: isSparkle
-      };
-    });
-    setBubbles(newBubbles);
-
-    const newGlitters = Array.from({ length: 50 }).map((_, i) => ({
-      id: i,
-      left: Math.random() * 100 + '%',
-      top: Math.random() * 100 + '%',
-      size: Math.random() * 3 + 1 + 'px',
-      delay: Math.random() * 5 + 's',
-      duration: Math.random() * 3 + 2 + 's'
-    }));
-    setGlitters(newGlitters);
-  }, []);
 
   return (
     <>
       <style>{`
         @import url('https://fonts.googleapis.com/css2?family=Lexend:wght@300;400;600&family=Montserrat:wght@400;600&display=swap');
-        @keyframes shine { 0% { left: -100%; } 100% { left: 100%; } }
-        .btn-glow-effect { position: relative; overflow: hidden; }
-        .btn-glow-effect::after {
-          content: ""; position: absolute; top: -50%; left: -100%; width: 50%; height: 200%;
-          background: rgba(255, 255, 255, 0.2); transform: rotate(30deg); transition: none;
-        }
-        .btn-glow-effect:hover::after { animation: shine 0.7s ease-in-out; }
         html, body { margin: 0; overflow-x: hidden; background: #f8fafc; font-family: 'Inter', system-ui, sans-serif; color: #1e293b; }
         .bg-ai-network {
           position: relative;
-          background: radial-gradient(circle at 15% 20%, rgba(59, 130, 246, 0.08), transparent 45%),
-                      radial-gradient(circle at 85% 80%, rgba(59, 130, 246, 0.05), transparent 50%),
-                      linear-gradient(180deg, #f0f7ff 0%, #ffffff 100%);
+          background: linear-gradient(180deg, #f0f7ff 0%, #ffffff 100%);
           min-height: 100vh; width: 100%;
         }
         .bg-ai-network::before {
-          content: ""; position: absolute; inset: 0;
-          background-image: linear-gradient(rgba(59, 130, 246, 0.1) 1px, transparent 1px),
-                            linear-gradient(90deg, rgba(59, 130, 246, 0.1) 1px, transparent 1px);
-          background-size: 80px 80px; animation: gridMove 40s linear infinite; pointer-events: none;
-        }
-        @keyframes gridMove { from { transform: translateY(0); } to { transform: translateY(80px); } }
-        .glitter {
-          position: absolute; background: #ffffff; border-radius: 50%;
-          box-shadow: 0 0 8px 2px rgba(255, 255, 255, 1), 0 0 15px 4px rgba(59, 130, 246, 0.6);
-          animation: glitterTwinkle infinite ease-in-out; pointer-events: none; z-index: 2; 
-        }
-        @keyframes glitterTwinkle {
-          0%, 100% { opacity: 0.3; transform: scale(0.4) rotate(0deg); filter: blur(1px); }
-          50% { opacity: 1; transform: scale(1.2) rotate(180deg); filter: blur(0px);
-                box-shadow: 0 0 12px 3px rgba(255, 255, 255, 1), 0 0 20px 6px rgba(59, 130, 246, 0.8); }
-        }
+  display: none;
+}
         .glass-card-tech {
-          position: relative; background: rgba(255, 255, 255, 0.6); backdrop-filter: blur(12px) saturate(180%);
-          border-radius: 24px; border: 1px solid rgba(255, 255, 255, 0.8);
-          box-shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.05); transition: all .35s cubic-bezier(.23, 1, .32, 1);
+          position: relative; background: rgba(255, 255, 255, 0.8);
+          border-radius: 24px; border: 1px solid rgba(226, 232, 240, 0.8);
+          box-shadow: 0 4px 15px -3px rgba(0, 0, 0, 0.05); transition: all .2s ease-in-out;
         }
         .glass-card-tech:hover {
-          transform: translateY(-5px); background: rgba(255, 255, 255, 0.9);
-          border: 1px solid var(--glow-color, rgba(59, 130, 246, 0.5));
-          box-shadow: 0 0 20px 2px var(--glow-color, rgba(59, 130, 246, 0.3));
+          transform: translateY(-2px); background: #ffffff;
+          border: 1px solid rgba(59, 130, 246, 0.3);
+          box-shadow: 0 10px 20px -5px rgba(59, 130, 246, 0.1);
         }
-        .bubble {
-          position: absolute; bottom: -100px; border-radius: 50%;
-          background: radial-gradient(circle at 30% 30%, rgba(59, 130, 246, 0.25), rgba(255, 255, 255, 0.4));
-          border: 1.5px solid rgba(59, 130, 246, 0.2); animation: floatUp linear infinite; z-index: 1;
-        }
-        .sparkle-item {
-          position: absolute; bottom: -100px; background: #fff; border-radius: 50%;
-          box-shadow: 0 0 10px #fff, 0 0 15px rgba(59, 130, 246, 0.6);
-          animation: floatUp linear infinite, twinkle 1.5s ease-in-out infinite; z-index: 1;
-        }
-        @keyframes floatUp {
-          from { transform: translateY(0) scale(1); opacity: 0; }
-          20% { opacity: var(--item-opacity); }
-          80% { opacity: var(--item-opacity); }
-          to { transform: translateY(-120vh) scale(1.5); opacity: 0; }
-        }
-        @keyframes twinkle { 0%, 100% { transform: scale(1); opacity: 0.5; } 50% { transform: scale(1.3); opacity: 1; } }
         .heading-ai-glow {
-          background: linear-gradient(to bottom, #1e3a8a 30%, #2563eb 90%);
-          -webkit-background-clip: text; -webkit-text-fill-color: transparent;
+          color: #1e3a8a;
           font-weight: 900; letter-spacing: 0.03em; line-height: 1.4 !important;
         }
-        .text-main-blue { color: #1e3a8a; }
-        .btn-start {
-          background: linear-gradient(135deg, #3b82f6, #2563eb);
-          box-shadow: 0 10px 25px rgba(37, 99, 235, 0.3); color: white !important;
-        }
-        @keyframes shimmer { 100% { transform: translateX(200%); } }
-        .animate-shimmer { animation: shimmer 2s infinite; }
+        .text-main-blue { color: #2563eb; }
       `}</style>
 
       <div className="bg-ai-network min-h-screen relative overflow-hidden flex flex-col">
-        {/* Bong bóng & Kim tuyến */}
-        <div className="absolute inset-0 z-0 pointer-events-none">
-          {glitters.map(g => (
-            <div key={`g-${g.id}`} className="glitter" style={{
-              width: g.size, height: g.size, left: g.left, top: g.top,
-              animationDuration: g.duration, animationDelay: g.delay
-            }} />
-          ))}
-          {bubbles.map(b => (
-            <div key={`b-${b.id}`} className={b.isSparkle ? "sparkle-item" : "bubble"} style={{
-              width: b.size, height: b.size, left: b.left,
-              animationDuration: b.duration, animationDelay: b.delay,
-              '--item-opacity': b.opacity
-            }} />
-          ))}
-        </div>
-
+        
         <header className="relative pt-16 pb-16 px-4 text-center z-10">
           <h1 className="text-5xl md:text-7xl mb-8 leading-tight heading-ai-glow uppercase">
             {t('HỆ THỐNG QUẢN LÝ')} <br />
@@ -198,31 +107,28 @@ function HomePage() {
           <div className="flex flex-wrap justify-center gap-6 mt-12">
             <button 
               onClick={() => navigate('/login')} 
-              className="group relative px-10 py-4 bg-[#2563eb] text-white font-bold rounded-2xl overflow-hidden transition-all duration-300 hover:scale-105 hover:shadow-[0_20px_40px_rgba(37,99,235,0.4)] active:scale-95"
+              className="px-10 py-4 bg-[#2563eb] text-white font-bold rounded-2xl transition-all duration-200 hover:bg-blue-700 active:scale-95 shadow-lg shadow-blue-500/20"
             >
-              <div className="absolute inset-0 w-1/2 h-full bg-white/20 skew-x-[-25deg] -translate-x-full group-hover:animate-shimmer" />
-              <span className="relative z-10 flex items-center gap-2">
+              <span className="flex items-center gap-2">
                 {t('BẮT ĐẦU NGAY')}
-                <svg className="w-5 h-5 group-hover:translate-x-1 transition-transform" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                <svg className="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                   <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M13 7l5 5m0 0l-5 5m5-5H6" />
                 </svg>
               </span>
             </button>
-
-            
           </div>
         </header>
 
         <section className="max-w-7xl mx-auto grid grid-cols-2 md:grid-cols-4 gap-6 px-6 relative z-10 w-full">
-          <StatCard title={t("Sinh viên")} value="1,250+" color="#3b82f6" year="2025-2026" />
-          <StatCard title={t("Trường đối tác")} value="30+" color="#a855f7" year="2025-2026" />
-          <StatCard title={t("Báo cáo")} value="99%" color="#06b6d4" year="2025-2026" />
-          <StatCard title={t("Hoàn thành")} value="1200+" color="#10b881" year="2025-2026" />
+          <StatCard title={t("Sinh viên")} value="1,250+" year="2025-2026" />
+          <StatCard title={t("Trường đối tác")} value="30+" year="2025-2026" />
+          <StatCard title={t("Báo cáo")} value="99%" year="2025-2026" />
+          <StatCard title={t("Hoàn thành")} value="1200+" year="2025-2026" />
         </section>
 
         <main className="max-w-7xl mx-auto py-20 px-6 grid grid-cols-1 lg:grid-cols-3 gap-10 relative z-10 w-full flex-grow">
           <div className="lg:col-span-2 space-y-8">
-            <h3 className="text-2xl font-bold text-main-blue flex items-center gap-3">
+            <h3 className="text-2xl font-bold text-[#1e3a8a] flex items-center gap-3">
               <span className="w-1.5 h-8 bg-blue-500 rounded-full"></span>
               {t('BẢN TIN CÔNG NGHỆ')}
             </h3>
@@ -233,7 +139,7 @@ function HomePage() {
             </div>
           </div>
 
-          <aside className="glass-card-tech p-8 h-fit shadow-md">
+          <aside className="glass-card-tech p-8 h-fit shadow-sm">
             <h3 className="text-lg font-bold mb-8 text-blue-600 tracking-widest uppercase">{t('Lộ trình số')}</h3>
             <div className="space-y-6">
               <Step num="1" text="Đăng ký nguyện vọng" active />
@@ -244,30 +150,27 @@ function HomePage() {
         </main>
 
         <footer className="relative mt-20 pt-16 pb-8 bg-[#0f172a] text-slate-300">
-          <div className="absolute top-0 left-0 w-full h-[1px] bg-gradient-to-r from-transparent via-blue-500/50 to-transparent"></div>
-
           <div className="max-w-7xl mx-auto px-6 relative z-10">
             <div className="grid grid-cols-1 md:grid-cols-3 lg:grid-cols-4 gap-12 mb-16">
               
               {/* Cột 1: Giới thiệu Khoa */}
               <div className="col-span-1 lg:col-span-2 space-y-6">
                 <div className="flex items-center gap-4">
-                  <div className="w-16 h-16 flex items-center justify-center transform hover:rotate-6 transition-transform duration-300 bg-white rounded-2xl p-2 shadow-xl shadow-blue-500/10">
+                  <div className="w-16 h-16 flex items-center justify-center bg-white rounded-2xl p-2 shadow-md">
                     <img 
                       src={logoKSP} 
                       alt="Logo Khoa Sư Phạm" 
                       className="w-full h-full object-contain" 
                     />
                   </div>
-  <div>
-  <p className="text-blue-600 text-[13px] tracking-[0.15em] font-black uppercase mb-0">
-    {t('Trường Đại học Quy Nhơn')}
-  </p>
-
-  <h3 className="text-blue-900 text-xl font-normal tracking-wide leading-tight">
-    {t('KHOA SƯ PHẠM')}
-  </h3>
-</div>
+                  <div>
+                    <p className="text-blue-500 text-[13px] tracking-[0.15em] font-black uppercase mb-0">
+                      {t('Trường Đại học Quy Nhơn')}
+                    </p>
+                    <h3 className="text-white text-xl font-bold tracking-wide leading-tight">
+                      {t('KHOA SƯ PHẠM')}
+                    </h3>
+                  </div>
                 </div>
                 <p className="text-sm leading-relaxed text-slate-400 max-w-sm">
                   {t('Đào tạo những thế hệ nhà giáo tương lai tâm huyết, tài năng, góp phần xây dựng nền giáo dục hiện đại cho đất nước.')}
