@@ -90,9 +90,13 @@ class="text-blue-700 font-bold hover:text-blue-900 transition-all flex items-cen
     <div class="flex-grow flex items-center justify-center p-4 relative z-10">
         <form action="xu-ly-quen-mk.php" method="POST" class="glass-form p-10 rounded-[2.5rem] w-full max-w-md">
             
-            <div class="flex justify-center mb-8">
-                <div class="bg-white text-blue-700 w-16 h-16 flex items-center justify-center rounded-2xl font-black text-2xl shadow-xl shadow-blue-900/20">KSP</div>
-            </div>
+           <div class="flex justify-center mb-8">
+    <div class="bg-white w-16 h-16 flex items-center justify-center rounded-2xl shadow-xl shadow-blue-900/20 overflow-hidden">
+        <img src="uploads/logo.png"
+             alt="Logo KSP"
+             class="w-12 h-12 object-contain">
+    </div>
+</div>
             
             <h2 class="text-3xl font-black text-center text-white mb-2 uppercase tracking-tighter">Đặt lại mật khẩu</h2>
             <p class="text-center text-blue-100/60 text-[10px] font-bold uppercase tracking-[0.3em] mb-10">An toàn & Bảo mật</p>
